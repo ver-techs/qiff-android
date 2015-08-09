@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Sony on 8/9/2015.

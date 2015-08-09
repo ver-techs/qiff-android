@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <TextView
+        android:id="@+id/FootballFact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:textSize="12dp"
+        android:textColor="#454545"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:text=" Football is the most played and most watched sport on earth !"/>
+
     <ImageView
         android:id="@+id/qiff_logo"
         android:layout_width="wrap_content"
@@ -14,10 +25,11 @@
         />
 
     <TextView
+        android:id="@+id/QIFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:textSize="12dp"
+        android:layout_marginBottom="180dp"
+        android:textSize="20dp"
         android:textColor="#454545"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"

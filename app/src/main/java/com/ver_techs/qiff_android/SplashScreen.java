@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
-import java.util.ArrayList;
-import java.util.Arrays;
+
+import java.util.Random;
 
 /**
  * Created by Sony on 8/9/2015.
@@ -20,6 +20,18 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        //Football Facts
+        String[] facts = new String[]{"Football is the most played and most watched sport on earth.",
+                "Football originated in China around 476 B.C.",
+                "Football goalies didn't have to wear different coloured shirts from their teammates until 1913."};
+
+        //Generate a Random number to display a random football fact
+        Random rand = new Random();
+        int randomNum = rand.nextInt(facts.length);
+
+        final TextView factView = (TextView) findViewById(R.id.FootballFact);
+        factView.setText(facts[randomNum]);
 
         new Handler().postDelayed(new Runnable() {
 

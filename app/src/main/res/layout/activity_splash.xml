@@ -35,4 +35,14 @@
         android:layout_alignParentBottom="true"
         android:text="QATAR INDIAN FOOTBALL FORUM"/>
 
+    <TextView
+        android:id="@+id/PoweredBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        android:textSize="17dp"
+        android:textColor="#454545"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:text="Powered by Ver-techs"/>
 </RelativeLayout>

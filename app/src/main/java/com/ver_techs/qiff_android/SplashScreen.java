@@ -22,9 +22,13 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.activity_splash);
 
         //Football Facts
-        String[] facts = new String[]{"Football is the most played and most watched sport on earth.",
-                "Football originated in China around 476 B.C.",
-                "Football goalies didn't have to wear different coloured shirts from their teammates until 1913."};
+        String[] facts = new String[]{"Football is the most played and most watched sport on earth !",
+                "Football originated in China around 476 B.C. !",
+                "Football goalies didn't have to wear different coloured shirts from their teammates until 1913 !",
+                "Football players run an average of 9.65 kms during every game !",
+                "Pele was the first to call football “the beautiful game” !",
+                "Neil Armstrong originally wanted to take a football to the moon !",
+                "More than 80% of the world’s footballs are manufactured in Pakistan !"};
 
         //Generate a Random number to display a random football fact
         Random rand = new Random();

@@ -27,8 +27,7 @@ public class SplashScreen extends Activity {
                 "Football goalies didn't have to wear different coloured shirts from their teammates until 1913 !",
                 "Football players run an average of 9.65 kms during every game !",
                 "Pele was the first to call football - the beautiful game !",
-                "Neil Armstrong originally wanted to take a football to the moon !",
-                "More than 80% of the world’s footballs are manufactured in Pakistan !"};
+                "Neil Armstrong originally wanted to take a football to the moon !"};
 
         //Generate a Random number to display a random football fact
         Random rand = new Random();

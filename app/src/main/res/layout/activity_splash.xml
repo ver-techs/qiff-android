@@ -38,12 +38,12 @@
 
     <ImageView
         android:id="@+id/vertechs_logo"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:src="@drawable/vertechs"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -26,8 +26,6 @@ import android.widget.LinearLayout;
  * limitations under the License.
  */
 
-
-
 class SlidingTabStrip extends LinearLayout {
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 0;

@@ -10,11 +10,11 @@ package com.ver_techs.qiff_android;
 /**
  * Created by Edwin on 15/02/2015.
  */
-public class Tab1 extends Fragment {
+public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab_2,container,false);
+        View v =inflater.inflate(R.layout.fragment_tab_1,container,false);
         return v;
     }
 }

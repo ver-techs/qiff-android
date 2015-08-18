@@ -20,7 +20,8 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            card_view:cardCornerRadius="5dp" >
+            card_view:cardCornerRadius="5dp"
+            card_view:cardBackgroundColor="@color/color_accent">
 
             <TableLayout android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -33,7 +34,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TEAM 1"
-                        android:textColor="@color/color_tertiary"
+                        android:textColor="@color/color_main"
                         android:gravity="center"
                         android:layout_column="0"
                         android:layout_marginLeft="8dp"
@@ -46,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:text="TEAM 2"
                         android:gravity="center"
-                        android:textColor="@color/color_tertiary"
+                        android:textColor="@color/color_main"
                         android:layout_marginRight="8dp"
                         android:layout_column="4"
                         android:layout_marginTop="10dp">
@@ -91,6 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="00:45"
+                        android:textColor="@color/color_primary"
                         android:gravity="right"
                         android:textSize="14dp"
                         android:layout_marginTop="10dp"
@@ -107,6 +109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:textColor="@color/color_primary"
                         android:gravity="right"
                         android:textSize="40dp"
                         android:layout_marginTop="10dp"
@@ -118,6 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=":"
+                        android:textColor="@color/color_primary"
                         android:gravity="center"
                         android:textSize="40dp"
                         android:layout_column="2"
@@ -130,6 +134,7 @@
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:gravity="left"
+                        android:textColor="@color/color_primary"
                         android:textSize="40dp"
                         android:layout_column="3"
                         android:layout_marginTop="10dp">
@@ -150,7 +155,8 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            card_view:cardCornerRadius="4dp" >
+            card_view:cardCornerRadius="4dp"
+            card_view:cardBackgroundColor="@color/color_accent">
 
             <RelativeLayout
                 android:id="@+id/relative_layout_commentary"
@@ -162,7 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="LIVE COMMENTARY"
-                    android:textColor="@color/color_tertiary"
+                    android:textColor="@color/color_main"
                     android:gravity="center"
                     android:layout_marginLeft="7dp"
                     android:layout_column="0"
@@ -198,6 +204,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="In : Fabio Carreno"
+                                android:textColor="@color/color_primary"
                                 android:layout_column="1"
                                 android:layout_marginLeft="6dp"
                                 android:layout_marginTop="6dp">
@@ -213,6 +220,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="In : Ronald Tryce"
                                 android:layout_column="1"
+                                android:textColor="@color/color_primary"
                                 android:gravity="right"
                                 android:layout_marginRight="6dp"
                                 android:layout_marginTop="6dp">
@@ -249,7 +257,8 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            card_view:cardCornerRadius="4dp" >
+            card_view:cardCornerRadius="4dp"
+            card_view:cardBackgroundColor="@color/color_accent">
 
             <RelativeLayout
                 android:id="@+id/relative_layout_fan_zone"
@@ -261,7 +270,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="FAN ZONE"
-                    android:textColor="@color/color_tertiary"
+                    android:textColor="@color/color_main"
                     android:gravity="center"
                     android:layout_marginLeft="7dp"
                     android:layout_column="0"
@@ -285,6 +294,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="FAN 1"
+                                android:textColor="@color/color_primary"
                                 android:layout_marginLeft="7dp"
                                 android:layout_column="0"
                                 android:layout_marginTop="10dp">
@@ -295,6 +305,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=":"
+                                android:textColor="@color/color_primary"
                                 android:gravity="center"
                                 android:layout_column="1"
                                 android:layout_marginTop="10dp">
@@ -306,6 +317,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Hey ! Blah blah blah blah !"
                                 android:layout_marginRight="7dp"
+                                android:textColor="@color/color_primary"
                                 android:layout_column="2"
                                 android:layout_marginTop="10dp">
                             </TextView>
@@ -319,6 +331,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="FAN 2"
+                                android:textColor="@color/color_primary"
                                 android:layout_marginLeft="7dp"
                                 android:layout_column="0"
                                 android:layout_marginTop="10dp">
@@ -329,6 +342,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=":"
+                                android:textColor="@color/color_primary"
                                 android:gravity="center"
                                 android:layout_column="1"
                                 android:layout_marginTop="10dp">
@@ -340,6 +354,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Hey ! Blah blah blah blah adding more blah !"
                                 android:layout_column="2"
+                                android:textColor="@color/color_primary"
                                 android:layout_marginRight="7dp"
                                 android:layout_marginTop="10dp">
                             </TextView>
@@ -353,6 +368,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="FAN 1"
+                                android:textColor="@color/color_primary"
                                 android:layout_marginLeft="7dp"
                                 android:layout_column="0"
                                 android:layout_marginTop="10dp">
@@ -363,6 +379,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=":"
+                                android:textColor="@color/color_primary"
                                 android:gravity="center"
                                 android:layout_column="1"
                                 android:layout_marginTop="10dp">
@@ -373,6 +390,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Hey ! Blah blah blah blah !"
+                                android:textColor="@color/color_primary"
                                 android:layout_column="2"
                                 android:layout_marginRight="7dp"
                                 android:layout_marginTop="10dp">
@@ -387,6 +405,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="FAN 2"
+                                android:textColor="@color/color_primary"
                                 android:layout_marginLeft="7dp"
                                 android:layout_column="0"
                                 android:layout_marginTop="10dp">
@@ -397,6 +416,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=":"
+                                android:textColor="@color/color_primary"
                                 android:gravity="center"
                                 android:layout_column="1"
                                 android:layout_marginTop="10dp">
@@ -408,6 +428,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Hey ! Blah blah blah blah !"
                                 android:layout_column="2"
+                                android:textColor="@color/color_primary"
                                 android:layout_marginRight="7dp"
                                 android:layout_marginTop="10dp">
                             </TextView>
@@ -421,6 +442,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="FAN 1"
+                                android:textColor="@color/color_primary"
                                 android:layout_marginLeft="7dp"
                                 android:layout_column="0"
                                 android:layout_marginTop="10dp">
@@ -431,6 +453,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=":"
+                                android:textColor="@color/color_primary"
                                 android:gravity="center"
                                 android:layout_column="1"
                                 android:layout_marginTop="10dp">
@@ -442,6 +465,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Hey ! Blah blah blah blah !"
                                 android:layout_column="2"
+                                android:textColor="@color/color_primary"
                                 android:layout_marginRight="7dp"
                                 android:layout_marginTop="10dp">
                             </TextView>

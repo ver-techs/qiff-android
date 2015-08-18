@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:textSize="17dp"
-        android:textColor="@color/color_tertiary"
+        android:textColor="@color/color_main"
         android:gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:textStyle="italic"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:textSize="17dp"
-        android:textColor="@color/color_black"
+        android:textColor="@color/color_main"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:text="Powered by"/>

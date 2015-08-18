@@ -13,7 +13,7 @@ public class MainActivity extends ActionBarActivity {
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Calendar","Home"};
+    CharSequence Titles[]={"Home","Calendar"};
     int Numboftabs =2;
 
     @Override
@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.color_third);
+                return getResources().getColor(R.color.color_main);
             }
         });
 

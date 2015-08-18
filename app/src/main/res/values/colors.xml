@@ -2,8 +2,8 @@
 <resources>
     <color name="color_primary">#F5F5F5</color>
     <color name="color_secondary">#FAFAFA</color>
-    <color name="color_third">#E0E0E0</color>
+    <color name="color_tertiary">#E0E0E0</color>
+    <color name="color_main">#00C853</color>
     <color name="color_accent">#FFFFFF</color>
-    <color name="color_tertiary">#00C853</color>
     <color name="color_black">#000000</color>
 </resources>

@@ -14,7 +14,7 @@ public class Tab1Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_home,container,false);
+        View v =inflater.inflate(R.layout.fragment_tab_1,container,false);
         return v;
     }
 }

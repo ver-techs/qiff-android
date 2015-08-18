@@ -263,114 +263,114 @@
                     android:layout_width="match_parent"
                     android:layout_below="@id/fan_zone"
                     android:layout_height="wrap_content">
-                    
-                <TableLayout android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:stretchColumns="1">
 
-                    <TableRow>
+                    <TableLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:stretchColumns="1">
 
-                        <TextView
-                            android:id="@+id/name_fan1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="FAN 1"
-                            android:layout_marginLeft="7dp"
-                            android:layout_column="0"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                        <TableRow>
 
-                        <TextView
-                            android:id="@+id/colon_separator"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=":"
-                            android:gravity="center"
-                            android:layout_column="1"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                            <TextView
+                                android:id="@+id/name_fan1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="FAN 1"
+                                android:layout_marginLeft="7dp"
+                                android:layout_column="0"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                        <TextView
-                            android:id="@+id/comment_fan1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hey ! Blah blah blah blah !"
-                            android:layout_marginRight="7dp"
-                            android:layout_column="2"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                            <TextView
+                                android:id="@+id/colon_separator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+                                android:gravity="center"
+                                android:layout_column="1"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                    </TableRow>
+                            <TextView
+                                android:id="@+id/comment_fan1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hey ! Blah blah blah blah !"
+                                android:layout_marginRight="7dp"
+                                android:layout_column="2"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                    <TableRow>
+                        </TableRow>
 
-                        <TextView
-                            android:id="@+id/name_fan2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="FAN 2"
-                            android:layout_marginLeft="7dp"
-                            android:layout_column="0"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                        <TableRow>
 
-                        <TextView
-                            android:id="@+id/colon_separator_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=":"
-                            android:gravity="center"
-                            android:layout_column="1"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                            <TextView
+                                android:id="@+id/name_fan2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="FAN 2"
+                                android:layout_marginLeft="7dp"
+                                android:layout_column="0"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                        <TextView
-                            android:id="@+id/comment_team2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hey ! Blah blah blah blah !"
-                            android:layout_column="2"
-                            android:layout_marginRight="7dp"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                            <TextView
+                                android:id="@+id/colon_separator_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+                                android:gravity="center"
+                                android:layout_column="1"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                    </TableRow>
+                            <TextView
+                                android:id="@+id/comment_team2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hey ! Blah blah blah blah !"
+                                android:layout_column="2"
+                                android:layout_marginRight="7dp"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                    <TableRow>
+                        </TableRow>
 
-                        <TextView
-                            android:id="@+id/name_fan3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="FAN 1"
-                            android:layout_marginLeft="7dp"
-                            android:layout_column="0"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                        <TableRow>
 
-                        <TextView
-                            android:id="@+id/colon_separator_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=":"
-                            android:gravity="center"
-                            android:layout_column="1"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                            <TextView
+                                android:id="@+id/name_fan3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="FAN 1"
+                                android:layout_marginLeft="7dp"
+                                android:layout_column="0"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                        <TextView
-                            android:id="@+id/comment_team3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hey ! Blah blah blah blah !"
-                            android:layout_column="2"
-                            android:layout_marginRight="7dp"
-                            android:layout_marginTop="10dp">
-                        </TextView>
+                            <TextView
+                                android:id="@+id/colon_separator_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+                                android:gravity="center"
+                                android:layout_column="1"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                    </TableRow>
+                            <TextView
+                                android:id="@+id/comment_team3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hey ! Blah blah blah blah !"
+                                android:layout_column="2"
+                                android:layout_marginRight="7dp"
+                                android:layout_marginTop="10dp">
+                            </TextView>
 
-                </TableLayout>
+                        </TableRow>
+
+                    </TableLayout>
 
                 </ScrollView>
 

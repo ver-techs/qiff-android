@@ -3,21 +3,20 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.androidfromhome.calendar.CalenderActivity" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="#343434"
+        android:background="@color/color_primary"
         android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/header"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#78C165"
+            android:background="@color/color_main"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dp" >
@@ -28,8 +27,9 @@
 
                 <ImageButton
                     android:id="@+id/ib_prev"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:src="@drawable/left_arrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="2dp" />
 
@@ -47,8 +47,8 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dip"
                     android:gravity="center"
-                    android:text="January"
-                    android:textColor="#ffffff"
+                    android:text="JANUARY"
+                    android:textColor="@color/color_accent"
                     android:textSize="18dip"
                     android:textStyle="bold" />
 
@@ -60,8 +60,9 @@
 
                 <ImageButton
                     android:id="@+id/Ib_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:src="@drawable/right_arrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_margin="2dp" />
 
             </FrameLayout>
@@ -83,7 +84,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="S"
-                android:textColor="#ffffff" />
+                android:textColor="@color/color_accent" />
 
             <TextView
                 android:id="@+id/TextView05"
@@ -92,7 +93,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="M"
-                android:textColor="#ffffff" />
+                android:textColor="@color/color_accent" />
 
             <TextView
                 android:id="@+id/TextView04"
@@ -101,7 +102,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="T"
-                android:textColor="#ffffff" />
+                android:textColor="@color/color_accent" />
 
             <TextView
                 android:id="@+id/TextView03"
@@ -110,7 +111,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="W"
-                android:textColor="#ffffff" />
+                android:textColor="@color/color_accent" />
 
             <TextView
                 android:id="@+id/TextView02"
@@ -119,7 +120,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="T"
-                android:textColor="#ffffff" />
+                android:textColor="@color/color_accent" />
 
             <TextView
                 android:id="@+id/TextView01"
@@ -128,7 +129,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="F"
-                android:textColor="#ffffff" />
+                android:textColor="@color/color_accent" />
 
             <TextView
                 android:id="@+id/textView1"
@@ -137,7 +138,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="S"
-                android:textColor="#ffffff" />
+                android:textColor="@color/color_accent" />
 
         </TableRow>
 
@@ -145,15 +146,15 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="#dfdfdf"
+            android:background="@color/color_secondary"
             android:padding="2dp" />
 
         <GridView
             android:id="@+id/gv_calendar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:cacheColorHint="#80000000"
+            android:background="@color/color_secondary"
+            android:cacheColorHint="@color/color_primary"
             android:gravity="center"
             android:listSelector="@android:color/transparent"
             android:numColumns="7"
@@ -166,7 +167,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="#343434"
+            android:background="@color/color_primary"
             android:orientation="vertical" >
 
         </LinearLayout>

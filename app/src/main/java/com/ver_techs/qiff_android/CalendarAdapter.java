@@ -19,21 +19,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CalendarAdapter extends BaseAdapter {
-    private Context context;
 
+    private Context context;
     private java.util.Calendar month;
     public GregorianCalendar pmonth;
+
     /**
      * calendar instance for previous month for getting complete view
      */
+
     public GregorianCalendar pmonthmaxset;
     private GregorianCalendar selectedDate;
     int firstDay;
     int maxWeeknumber;
     int maxP;
     int calMaxP;
-    int lastWeekDay;
-    int leftDays;
     int mnthlength;
     String itemvalue, curentDateString;
     DateFormat df;
@@ -44,6 +44,7 @@ public class CalendarAdapter extends BaseAdapter {
     public ArrayList<CalendarCollection>  date_collection_arr;
 
     public CalendarAdapter(Context context, GregorianCalendar monthCalendar,ArrayList<CalendarCollection> date_collection_arr) {
+
         this.date_collection_arr=date_collection_arr;
         CalendarAdapter.day_string = new ArrayList<String>();
         Locale.setDefault(Locale.US);
@@ -60,12 +61,14 @@ public class CalendarAdapter extends BaseAdapter {
     }
 
     public void setItems(ArrayList<String> items) {
+
         for (int i = 0; i != items.size(); i++) {
             if (items.get(i).length() == 1) {
                 items.set(i, "0" + items.get(i));
             }
         }
         this.items = items;
+
     }
 
     public int getCount() {
@@ -82,65 +85,64 @@ public class CalendarAdapter extends BaseAdapter {
 
     // create a new view for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View v = convertView;
         TextView dayView;
-        if (convertView == null) { // if it's not recycled, initialize some
-            // attributes
+        if (convertView == null) {
+
+        // if it's not recycled, initialize some attributes
             LayoutInflater vi = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.cal_item, null);
+            v = vi.inflate(R.layout.calendar_item, null);
 
         }
 
 
         dayView = (TextView) v.findViewById(R.id.date);
         String[] separatedTime = day_string.get(position).split("-");
-
-
         String gridvalue = separatedTime[2].replaceFirst("^0*", "");
+
         if ((Integer.parseInt(gridvalue) > 1) && (position < firstDay)) {
+
             dayView.setTextColor(Color.GRAY);
             dayView.setClickable(false);
             dayView.setFocusable(false);
-        } else if ((Integer.parseInt(gridvalue) < 7) && (position > 28)) {
+
+        }
+        else if ((Integer.parseInt(gridvalue) < 7) && (position > 28)) {
+
             dayView.setTextColor(Color.GRAY);
             dayView.setClickable(false);
             dayView.setFocusable(false);
+
         } else {
             // setting curent month's days in blue color.
             dayView.setTextColor(Color.WHITE);
-        }
 
+        }
 
         if (day_string.get(position).equals(curentDateString)) {
 
             v.setBackgroundColor(Color.CYAN);
-        } else {
-            v.setBackgroundColor(Color.parseColor("#343434"));
-        }
 
+        } else {
+
+            v.setBackgroundColor(Color.parseColor("#343434"));
+
+        }
 
         dayView.setText(gridvalue);
 
         // create date string for comparison
         String date = day_string.get(position);
-
         if (date.length() == 1) {
             date = "0" + date;
         }
+
         String monthStr = "" + (month.get(GregorianCalendar.MONTH) + 1);
         if (monthStr.length() == 1) {
             monthStr = "0" + monthStr;
         }
-
-        // show icon if date is not empty and it exists in the items array
-        /*ImageView iw = (ImageView) v.findViewById(R.id.date_icon);
-        if (date.length() > 0 && items != null && items.contains(date)) {
-            iw.setVisibility(View.VISIBLE);
-        } else {
-            iw.setVisibility(View.GONE);
-        }
-        */
 
         setEventView(v, position,dayView);
 
@@ -148,6 +150,7 @@ public class CalendarAdapter extends BaseAdapter {
     }
 
     public View setSelected(View view,int pos) {
+
         if (previousView != null) {
             previousView.setBackgroundColor(Color.parseColor("#343434"));
         }
@@ -166,11 +169,11 @@ public class CalendarAdapter extends BaseAdapter {
 
         }
 
-
         return view;
     }
 
     public void refreshDays() {
+
         // clear items
         items.clear();
         day_string.clear();
@@ -204,9 +207,11 @@ public class CalendarAdapter extends BaseAdapter {
             day_string.add(itemvalue);
 
         }
+
     }
 
     private int getMaxP() {
+
         int maxP;
         if (month.get(GregorianCalendar.MONTH) == month
                 .getActualMinimum(GregorianCalendar.MONTH)) {
@@ -219,51 +224,51 @@ public class CalendarAdapter extends BaseAdapter {
         maxP = pmonth.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 
         return maxP;
+
     }
-
-
-
 
     public void setEventView(View v,int pos,TextView txt){
 
         CalendarCollection.date_collection_arr=new ArrayList<CalendarCollection>();
-        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-04-01","John Birthday"));
-        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-04-04","Client Meeting at 5 p.m."));
-        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-04-06","A Small Party at my office"));
-        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-05-02","Marriage Anniversary"));
-        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-04-11","Live Event and Concert of sonu"));
+        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-08-01","John Birthday"));
+        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-08-04","Client Meeting at 5 p.m."));
+        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-08-06","A Small Party at my office"));
+        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-08-02","Marriage Anniversary"));
+        CalendarCollection.date_collection_arr.add(new CalendarCollection("2015-09-11","Live Event and Concert of sonu"));
+
         int len=CalendarCollection.date_collection_arr.size();
+
         for (int i = 0; i < len; i++) {
+
             CalendarCollection cal_obj=CalendarCollection.date_collection_arr.get(i);
             String date=cal_obj.date;
             int len1=day_string.size();
             if (len1>pos) {
 
                 if (day_string.get(pos).equals(date)) {
+
                     v.setBackgroundColor(Color.parseColor("#343434"));
-                    //v.setBackgroundResource(R.drawable.rounded_calender_item);
+                    v.setBackgroundResource(R.drawable.event_background);
 
                     txt.setTextColor(Color.WHITE);
+
                 }
+
             }}
 
-
-
     }
-
 
     public void getPositionList(String date,final Activity act){
 
         int len=CalendarCollection.date_collection_arr.size();
         for (int i = 0; i < len; i++) {
+
             CalendarCollection cal_collection=CalendarCollection.date_collection_arr.get(i);
             String event_date=cal_collection.date;
-
             String event_message=cal_collection.event_message;
 
             if (date.equals(event_date)) {
 
-                Toast.makeText(context, "You have event on this date: "+event_date, Toast.LENGTH_LONG).show();
                 new AlertDialog.Builder(context)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Date: "+event_date)
@@ -277,7 +282,10 @@ public class CalendarAdapter extends BaseAdapter {
                 break;
             }else{
 
-            }}
+            }
+
+        }
+
     }
 
 }

@@ -33,7 +33,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         }
         else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-            Tab1Fragment tab2 = new Tab1Fragment();
+            CalendarFragment tab2 = new CalendarFragment();
             return tab2;
         }
 

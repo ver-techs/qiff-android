@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 /**
  * Created by Edwin on 15/02/2015.
  */
-public class Tab1Fragment extends Fragment {
+public class CalendarFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

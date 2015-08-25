@@ -14,11 +14,11 @@
         android:id="@+id/textView" />
 
     <EditText
-        android:id="@+id/edittext"
+        android:id="@+id/userName"
         android:layout_width="fill_parent"
         android:textSize="16dp"
         android:layout_height="wrap_content"
-        android:hint="Enter text here.."
+        android:hint="Enter username here.."
         android:padding="10dp" />
 
 </LinearLayout>

@@ -65,8 +65,18 @@ public class HomeFragment extends Fragment {
         alertDialogBuilder.setView(promptView);
 
         final EditText editText = (EditText) promptView.findViewById(R.id.edittext);
-        // setup a dialog window
-        alertDialogBuilder.setCancelable(false);
+
+        alertDialogBuilder
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                }
+                })
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        
+                    }
+                });
 
         // create an alert dialog
         AlertDialog alert = alertDialogBuilder.create();

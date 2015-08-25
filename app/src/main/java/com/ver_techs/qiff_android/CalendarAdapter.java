@@ -276,7 +276,7 @@ public class CalendarAdapter extends BaseAdapter {
                         .setPositiveButton("OK",new android.content.DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int which)
                             {
-                                act.finish();
+                                //act.finish();
                             }
                         }).show();
                 break;

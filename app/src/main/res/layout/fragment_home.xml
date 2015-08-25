@@ -526,6 +526,7 @@
                     android:layout_height="50dp" />
 
                 <Button
+                    android:id="@+id/send_chat_button"
                     android:background="@drawable/send_chat_button"
                     android:layout_width="30dp"
                     android:layout_gravity="end|right"

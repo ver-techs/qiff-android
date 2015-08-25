@@ -1,5 +1,7 @@
 package com.ver_techs.qiff_android;
 
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ package com.ver_techs.qiff_android;
         import android.view.MotionEvent;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.Button;
         import android.widget.ScrollView;
 
 /**
@@ -31,13 +34,38 @@ public class HomeFragment extends Fragment {
         });
         childScroll.setOnTouchListener(new View.OnTouchListener() {
 
-            public boolean onTouch(View v, MotionEvent event)
-            {
+            public boolean onTouch(View v, MotionEvent event) {
                 // Disallow the touch request for parent scroll on touch of child view
                 v.getParent().requestDisallowInterceptTouchEvent(true);
                 return false;
             }
 
+        });
+
+        Button send_chat_button = (Button) v.findViewById(R.id.send_chat_button);
+        send_chat_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                new AlertDialog.Builder(getActivity())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Username")
+                        .setMessage("Enter a Username for sending chat :")
+                        .setPositiveButton("OK",new android.content.DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+
+                            }
+                        })
+                        .setNegativeButton("Cancel",new android.content.DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+
+                            }
+                        }).show();
+
+            }
         });
 
         return v;

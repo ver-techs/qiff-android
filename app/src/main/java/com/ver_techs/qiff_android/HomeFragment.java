@@ -10,6 +10,7 @@ package com.ver_techs.qiff_android;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.Button;
+        import android.widget.EditText;
         import android.widget.ScrollView;
 
 /**
@@ -48,26 +49,27 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                new AlertDialog.Builder(getActivity())
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Username")
-                        .setMessage("Enter a Username for sending chat :")
-                        .setPositiveButton("OK",new android.content.DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int which)
-                            {
-
-                            }
-                        })
-                        .setNegativeButton("Cancel",new android.content.DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int which)
-                            {
-
-                            }
-                        }).show();
+                showInputDialog();
 
             }
         });
 
         return v;
+    }
+
+    protected void showInputDialog() {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View promptView = layoutInflater.inflate(R.layout.username_alert_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setView(promptView);
+
+        final EditText editText = (EditText) promptView.findViewById(R.id.edittext);
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false);
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 }

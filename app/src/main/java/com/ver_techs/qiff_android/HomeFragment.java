@@ -25,8 +25,8 @@ import com.parse.SignUpCallback;
 public class HomeFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
-    EditText userName_editText;
-    String userName;
+    EditText userName_editText, message_editText;
+    String userName, message;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class HomeFragment extends Fragment {
 
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
+        message_editText = (EditText) v.findViewById(R.id.message_box);
+
         Button send_chat_button = (Button) v.findViewById(R.id.send_chat_button);
         send_chat_button.setOnClickListener(new View.OnClickListener() {
 
@@ -65,17 +67,33 @@ public class HomeFragment extends Fragment {
 
                     //Get desired User Name from user
                     showInputDialog();
+                    sendChatToParse();
 
                 }
                 else {
                     
                     //send chat with existing User Name
-                    Log.i("***username***", userName);
+                    sendChatToParse();
                 }
             }
         });
 
         return v;
+    }
+
+    protected void sendChatToParse(){
+
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        userName = sharedPreferences.getString("UserName", "null");
+        message = message_editText.getText().toString();
+        ChatItem chatItem = new ChatItem(userName, message);
+
+        Log.i("***username***", chatItem.getUserName());
+        Log.i("***message***", chatItem.getChatMessage());
+
+        // Save the data to Parse whenever internet is available
+        chatItem.saveEventually();
+
     }
 
     protected void showInputDialog() {
@@ -102,6 +120,7 @@ public class HomeFragment extends Fragment {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("UserName", userName);
                         editor.commit();
+                        Log.i("reached", "reached here");
 
                     }
                 });

@@ -7,6 +7,7 @@ import com.parse.ParseClassName;
  * Created by Sony on 8/28/2015.
  */
 
+@ParseClassName("ChatItem")
 public class ChatItem extends ParseObject{
 
     String userName;

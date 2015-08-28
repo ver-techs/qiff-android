@@ -25,6 +25,9 @@ import com.parse.SignUpCallback;
 public class HomeFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
+    EditText userName_editText;
+    String userName;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_home,container,false);
@@ -50,7 +53,7 @@ public class HomeFragment extends Fragment {
 
         });
 
-        sharedPreferences = getActivity().getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         Button send_chat_button = (Button) v.findViewById(R.id.send_chat_button);
         send_chat_button.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +61,17 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showInputDialog();
-                //Log.i("***username***", sharedPreferences.getString("UserName", "null"));
+                if(sharedPreferences.getString("UserName", "null").equals("null")){
+
+                    //Get desired User Name from user
+                    showInputDialog();
+
+                }
+                else {
+                    
+                    //send chat with existing User Name
+                    Log.i("***username***", userName);
+                }
             }
         });
 
@@ -73,16 +85,23 @@ public class HomeFragment extends Fragment {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setView(promptView);
 
-        final EditText userName_editText = (EditText) promptView.findViewById(R.id.userName);
+        userName_editText = (EditText) promptView.findViewById(R.id.userName);
 
         alertDialogBuilder
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                         dialog.cancel();
+
                 }
                 })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
+                        userName  = userName_editText.getText().toString();
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("UserName", userName);
+                        editor.commit();
 
                     }
                 });
@@ -91,28 +110,5 @@ public class HomeFragment extends Fragment {
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
 
-        final String userName  = userName_editText.getText().toString();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("UserName", userName);
-        editor.commit();
-
-        // Create the ParseUser
-        ParseUser user = new ParseUser();
-        // Set core properties
-        user.setUsername(userName);
-        //user.setPassword("secret123");
-        //user.setEmail("email@example.com");
-        // Invoke signUpInBackground
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    // Hooray! Let them use the app now.
-                    Log.i("***username success**", "successful signup");
-                } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
-                }
-            }
-        });
     }
 }

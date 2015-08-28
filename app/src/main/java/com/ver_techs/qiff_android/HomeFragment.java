@@ -18,9 +18,13 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -74,6 +78,24 @@ public class HomeFragment extends Fragment {
                     
                     //send chat with existing User Name
                     sendChatToParse();
+                }
+            }
+        });
+
+        // Define the class we would like to query
+        ParseQuery<ChatItem> query = ParseQuery.getQuery(ChatItem.class);
+        // Execute the find asynchronously
+        query.findInBackground(new FindCallback<ChatItem>() {
+            public void done(List<ChatItem> chatItemList, ParseException e) {
+                if (e == null) {
+                    // Access the array of results here
+                    for(int i=0; i< chatItemList.size(); i++){
+
+                        Log.i("recieved - ", chatItemList.get(i).getUserName() + " " + chatItemList.get(i).getChatMessage());
+
+                    }
+                } else {
+                    Log.d("item", "Error: " + e.getMessage());
                 }
             }
         });

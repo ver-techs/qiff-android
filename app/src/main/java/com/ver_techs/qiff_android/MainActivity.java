@@ -23,6 +23,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_sliding_tab);
 
+        // Register your parse models
+        ParseObject.registerSubclass(ChatItem.class);
+
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "6s7QG2du0XmhMsOiaHjLigPGYAE7S5qbiS3WtFkd", "E8NNZPjH07UuOly76mmuQV8g2q5mrYDt9w8oL2fa");
@@ -48,10 +51,6 @@ public class MainActivity extends ActionBarActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
 
     }
 

@@ -19,32 +19,31 @@ public class ChatItem extends ParseObject{
     public ChatItem(String username, String chatmessage) {
 
         super();
-        userName=username;
-        chatMessage=chatmessage;
+        setUserName(username);
+        setChatMessage(chatmessage);
 
     }
 
     public void setUserName(String username){
 
-        userName=username;
+        put("userName",username);
 
     }
 
     public void setChatMessage(String chatmessage){
 
-        chatMessage=chatmessage;
+        put("chatMessage",chatmessage);
 
     }
 
     public String getUserName() {
 
-        return userName;
-
+        return getString("userName");
     }
 
     public String getChatMessage() {
 
-        return chatMessage;
+        return getString("chatMessage");
 
     }
 

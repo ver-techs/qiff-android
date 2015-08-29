@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -35,6 +36,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_home,container,false);
+
+        //ensuring parent and child scroll views work fine on touch
 
         ScrollView parentScroll=(ScrollView) v.findViewById(R.id.parentScroll);
         ScrollView childScroll=(ScrollView) v.findViewById(R.id.childScroll);
@@ -56,6 +59,8 @@ public class HomeFragment extends Fragment {
             }
 
         });
+
+        //Chat send button code - to get username first time, save as sharedpref, use it subsequently, and send chat messages
 
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
@@ -82,6 +87,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Parse query to get all chats from server
+
         // Define the class we would like to query
         ParseQuery<ChatItem> query = ParseQuery.getQuery(ChatItem.class);
         // Execute the find asynchronously
@@ -99,6 +106,11 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+        // Polulating Fan zone with chat messages from Parse
+
+        TableLayout t1;
+        TableLayout tl = (TableLayout) v.findViewById(R.id.fan_zone_table);
 
         return v;
     }

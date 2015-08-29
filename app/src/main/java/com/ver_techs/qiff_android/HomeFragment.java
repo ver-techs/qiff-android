@@ -1,5 +1,6 @@
 package com.ver_techs.qiff_android;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,8 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -87,30 +91,56 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        // Polulating Fan zone with chat messages from Parse
+
+
+        final TableLayout tl = (TableLayout) v.findViewById(R.id.fan_zone_table);
+
         // Parse query to get all chats from server
 
         // Define the class we would like to query
         ParseQuery<ChatItem> query = ParseQuery.getQuery(ChatItem.class);
         // Execute the find asynchronously
         query.findInBackground(new FindCallback<ChatItem>() {
+
             public void done(List<ChatItem> chatItemList, ParseException e) {
+
                 if (e == null) {
-                    // Access the array of results here
-                    for(int i=0; i< chatItemList.size(); i++){
 
-                        Log.i("recieved - ", chatItemList.get(i).getUserName() + " " + chatItemList.get(i).getChatMessage());
+                        // Access the array of results here
+                        for(int i=0; i< chatItemList.size(); i++){
 
+                            TableRow tr_1 = new TableRow(getActivity());
+                            tr_1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                            TextView fan_name = new TextView(getActivity());
+                            fan_name.setText(chatItemList.get(i).getUserName());
+                            fan_name.setTextSize(16);
+                            fan_name.setTextColor(getResources().getColor(R.color.color_primary));
+                            tr_1.addView(fan_name);// add the column to the table row here
+
+                            TextView colon = new TextView(getActivity());
+                            colon.setText(" :   ");
+                            colon.setTextSize(16);
+                            colon.setTextColor(getResources().getColor(R.color.color_primary));
+                            tr_1.addView(colon);// add the column to the table row here
+
+                            TextView message = new TextView(getActivity());
+                            message.setText(chatItemList.get(i).getChatMessage());
+                            message.setTextSize(16);
+                            message.setTextColor(getResources().getColor(R.color.color_primary));
+                            tr_1.addView(message);// add the column to the table row here
+
+                            tl.addView(tr_1, new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                        }
+
+                    } else {
+                        Log.d("item", "Error: " + e.getMessage());
                     }
-                } else {
-                    Log.d("item", "Error: " + e.getMessage());
                 }
-            }
-        });
-
-        // Polulating Fan zone with chat messages from Parse
-
-        TableLayout t1;
-        TableLayout tl = (TableLayout) v.findViewById(R.id.fan_zone_table);
+            });
 
         return v;
     }
@@ -127,7 +157,7 @@ public class HomeFragment extends Fragment {
 
         // Save the data to Parse whenever internet is available
         chatItem.saveEventually();
-
+        Toast.makeText(getActivity(), "Chat message has been successfully sent !", Toast.LENGTH_SHORT);
     }
 
     protected void showInputDialog() {

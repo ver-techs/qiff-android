@@ -157,7 +157,7 @@ public class HomeFragment extends Fragment {
 
         // Save the data to Parse whenever internet is available
         chatItem.saveEventually();
-        Toast.makeText(getActivity(), "Chat message has been successfully sent !", Toast.LENGTH_SHORT);
+        Toast.makeText(getActivity(), "Chat message has been successfully sent !", Toast.LENGTH_SHORT).show();
     }
 
     protected void showInputDialog() {

@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 /**
  * Created by Sony on 9/2/2015.
  */
-public class CalendarFragment extends Fragment {
+public class FixtureFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_calendar, container, false);
+        View v = inflater.inflate(R.layout.fragment_fixture, container, false);
 
         return v;
     }

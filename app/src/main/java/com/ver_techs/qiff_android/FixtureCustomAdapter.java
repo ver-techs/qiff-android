@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 /**
  * Created by Sony on 9/2/2015.
  */
-public class CalendarCustomAdapter extends BaseAdapter {
+public class FixtureCustomAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {

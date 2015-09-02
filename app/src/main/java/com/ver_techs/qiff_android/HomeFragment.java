@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -26,8 +25,6 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 import java.util.List;
 
@@ -117,19 +114,19 @@ public class HomeFragment extends Fragment {
                             TextView fan_name = new TextView(getActivity());
                             fan_name.setText(chatItemList.get(i).getUserName());
                             fan_name.setTextSize(16);
-                            fan_name.setTextColor(getResources().getColor(R.color.color_primary));
+                            fan_name.setTextColor(getResources().getColor(R.color.color_main));
                             tr_1.addView(fan_name);// add the column to the table row here
 
                             TextView colon = new TextView(getActivity());
                             colon.setText(" :   ");
                             colon.setTextSize(16);
-                            colon.setTextColor(getResources().getColor(R.color.color_primary));
+                            colon.setTextColor(getResources().getColor(R.color.color_main));
                             tr_1.addView(colon);// add the column to the table row here
 
                             TextView message = new TextView(getActivity());
                             message.setText(chatItemList.get(i).getChatMessage());
                             message.setTextSize(16);
-                            message.setTextColor(getResources().getColor(R.color.color_primary));
+                            message.setTextColor(getResources().getColor(R.color.color_main));
                             tr_1.addView(message);// add the column to the table row here
 
                             tl.addView(tr_1, new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));

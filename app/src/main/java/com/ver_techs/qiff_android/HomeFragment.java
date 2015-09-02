@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment {
                 if (e == null) {
 
                         // Access the array of results here
-                        for(int i=0; i< chatItemList.size(); i++){
+                        for(int i=chatItemList.size()-1; i>=0; i--){
 
                             TableRow tr_1 = new TableRow(getActivity());
                             tr_1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));

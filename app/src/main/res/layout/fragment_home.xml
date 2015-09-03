@@ -104,7 +104,8 @@
 
                     <TextView
                         android:id="@+id/score_team1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="@color/color_main"
@@ -116,7 +117,8 @@
 
                     <TextView
                         android:id="@+id/colon"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
                         android:layout_height="wrap_content"
                         android:text=":"
                         android:textColor="@color/color_main"
@@ -128,7 +130,8 @@
 
                     <TextView
                         android:id="@+id/score_team2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="4"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:gravity="left"

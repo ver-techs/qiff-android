@@ -1,11 +1,19 @@
 package com.ver_techs.qiff_android;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,16 +76,33 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
     public List<FixtureItem> getDataForListView()
     {
-        List<FixtureItem> fixtureItemArrayList = new ArrayList<FixtureItem>();
+        final List<FixtureItem> fixtureItemArrayList = new ArrayList<FixtureItem>();
 
-        for(int i=0;i<10;i++)
-        {
+        // Parse query to get all FixtureItem objects from server
 
-            FixtureItem fixtureItem = new FixtureItem();
-            fixtureItem.teamName1 = fixtureItem.getTeamName1();
-            fixtureItem.teamName2 = fixtureItem.getTeamName2();
-            fixtureItemArrayList.add(fixtureItem);
-        }
+        ParseObject.registerSubclass(FixtureItem.class);
+        // Define the class we would like to query
+        ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
+        // Execute the find asynchronously
+        query.findInBackground(new FindCallback<FixtureItem>() {
+
+            public void done(List<FixtureItem> fixtureItemList, ParseException e) {
+
+                if (e == null) {
+
+                    // Access the array of results here
+                    for(int i=0; i<fixtureItemList.size(); i++){
+
+                        fixtureItemArrayList.add(fixtureItemList.get(i));
+                        Log.i("fixture", fixtureItemList.get(i).getTeamName1());
+
+                    }
+
+                } else {
+                    Log.d("item", "Error: " + e.getMessage());
+                }
+            }
+        });
 
         return fixtureItemArrayList;
 

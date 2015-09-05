@@ -25,6 +25,7 @@ public class MainActivity extends ActionBarActivity {
 
         // Register your parse models
         ParseObject.registerSubclass(ChatItem.class);
+        ParseObject.registerSubclass(FixtureItem.class);
 
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);

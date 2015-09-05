@@ -19,10 +19,7 @@ public class FixtureFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_fixture, container, false);
 
         FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter();
-
         ListView fixtureList = (ListView) v.findViewById(R.id.fixtureListView);
-
-        Log.i("aaki", "reached set adapter");
         fixtureList.setAdapter(fixtureListAdapter);
 
         return v;

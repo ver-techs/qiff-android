@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,46 +22,15 @@ import java.util.List;
 
 public class FixtureCustomAdapter extends BaseAdapter {
 
-    ArrayList<FixtureItem> fixtureItemArrayList;
+    ArrayList<FixtureItemLocal> fixtureItemArrayList;
 
-    public FixtureCustomAdapter() {
-
-        fixtureItemArrayList = new ArrayList<FixtureItem>();
-
-//        // Parse query to get all FixtureItem objects from server
-//
-//        // Define the class we would like to query
-//        ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
-//        // Execute the find asynchronously
-//        query.findInBackground(new FindCallback<FixtureItem>() {
-//
-//            public void done(List<FixtureItem> fixtureItemList, ParseException e) {
-//
-//                if (e == null) {
-//
-//                    // Access the array of results here
-//                    for (int i = 0; i < fixtureItemList.size() ; i++) {
-//
-//                        fixtureItemArrayList.add(fixtureItemList.get(i));
-//
-//                    }
-//
-//                } else {
-//                    Log.d("item", "Error: " + e.getMessage());
-//                }
-//            }
-//        });
-
-        FixtureItem fixtureitem = new FixtureItem("team1", "team2", "3", "4", "junk");
-        FixtureItem fixtureitem2 = new FixtureItem("team2", "team1", "3", "4", "junk");
-        fixtureItemArrayList.add(fixtureitem);
-        fixtureItemArrayList.add(fixtureitem2);
-
+    public FixtureCustomAdapter(ArrayList<FixtureItemLocal> fixtureItemArray) {
+        this.fixtureItemArrayList=fixtureItemArray;
     }
 
     @Override
     public int getCount() {
-        return fixtureItemArrayList.size();    // total number of elements in the list
+        return fixtureItemArrayList.size();
     }
 
     @Override
@@ -80,27 +51,28 @@ public class FixtureCustomAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.fixture_list_item, parent, false);
         }
 
-        final FixtureItem fixtureItem = fixtureItemArrayList.get(index);
+        final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index);
 
-        TextView teamName1 = (TextView) view.findViewById(R.id.name_team1);
-        teamName1.setText(fixtureItem.getTeamName1());
+        TextView teamName1 = (TextView) view.findViewById(R.id.name_team1_fixture);
+        teamName1.setText(fixtureItemLocal.getTeamName1());
 
-        TextView teamName2 = (TextView) view.findViewById(R.id.name_team2);
-        teamName2.setText(fixtureItem.getTeamName2());
+        TextView teamName2 = (TextView) view.findViewById(R.id.name_team2_fixture);
+        teamName2.setText(fixtureItemLocal.getTeamName2());
 
-        TextView scoreTeam1 = (TextView) view.findViewById(R.id.score_team1);
-        scoreTeam1.setText(fixtureItem.getScoreTeam1());
+        TextView scoreTeam1 = (TextView) view.findViewById(R.id.score_team1_fixture);
+        scoreTeam1.setText(fixtureItemLocal.getScoreTeam1());
 
-        TextView scoreTeam2 = (TextView) view.findViewById(R.id.score_team2);
-        scoreTeam2.setText(fixtureItem.getScoreTeam2());
+        TextView scoreTeam2 = (TextView) view.findViewById(R.id.score_team2_fixture);
+        scoreTeam2.setText(fixtureItemLocal.getScoreTeam2());
 
-        TextView time = (TextView) view.findViewById(R.id.time);
-        scoreTeam2.setText(fixtureItem.getTimeDate());
-        //ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1);
-        //team1_logo.setImageResource(R.drawable.team_1);
+        TextView time = (TextView) view.findViewById(R.id.time_fixture);
+        time.setText(fixtureItemLocal.getTimeDate());
 
-        //ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2);
-        //team2_logo.setImageResource(R.drawable.team_2);
+        ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1);
+        team1_logo.setImageResource(R.drawable.team_2);
+
+        ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2);
+        team2_logo.setImageResource(R.drawable.team_1);
 
         return view;
     }

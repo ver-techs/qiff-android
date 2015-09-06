@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TableLayout android:layout_width="match_parent"
+    <TableLayout
+        android:id="@+id/table_fixture"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:stretchColumns="2">
 
         <TableRow android:layout_width="match_parent">
 
             <TextView
-                android:id="@+id/name_team1"
+                android:id="@+id/name_team1_fixture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TEAM 1"
@@ -23,7 +25,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/time_fixture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_main"
@@ -36,7 +38,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/name_team2"
+                android:id="@+id/name_team2_fixture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TEAM 2"
@@ -54,7 +56,7 @@
         <TableRow android:layout_width="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image_team1"
+                android:id="@+id/image_team1_fixture"
                 android:layout_column="0"
                 android:gravity="center"
                 android:layout_weight="2"
@@ -65,7 +67,7 @@
                 android:src="@drawable/team_1" />
 
             <TextView
-                android:id="@+id/score_team1"
+                android:id="@+id/score_team1_fixture"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -78,7 +80,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/colon"
+                android:id="@+id/colon_fixture"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
@@ -91,7 +93,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/score_team2"
+                android:id="@+id/score_team2_fixture"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -104,7 +106,7 @@
             </TextView>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image_team2"
+                android:id="@+id/image_team2_fixture"
                 android:layout_column="4"
                 android:layout_weight="2"
                 android:layout_width="0dp"

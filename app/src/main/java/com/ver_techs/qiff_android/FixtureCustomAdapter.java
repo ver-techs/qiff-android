@@ -52,7 +52,6 @@ public class FixtureCustomAdapter extends BaseAdapter {
         }
 
         final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index);
-        Log.i("aaki2", fixtureItemLocal.getTeamName1() + " " + fixtureItemLocal.getTeamName2());
 
         TextView teamName1 = (TextView) view.findViewById(R.id.name_team1_fixture);
         teamName1.setText(fixtureItemLocal.getTeamName1());

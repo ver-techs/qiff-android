@@ -17,6 +17,5 @@ public class EmptyFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_empty, container, false);
         return v;
 
-
     }
 }

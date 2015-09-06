@@ -52,6 +52,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
         }
 
         final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index);
+        Log.i("aaki2", fixtureItemLocal.getTeamName1() + " " + fixtureItemLocal.getTeamName2());
 
         TextView teamName1 = (TextView) view.findViewById(R.id.name_team1_fixture);
         teamName1.setText(fixtureItemLocal.getTeamName1());
@@ -68,11 +69,11 @@ public class FixtureCustomAdapter extends BaseAdapter {
         TextView time = (TextView) view.findViewById(R.id.time_fixture);
         time.setText(fixtureItemLocal.getTimeDate());
 
-        ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1);
-        team1_logo.setImageResource(R.drawable.team_2);
+        //ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1);
+        //team1_logo.setImageResource(R.drawable.team_2);
 
-        ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2);
-        team2_logo.setImageResource(R.drawable.team_1);
+        //ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2);
+        //team2_logo.setImageResource(R.drawable.team_1);
 
         return view;
     }

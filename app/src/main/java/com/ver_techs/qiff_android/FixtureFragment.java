@@ -1,5 +1,6 @@
 package com.ver_techs.qiff_android;
 
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,40 +24,76 @@ import java.util.List;
 public class FixtureFragment extends Fragment {
 
     ArrayList<FixtureItemLocal> fixtureItemArrayList;
+    private WeakReference<MyAsyncTask> asyncTaskWeakRef;
+    View v;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_fixture, container, false);
+        v = inflater.inflate(R.layout.fragment_fixture, container, false);
 
-        // Parse query to get all FixtureItem objects from server
-
-        fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
-        // Define the class we would like to query
-        ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
-        // Execute the find asynchronously
-        query.findInBackground(new FindCallback<FixtureItem>() {
-
-            public void done(List<FixtureItem> fixtureItemList, ParseException e) {
-
-                if (e == null) {
-
-                    // Access the array of results here
-                    for (int i = 0; i < fixtureItemList.size() ; i++) {
-                        FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
-                                fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
-                        fixtureItemArrayList.add(fixtureItemLocal);
-                    }
-
-                } else {
-                    Log.d("item", "Error: " + e.getMessage());
-                }
-            }
-        });
-
-
-        FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(fixtureItemArrayList);
-        ListView fixtureList = (ListView) v.findViewById(R.id.list);
-        fixtureList.setAdapter(fixtureListAdapter);
+        setRetainInstance(true); //configure the fragment instance to be retained on configuration change
+        startNewAsyncTask();
 
         return v;
     }
+
+    private void startNewAsyncTask() {
+        MyAsyncTask asyncTask = new MyAsyncTask(this);
+        this.asyncTaskWeakRef = new WeakReference<MyAsyncTask >(asyncTask );
+        asyncTask.execute();
+    }
+
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private WeakReference<FixtureFragment> fragmentWeakRef;
+
+        private MyAsyncTask (FixtureFragment fragment) {
+            this.fragmentWeakRef = new WeakReference<FixtureFragment>(fragment);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            // Parse query to get all FixtureItem objects from server
+
+            fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
+            // Define the class we would like to query
+            ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
+            // Execute the find asynchronously
+            query.findInBackground(new FindCallback<FixtureItem>() {
+
+                public void done(List<FixtureItem> fixtureItemList, ParseException e) {
+
+                    if (e == null) {
+
+                        // Access the array of results here
+                        for (int i = 0; i < fixtureItemList.size() ; i++) {
+                            FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
+                                    fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
+                            fixtureItemArrayList.add(fixtureItemLocal);
+                        }
+
+                    } else {
+                        Log.d("item", "Error: " + e.getMessage());
+                    }
+                }
+            });
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void response) {
+            super.onPostExecute(response);
+            if (this.fragmentWeakRef.get() != null) {
+                Log.i("aaki", "task completed");
+
+                FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(fixtureItemArrayList);
+                ListView fixtureList = (ListView) v.findViewById(R.id.list);
+                fixtureList.setAdapter(fixtureListAdapter);
+
+            }
+        }
+    }
+
 }

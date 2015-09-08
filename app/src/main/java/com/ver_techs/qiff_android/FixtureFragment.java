@@ -66,6 +66,8 @@ public class FixtureFragment extends Fragment {
             fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
             // Define the class we would like to query
             ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
+            query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+
             // Execute the find asynchronously
             query.findInBackground(new FindCallback<FixtureItem>() {
 
@@ -74,7 +76,7 @@ public class FixtureFragment extends Fragment {
                     if (e == null) {
 
                         // Access the array of results here
-                        for (int i = 0; i < fixtureItemList.size() ; i++) {
+                        for (int i = 0; i < fixtureItemList.size(); i++) {
                             FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
                                     fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
                             fixtureItemArrayList.add(fixtureItemLocal);

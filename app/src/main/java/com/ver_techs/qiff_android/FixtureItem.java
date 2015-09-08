@@ -42,7 +42,7 @@ public class FixtureItem extends ParseObject{
 
     public String getTimeDate() {
 
-        return getString("timeDate");
+        return getString("dateTime");
     }
 
 }

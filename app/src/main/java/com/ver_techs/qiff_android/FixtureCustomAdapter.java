@@ -26,6 +26,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
     public FixtureCustomAdapter(ArrayList<FixtureItemLocal> fixtureItemArray) {
         this.fixtureItemArrayList=fixtureItemArray;
+        Log.i("aaki",Integer.toString(fixtureItemArrayList.size()));
     }
 
     @Override
@@ -40,12 +41,13 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return i;                   // index number
+        return i;// index number
     }
 
     @Override
     public View getView(int index, View view, final ViewGroup parent) {
 
+        Log.i("aaki", "getView called");
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             view = inflater.inflate(R.layout.fixture_list_item, parent, false);

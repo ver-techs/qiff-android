@@ -28,16 +28,21 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if(position == 0) // if the position is 0 we are returning the First tab
         {
-            HomeFragment tab1 = new HomeFragment();
+            FixtureFragment tab1 = new FixtureFragment();
             return tab1;
         }
-        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position == 1)            // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-            FixtureFragment tab2 = new FixtureFragment();
+            HomeFragment tab2 = new HomeFragment();
             return tab2;
         }
-
+        else
+        {
+            EmptyFragment tab3 = new EmptyFragment();
+            return tab3;
+        }
     }
+
 
     // This method return the titles for the Tabs in the Tab Strip
 

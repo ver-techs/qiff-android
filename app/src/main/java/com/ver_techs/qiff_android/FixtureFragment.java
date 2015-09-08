@@ -1,5 +1,6 @@
 package com.ver_techs.qiff_android;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class FixtureFragment extends Fragment {
 
     ArrayList<FixtureItemLocal> fixtureItemArrayList;
     private WeakReference<MyAsyncTask> asyncTaskWeakRef;
+    private ProgressDialog pDialog;
     View v;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,6 +54,11 @@ public class FixtureFragment extends Fragment {
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
         protected Void doInBackground(Void... params) {
 
             // Parse query to get all FixtureItem objects from server
@@ -72,7 +79,7 @@ public class FixtureFragment extends Fragment {
                                     fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
                             fixtureItemArrayList.add(fixtureItemLocal);
                         }
-
+                        Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
                     } else {
                         Log.d("item", "Error: " + e.getMessage());
                     }
@@ -86,7 +93,7 @@ public class FixtureFragment extends Fragment {
         protected void onPostExecute(Void response) {
             super.onPostExecute(response);
             if (this.fragmentWeakRef.get() != null) {
-                Log.i("aaki", "task completed");
+                Log.i("aaki", "task completed " + Integer.toString(fixtureItemArrayList.size()));
 
                 FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(fixtureItemArrayList);
                 ListView fixtureList = (ListView) v.findViewById(R.id.list);

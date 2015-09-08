@@ -70,12 +70,37 @@ public class FixtureCustomAdapter extends BaseAdapter {
         TextView time = (TextView) view.findViewById(R.id.time_fixture);
         time.setText(fixtureItemLocal.getTimeDate());
 
-        //ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1);
-        //team1_logo.setImageResource(R.drawable.team_2);
+        ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1_fixture);
+        team1_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName1()));
 
-        //ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2);
-        //team2_logo.setImageResource(R.drawable.team_1);
+        ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2_fixture);
+        team2_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName2()));
 
         return view;
+    }
+
+    public int findTeamLogo(String teamName){
+        // code to find corresponding image of respective teams
+
+        int resource_id = 0;
+        switch (teamName){
+            case "NADHAM TCR" : resource_id = R.drawable.team_1; break;
+            case "KMCC MLP" : resource_id = R.drawable.team_2; break;
+            case "KMCC KKD" : resource_id = R.drawable.team_3; break;
+            case "KMCC PKD" : resource_id = R.drawable.team_4; break;
+            case "SKIA TVM" : resource_id = R.drawable.team_5; break;
+            case "KMCC WND" : resource_id = R.drawable.team_6; break;
+            case "CFQ PTNMTA" : resource_id = R.drawable.team_1; break;
+            case "MAK KKD" : resource_id = R.drawable.team_2; break;
+            case "EDSO EKM" : resource_id = R.drawable.team_3; break;
+            case "MAMWAQ MLP" : resource_id = R.drawable.team_4; break;
+            case "KMCC KNR" : resource_id = R.drawable.team_5; break;
+            case "CFQ KKD" : resource_id =  R.drawable.team_6; break;
+            case "TYC TCR" : resource_id = R.drawable.team_1; break;
+            case "KMCC TCR" : resource_id = R.drawable.team_2; break;
+            case "KMCC KSGD" : resource_id = R.drawable.team_3; break;
+            case "KPAQ KKD" : resource_id = R.drawable.team_4; break;
+        }
+        return resource_id;
     }
 }

@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="COMING SOON !"
-        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:textColor="@color/color_main"
         android:id="@+id/comingSoon"
-        android:gravity="center"
-        android:layout_gravity="center" />
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="- LIVE COMMENTARY"
+        android:textSize="18dp"
+        android:textColor="@color/color_main"
+        android:id="@+id/live_commentary_text"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="- PREDICTION CONTEST"
+        android:textSize="18dp"
+        android:textColor="@color/color_main"
+        android:id="@+id/predictionContest"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="- FAN CHAT ROOM"
+        android:textSize="18dp"
+        android:textColor="@color/color_main"
+        android:id="@+id/fanChatRooms"
+        android:gravity="center" />
 
 </LinearLayout>

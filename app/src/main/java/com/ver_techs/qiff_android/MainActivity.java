@@ -24,6 +24,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_sliding_tab);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.qiff_logo_small);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         // Register your parse models
         ParseObject.registerSubclass(ChatItem.class);
         ParseObject.registerSubclass(FixtureItem.class);

@@ -66,7 +66,7 @@ public class FixtureFragment extends Fragment {
             fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
             // Define the class we would like to query
             ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
-            query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+            query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
             // Execute the find asynchronously
             query.findInBackground(new FindCallback<FixtureItem>() {

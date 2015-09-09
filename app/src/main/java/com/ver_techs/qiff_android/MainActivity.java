@@ -15,8 +15,9 @@ public class MainActivity extends ActionBarActivity {
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Fixture","Home","Coming Soon"};
-    int Numboftabs =3;
+    CharSequence Titles[]={"Fixture", "Home","Coming Soon"};
+
+    int Numboftabs = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
         // Register your parse models
         ParseObject.registerSubclass(ChatItem.class);
         ParseObject.registerSubclass(FixtureItem.class);
-        
+
         Parse.initialize(this, "2WLxFTr9dd04QQf8zClDnwgqvGeKPhmm9f03iaBB", "a4Ac6BAISHDRGU70dxc1mHgjXFfD1vPTyOvCV3DA");
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.

@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="5sp"
             card_view:cardBackgroundColor="@color/color_accent">
 
             <TableLayout android:layout_width="match_parent"
@@ -156,7 +157,8 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            card_view:cardCornerRadius="4dp"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="5sp"
             card_view:cardBackgroundColor="@color/color_main">
 
             <RelativeLayout
@@ -256,7 +258,8 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            card_view:cardCornerRadius="4dp"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="5sp"
             card_view:cardBackgroundColor="@color/color_accent">
 
             <RelativeLayout
@@ -281,6 +284,7 @@
                     android:id="@+id/childScroll"
                     android:layout_width="match_parent"
                     android:layout_below="@id/fan_zone"
+                    android:layout_marginLeft="7dp"
                     android:layout_height="wrap_content">
 
                     <TableLayout
@@ -306,7 +310,8 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            card_view:cardCornerRadius="4dp"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="5sp"
             card_view:cardBackgroundColor="@color/color_main">
             
             <LinearLayout

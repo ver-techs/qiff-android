@@ -23,7 +23,7 @@ public class Application extends android.app.Application {
         ParsePush.subscribeInBackground("QIFF", new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                Log.i("aaki", "Successfully subscribed to Parse!");
+                Log.i("aaki", "Successfully subscribed to Parse channel QIFF !");
             }
         });
     }

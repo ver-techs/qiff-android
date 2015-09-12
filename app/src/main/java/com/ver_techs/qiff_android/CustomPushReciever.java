@@ -13,11 +13,11 @@ import org.json.JSONObject;
  * Created by Ravi on 01/06/15.
  */
 
-public class CustomPushReceiver extends ParsePushBroadcastReceiver {
+public class CustomPushReciever extends ParsePushBroadcastReceiver {
 
     private Intent parseIntent;
 
-    public CustomPushReceiver() {
+    public CustomPushReciever() {
         super();
     }
 

@@ -35,7 +35,7 @@ public class CustomPushReciever extends ParsePushBroadcastReceiver {
 
             parseIntent = intent;
 
-            parsePushJson(context, json);
+            parsePushJsonAndUpdateApp(context, json);
 
         } catch (JSONException e) {
             Log.e("aaki", "Push message json exception: " + e.getMessage());
@@ -56,14 +56,12 @@ public class CustomPushReciever extends ParsePushBroadcastReceiver {
      * Parses the push notification json
      */
 
-    private void parsePushJson(Context context, JSONObject json) {
+    private void parsePushJsonAndUpdateApp(Context context, JSONObject json) {
         try {
 
             JSONObject data = json.getJSONObject("data");
             String title = data.getString("team1");
             String message = data.getString("team2");
-
-            Intent resultIntent = new Intent(context, MainActivity.class);
 
         } catch (JSONException e) {
             Log.e("aaki", "Push message json exception: " + e.getMessage());

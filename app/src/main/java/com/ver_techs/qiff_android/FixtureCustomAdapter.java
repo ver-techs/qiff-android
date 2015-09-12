@@ -47,7 +47,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
     @Override
     public View getView(int index, View view, final ViewGroup parent) {
 
-        Log.i("aaki", "getView called");
+        //Log.i("aaki", "getView called");
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             view = inflater.inflate(R.layout.fixture_list_item, parent, false);

@@ -57,6 +57,17 @@
                 <category android:name="com.ver_techs.qiff_android" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name="com.ver_techs.qiff_android.CustomPushReciever"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

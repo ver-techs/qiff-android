@@ -16,7 +16,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
     private int[] imageResId = { //Icons of tabs in order
             R.drawable.icon_calendar,
-            R.drawable.icon_home,
+            //R.drawable.icon_home,
             R.drawable.icon_coming_soon
     };
     Context context;
@@ -40,11 +40,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             FixtureFragment tab1 = new FixtureFragment();
             return tab1;
         }
-        else if(position == 1)
-        {
-            HomeFragment tab2 = new HomeFragment();
-            return tab2;
-        }
+//        else if(position == 1)
+//        {
+//            HomeFragment tab2 = new HomeFragment();
+//            return tab2;
+//        }
         else
         {
             EmptyFragment tab3 = new EmptyFragment();

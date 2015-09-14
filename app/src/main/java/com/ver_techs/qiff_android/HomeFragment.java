@@ -94,6 +94,7 @@ public class HomeFragment extends Fragment {
         // Define the class we would like to query
         ParseQuery<ChatItem> query = ParseQuery.getQuery(ChatItem.class);
         // Execute the find asynchronously
+        query.addAscendingOrder("createdAt"); //order query results
         query.findInBackground(new FindCallback<ChatItem>() {
 
             public void done(List<ChatItem> chatItemList, ParseException e) {

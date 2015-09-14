@@ -19,14 +19,11 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Sony on 9/2/2015.
- */
+//Fixture fragment that contains fixture view
 public class FixtureFragment extends Fragment {
 
-    ArrayList<FixtureItemLocal> fixtureItemArrayList;
-    private WeakReference<MyAsyncTask> asyncTaskWeakRef;
-    private ProgressDialog pDialog;
+    ArrayList<FixtureItemLocal> fixtureItemArrayList; //list of fixture items, loaded from parse
+    private WeakReference<MyAsyncTask> asyncTaskWeakRef; //weak reference to asynctask
     View v;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,15 +31,15 @@ public class FixtureFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_fixture, container, false);
 
         setRetainInstance(true); //configure the fragment instance to be retained on configuration change
-        startNewAsyncTask();
+        startNewAsyncTask(); //call async task to get fixture items from parse
 
         return v;
     }
 
     private void startNewAsyncTask() {
-        MyAsyncTask asyncTask = new MyAsyncTask(this);
-        this.asyncTaskWeakRef = new WeakReference<MyAsyncTask >(asyncTask );
-        asyncTask.execute();
+        MyAsyncTask asyncTask = new MyAsyncTask(this); //create a new instance of asynctask
+        this.asyncTaskWeakRef = new WeakReference<MyAsyncTask >(asyncTask ); //set the seak reference
+        asyncTask.execute(); //execute asynctask
     }
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -50,7 +47,7 @@ public class FixtureFragment extends Fragment {
         private WeakReference<FixtureFragment> fragmentWeakRef;
 
         private MyAsyncTask (FixtureFragment fragment) {
-            this.fragmentWeakRef = new WeakReference<FixtureFragment>(fragment);
+            this.fragmentWeakRef = new WeakReference<FixtureFragment>(fragment); //set the weak reference
         }
 
         @Override
@@ -97,9 +94,9 @@ public class FixtureFragment extends Fragment {
             if (this.fragmentWeakRef.get() != null) {
                 Log.i("aaki", "task completed " + Integer.toString(fixtureItemArrayList.size()));
 
-                FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(fixtureItemArrayList);
-                ListView fixtureList = (ListView) v.findViewById(R.id.list);
-                fixtureList.setAdapter(fixtureListAdapter);
+                FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(fixtureItemArrayList); //get a new istance of adapter for fixture view
+                ListView fixtureList = (ListView) v.findViewById(R.id.list); //find the listview to load fixture items
+                fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
 
             }
         }

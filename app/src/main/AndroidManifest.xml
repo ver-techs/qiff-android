@@ -58,7 +58,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.ver_techs.qiff_android.CustomPushReciever"
+            android:name=".CustomPushReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

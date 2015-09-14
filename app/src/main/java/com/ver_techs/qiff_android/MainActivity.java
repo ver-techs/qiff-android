@@ -9,38 +9,39 @@ import android.support.v7.widget.Toolbar;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
+// Main Activity class
 public class MainActivity extends ActionBarActivity {
 
     Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Fixture", "Home","Coming Soon"};
 
-    int Numboftabs = 3;
+    CharSequence titles[]={"Fixture", "Home","Coming Soon"}; //sequence of title for tabs
+    int numbOfTabs = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_sliding_tab);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true); //show title action bar
         getSupportActionBar().setLogo(R.drawable.qiff_logo_small);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        // Register your parse models
+        // Register the parse models
         ParseObject.registerSubclass(ChatItem.class);
         ParseObject.registerSubclass(FixtureItem.class);
 
-        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(this, getSupportFragmentManager(),Titles,Numboftabs);
+        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles for the Tabs and Number Of Tabs
+        adapter =  new ViewPagerAdapter(this, getSupportFragmentManager(), titles, numbOfTabs);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
-        pager.setCurrentItem(1);
+        pager.setCurrentItem(1); //setting default tab to tab number 1 (index starting from 0)
 
-        // Assiging the Sliding Tab Layout View
+        // Assigning the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true); // This makes the tabs Space Evenly in Available width
         tabs.setCustomTabView(R.layout.layout_sliding_tab, 0);

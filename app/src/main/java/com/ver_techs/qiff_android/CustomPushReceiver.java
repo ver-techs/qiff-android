@@ -9,15 +9,12 @@ import com.parse.ParsePushBroadcastReceiver;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by Ravi on 01/06/15.
- */
-
-public class CustomPushReciever extends ParsePushBroadcastReceiver {
+// Receiver class to receive parse push notifications
+public class CustomPushReceiver extends ParsePushBroadcastReceiver {
 
     private Intent parseIntent;
 
-    public CustomPushReciever() {
+    public CustomPushReceiver() {
         super();
     }
 
@@ -29,13 +26,13 @@ public class CustomPushReciever extends ParsePushBroadcastReceiver {
             return;
 
         try {
-            JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+            JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data")); // on receiving a parse push, get the json data out of it
 
             Log.i("aaki", "Push received: " + json);
 
-            parseIntent = intent;
+            parseIntent = intent; //save the intent into the class varibale
 
-            parsePushJsonAndUpdateApp(context, json);
+            parsePushJsonAndUpdateApp(context, json); //call this function to parse the json and use it to update app content
 
         } catch (JSONException e) {
             Log.e("aaki", "Push message json exception: " + e.getMessage());
@@ -55,11 +52,10 @@ public class CustomPushReciever extends ParsePushBroadcastReceiver {
     /**
      * Parses the push notification json
      */
-
     private void parsePushJsonAndUpdateApp(Context context, JSONObject json) {
         try {
 
-            JSONObject data = json.getJSONObject("data");
+            JSONObject data = json.getJSONObject("data"); //parse the push json
             String title = data.getString("team1");
             String message = data.getString("team2");
 

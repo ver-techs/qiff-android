@@ -20,9 +20,10 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+// Adapter for Fixture tab
 public class FixtureCustomAdapter extends BaseAdapter {
 
-    ArrayList<FixtureItemLocal> fixtureItemArrayList;
+    ArrayList<FixtureItemLocal> fixtureItemArrayList; //Local variable list that stores all fixture items
 
     public FixtureCustomAdapter(ArrayList<FixtureItemLocal> fixtureItemArray) {
         this.fixtureItemArrayList=fixtureItemArray;
@@ -31,7 +32,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return fixtureItemArrayList.size();
+        return fixtureItemArrayList.size(); //size of the list
     }
 
     @Override
@@ -41,7 +42,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return i;// index number
+        return i; // index number
     }
 
     @Override
@@ -49,12 +50,13 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
         //Log.i("aaki", "getView called");
         if (view == null) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext()); //inflate a list item layout
             view = inflater.inflate(R.layout.fixture_list_item, parent, false);
         }
 
-        final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index);
+        final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index); //get the fixture item from the list to populate into the layout
 
+        //set the textviews and imageviews
         TextView teamName1 = (TextView) view.findViewById(R.id.name_team1_fixture);
         teamName1.setText(fixtureItemLocal.getTeamName1());
 

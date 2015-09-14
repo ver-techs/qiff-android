@@ -9,14 +9,12 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
 
-/**
- * Created by Edwin on 15/02/2015.
- */
+//Adapter for tabs
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-    private int[] imageResId = {
+    private int[] imageResId = { //Icons of tabs in order
             R.drawable.icon_calendar,
             R.drawable.icon_home,
             R.drawable.icon_coming_soon
@@ -37,12 +35,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if(position == 0) // if the position is 0 we are returning the First tab
+        if(position == 0)
         {
             FixtureFragment tab1 = new FixtureFragment();
             return tab1;
         }
-        else if(position == 1)            // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position == 1)
         {
             HomeFragment tab2 = new HomeFragment();
             return tab2;
@@ -63,7 +61,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         Drawable image = context.getResources().getDrawable(imageResId[position]);
         image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
         SpannableString sb = new SpannableString(" ");
-        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
+        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM); //set the image onto the tab
         sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sb;
 
@@ -73,9 +71,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-
         return NumbOfTabs;
-
     }
 
 }

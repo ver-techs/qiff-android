@@ -28,6 +28,7 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
+// Fragment that inflates the home screen
 public class HomeFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
@@ -74,23 +75,17 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
                 if(sharedPreferences.getString("UserName", "null").equals("null")){
-
                     //Get desired User Name from user
                     showInputDialog();
-                    sendChatToParse();
-
                 }
                 else {
-                    
                     //send chat with existing User Name
                     sendChatToParse();
                 }
             }
         });
 
-
         // Polulating Fan zone with chat messages from Parse
-
 
         final TableLayout tl = (TableLayout) v.findViewById(R.id.fan_zone_table);
 
@@ -145,9 +140,9 @@ public class HomeFragment extends Fragment {
     protected void sendChatToParse(){
 
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        userName = sharedPreferences.getString("UserName", "null");
-        message = message_editText.getText().toString();
-        ChatItem chatItem = new ChatItem(userName, message);
+        userName = sharedPreferences.getString("UserName", "null"); //get username
+        message = message_editText.getText().toString(); //get message from text box
+        ChatItem chatItem = new ChatItem(userName, message); //create a new chatitem
 
         Log.i("***username***", chatItem.getUserName());
         Log.i("***message***", chatItem.getChatMessage());
@@ -160,7 +155,7 @@ public class HomeFragment extends Fragment {
     protected void showInputDialog() {
 
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-        View promptView = layoutInflater.inflate(R.layout.username_alert_dialog, null);
+        View promptView = layoutInflater.inflate(R.layout.username_alert_dialog, null); //inflate dialog for username input
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setView(promptView);
 
@@ -169,9 +164,7 @@ public class HomeFragment extends Fragment {
         alertDialogBuilder
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
                         dialog.cancel();
-
                 }
                 })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -181,7 +174,7 @@ public class HomeFragment extends Fragment {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("UserName", userName);
                         editor.commit();
-                        Log.i("reached", "reached here");
+                        sendChatToParse();
 
                     }
                 });

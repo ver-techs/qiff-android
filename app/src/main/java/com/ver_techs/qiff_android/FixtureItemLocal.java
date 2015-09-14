@@ -1,9 +1,6 @@
 package com.ver_techs.qiff_android;
 
-/**
- * Created by Sony on 8/28/2015.
- */
-
+//Class to store local fixture items
 public class FixtureItemLocal{
 
     String teamName1, teamName2;
@@ -20,29 +17,22 @@ public class FixtureItemLocal{
     }
 
     public String getTeamName1() {
-
         return teamName1;
     }
 
     public String getTeamName2() {
-
         return teamName2;
-
     }
 
     public String getScoreTeam1() {
-
         return scoreTeam1;
     }
 
     public String getScoreTeam2() {
-
         return scoreTeam2;
-
     }
 
     public String getTimeDate() {
-
         return timeDate;
     }
 

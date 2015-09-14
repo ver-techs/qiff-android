@@ -7,9 +7,7 @@ import android.os.Handler;
 import android.widget.TextView;
 import java.util.Random;
 
-/**
- * Created by Sony on 8/9/2015.
- */
+// Activity that displays splash screen
 public class SplashScreen extends Activity {
 
     // Splash screen timer

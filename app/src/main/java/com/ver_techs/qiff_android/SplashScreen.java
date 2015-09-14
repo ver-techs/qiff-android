@@ -24,7 +24,9 @@ public class SplashScreen extends Activity {
                 "Football goalies didn't have to wear different coloured shirts from their teammates until 1913 !",
                 "Football players run an average of 9.65 kms during every game !",
                 "Pele was the first to call football - the beautiful game !",
-                "Neil Armstrong originally wanted to take a football to the moon !"};
+                "Neil Armstrong originally wanted to take a football to the moon !",
+                "Football is like life, it requires perseverance, self-denial, hard work, sacrifice, dedication and respect for authority. - Vince Lombardi",
+                "Some people think football is a matter of life and death. I don't like that attitude. I can assure them it is much more serious than that. -  Bill Shankly"};
 
         //Generate a Random number to display a random football fact
         Random rand = new Random();

@@ -94,7 +94,7 @@ public class FixtureFragment extends Fragment {
             if (this.fragmentWeakRef.get() != null) {
                 Log.i("aaki", "task completed " + Integer.toString(fixtureItemArrayList.size()));
 
-                FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(fixtureItemArrayList); //get a new istance of adapter for fixture view
+                FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
                 ListView fixtureList = (ListView) v.findViewById(R.id.list); //find the listview to load fixture items
                 fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
 

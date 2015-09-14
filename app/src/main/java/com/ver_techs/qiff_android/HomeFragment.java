@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,33 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_home,container,false);
+
+        //setting font to all textviews
+        TextView name_team1 = (TextView) v.findViewById(R.id.name_team1);
+        TextView name_team2 = (TextView) v.findViewById(R.id.name_team2);
+        TextView time = (TextView) v.findViewById(R.id.time);
+        TextView score_team1 = (TextView) v.findViewById(R.id.score_team1);
+        TextView colon = (TextView) v.findViewById(R.id.colon);
+        TextView score_team2 = (TextView) v.findViewById(R.id.score_team2);
+        TextView live_commentary = (TextView) v.findViewById(R.id.live_commentary);
+        TextView comment_text_team1 = (TextView) v.findViewById(R.id.comment_text_team1);
+        TextView comment_text_team2 = (TextView) v.findViewById(R.id.comment_text_team2);
+        TextView fan_zone = (TextView) v.findViewById(R.id.fan_zone);
+        EditText message_box = (EditText) v.findViewById(R.id.message_box);
+
+        final Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
+
+        name_team1.setTypeface(custom_font);
+        name_team2.setTypeface(custom_font);
+        time.setTypeface(custom_font);
+        score_team1.setTypeface(custom_font);
+        colon.setTypeface(custom_font);
+        score_team2.setTypeface(custom_font);
+        live_commentary.setTypeface(custom_font);
+        comment_text_team1.setTypeface(custom_font);
+        comment_text_team2.setTypeface(custom_font);
+        fan_zone.setTypeface(custom_font);
+        message_box.setTypeface(custom_font);
 
         //ensuring parent and child scroll views work fine on touch
 
@@ -101,39 +129,42 @@ public class HomeFragment extends Fragment {
 
                 if (e == null) {
 
-                        // Access the array of results here
-                        for(int i=chatItemList.size()-1; i>=0; i--){
+                    // Access the array of results here
+                    for (int i = chatItemList.size() - 1; i >= 0; i--) {
 
-                            TableRow tr_1 = new TableRow(getActivity());
-                            tr_1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        TableRow tr_1 = new TableRow(getActivity());
+                        tr_1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                            TextView fan_name = new TextView(getActivity());
-                            fan_name.setText(chatItemList.get(i).getUserName());
-                            fan_name.setTextSize(16);
-                            fan_name.setTextColor(getResources().getColor(R.color.color_main));
-                            tr_1.addView(fan_name);// add the column to the table row here
+                        TextView fan_name = new TextView(getActivity());
+                        fan_name.setText(chatItemList.get(i).getUserName());
+                        fan_name.setTextSize(16);
+                        fan_name.setTypeface(custom_font);
+                        fan_name.setTextColor(getResources().getColor(R.color.color_main));
+                        tr_1.addView(fan_name);// add the column to the table row here
 
-                            TextView colon = new TextView(getActivity());
-                            colon.setText(" :   ");
-                            colon.setTextSize(16);
-                            colon.setTextColor(getResources().getColor(R.color.color_main));
-                            tr_1.addView(colon);// add the column to the table row here
+                        TextView colon = new TextView(getActivity());
+                        colon.setText(" :   ");
+                        colon.setTextSize(16);
+                        colon.setTypeface(custom_font);
+                        colon.setTextColor(getResources().getColor(R.color.color_main));
+                        tr_1.addView(colon);// add the column to the table row here
 
-                            TextView message = new TextView(getActivity());
-                            message.setText(chatItemList.get(i).getChatMessage());
-                            message.setTextSize(16);
-                            message.setTextColor(getResources().getColor(R.color.color_main));
-                            tr_1.addView(message);// add the column to the table row here
+                        TextView message = new TextView(getActivity());
+                        message.setText(chatItemList.get(i).getChatMessage());
+                        message.setTextSize(16);
+                        message.setTypeface(custom_font);
+                        message.setTextColor(getResources().getColor(R.color.color_main));
+                        tr_1.addView(message);// add the column to the table row here
 
-                            tl.addView(tr_1, new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        tl.addView(tr_1, new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                        }
-
-                    } else {
-                        Log.d("item", "Error: " + e.getMessage());
                     }
+
+                } else {
+                    Log.d("item", "Error: " + e.getMessage());
                 }
-            });
+            }
+        });
 
         return v;
     }

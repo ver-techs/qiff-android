@@ -2,6 +2,7 @@ package com.ver_techs.qiff_android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -34,6 +35,13 @@ public class SplashScreen extends Activity {
 
         final TextView factView = (TextView) findViewById(R.id.FootballFact);
         factView.setText(facts[randomNum]);
+
+        final TextView poweredBy = (TextView) findViewById(R.id.PoweredBy);
+
+        Typeface custom_font = Typeface.createFromAsset(getAssets(), getString(R.string.font_path));
+
+        factView.setTypeface(custom_font);
+        poweredBy.setTypeface(custom_font);
 
         new Handler().postDelayed(new Runnable() {
 

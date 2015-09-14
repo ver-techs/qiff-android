@@ -6,13 +6,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Window;
+
 import com.parse.Parse;
 import com.parse.ParseObject;
 
 // Main Activity class
 public class MainActivity extends ActionBarActivity {
 
-    Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
@@ -25,9 +26,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_sliding_tab);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true); //show title action bar
-        getSupportActionBar().setLogo(R.drawable.qiff_logo_small);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        //Disable action bar on top of screen
+        getSupportActionBar().hide();
 
         // Register the parse models
         ParseObject.registerSubclass(ChatItem.class);

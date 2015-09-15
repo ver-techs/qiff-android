@@ -16,14 +16,12 @@ public class EmptyFragment extends Fragment{
 
         View v = inflater.inflate(R.layout.fragment_empty, container, false);
 
-        final TextView poweredBy = (TextView) v.findViewById(R.id.comingSoon);
         final TextView live_commentary_text = (TextView) v.findViewById(R.id.live_commentary_text);
         final TextView predictionContest = (TextView) v.findViewById(R.id.predictionContest);
         final TextView fanChatRooms = (TextView) v.findViewById(R.id.fanChatRooms);
 
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
 
-        poweredBy.setTypeface(custom_font);
         live_commentary_text.setTypeface(custom_font);
         predictionContest.setTypeface(custom_font);
         fanChatRooms.setTypeface(custom_font);

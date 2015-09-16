@@ -16,17 +16,13 @@ public class PointsTableFragment extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_empty, container, false);
+        View v = inflater.inflate(R.layout.fragment_points_table, container, false);
 
-        final TextView live_commentary_text = (TextView) v.findViewById(R.id.live_commentary_text);
-        final TextView predictionContest = (TextView) v.findViewById(R.id.predictionContest);
-        final TextView fanChatRooms = (TextView) v.findViewById(R.id.fanChatRooms);
+        final TextView name_group_1 = (TextView) v.findViewById(R.id.name_group1);
 
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
 
-        live_commentary_text.setTypeface(custom_font);
-        predictionContest.setTypeface(custom_font);
-        fanChatRooms.setTypeface(custom_font);
+        name_group_1.setTypeface(custom_font);
 
         return v;
 

@@ -61,7 +61,7 @@ public class FixtureFragment extends Fragment {
 
                     nDialog.cancel();
                     FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
-                    ListView fixtureList = (ListView) v.findViewById(R.id.list); //find the listview to load fixture items
+                    ListView fixtureList = (ListView) v.findViewById(R.id.list_fixture); //find the listview to load fixture items
                     fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
 
                 } else {

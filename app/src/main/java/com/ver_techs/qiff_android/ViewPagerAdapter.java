@@ -15,8 +15,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
     private int[] imageResId = { //Icons of tabs in order
+            R.drawable.icon_points_table,
             R.drawable.icon_calendar,
-            //R.drawable.icon_home,
             R.drawable.icon_coming_soon
     };
     Context context;
@@ -37,7 +37,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if(position == 0)
         {
-            HomeFragment tab1 = new HomeFragment();
+            PointsTableFragment tab1 = new PointsTableFragment();
             return tab1;
         }
         else if(position == 1)

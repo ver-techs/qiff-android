@@ -15,22 +15,22 @@ import java.util.ArrayList;
 public class PointsTableCustomAdapter extends BaseAdapter {
 
     private Context context;
-    ArrayList<FixtureItemLocal> fixtureItemArrayList; //Local variable list that stores all fixture items
+    ArrayList<PointsTableItemLocal> pointsTableArrayList; //Local variable list that stores all points table items
 
-    public PointsTableCustomAdapter(Context context, ArrayList<FixtureItemLocal> fixtureItemArray) {
+    public PointsTableCustomAdapter(Context context, ArrayList<PointsTableItemLocal> pointsTableItemArray) {
         this.context = context;
-        this.fixtureItemArrayList = fixtureItemArray;
-        Log.i("aaki", Integer.toString(fixtureItemArrayList.size()));
+        this.pointsTableArrayList = pointsTableItemArray;
+        Log.i("aaki", "adapter - " + Integer.toString(pointsTableItemArray.size()));
     }
 
     @Override
     public int getCount() {
-        return fixtureItemArrayList.size(); //size of the list
+        return pointsTableArrayList.size(); //size of the list
     }
 
     @Override
     public Object getItem(int i) {
-        return fixtureItemArrayList.get(i);    // single item in the list
+        return pointsTableArrayList.get(i);    // single item in the list
     }
 
     @Override
@@ -43,43 +43,41 @@ public class PointsTableCustomAdapter extends BaseAdapter {
 
         //Log.i("aaki", "getView called");
         if (view == null) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext()); //inflate a list item progress_spin
-            view = inflater.inflate(R.layout.fixture_list_item, parent, false);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext()); //inflate a list item
+            view = inflater.inflate(R.layout.points_table_list_item, parent, false);
         }
 
-        final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index); //get the fixture item from the list to populate into the progress_spin
+        final PointsTableItemLocal pointsTableItemLocal = pointsTableArrayList.get(index); //get the points table item from the list to populate into the progress_spin
 
         Typeface custom_font = Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_path));
 
         //set the textviews and imageviews
-        TextView teamName1 = (TextView) view.findViewById(R.id.name_team1_fixture);
-        teamName1.setText(fixtureItemLocal.getTeamName1());
-        teamName1.setTypeface(custom_font);
+        TextView name_team_points_table = (TextView) view.findViewById(R.id.name_team_points_table);
+        name_team_points_table.setText(pointsTableItemLocal.getTeamName());
+        name_team_points_table.setTypeface(custom_font);
 
-        TextView teamName2 = (TextView) view.findViewById(R.id.name_team2_fixture);
-        teamName2.setText(fixtureItemLocal.getTeamName2());
-        teamName2.setTypeface(custom_font);
+        TextView total_points_team_points_table = (TextView) view.findViewById(R.id.total_points_team_points_table);
+        total_points_team_points_table.setText(pointsTableItemLocal.getTotal());
+        total_points_team_points_table.setTypeface(custom_font);
 
-        TextView scoreTeam1 = (TextView) view.findViewById(R.id.score_team1_fixture);
-        scoreTeam1.setText(fixtureItemLocal.getScoreTeam1());
-        scoreTeam1.setTypeface(custom_font);
+        TextView played_points_table = (TextView) view.findViewById(R.id.played_points_table);
+        played_points_table.setText("P : " + pointsTableItemLocal.getPlayed());
+        played_points_table.setTypeface(custom_font);
 
-        TextView colon_fixture = (TextView) view.findViewById(R.id.colon_fixture);
-        colon_fixture.setTypeface(custom_font);
+        TextView wins_points_table = (TextView) view.findViewById(R.id.wins_points_table);
+        wins_points_table.setText("W : " + pointsTableItemLocal.getWins());
+        wins_points_table.setTypeface(custom_font);
 
-        TextView scoreTeam2 = (TextView) view.findViewById(R.id.score_team2_fixture);
-        scoreTeam2.setText(fixtureItemLocal.getScoreTeam2());
-        scoreTeam2.setTypeface(custom_font);
+        TextView draws_points_table = (TextView) view.findViewById(R.id.draws_points_table);
+        draws_points_table.setText("D : " + pointsTableItemLocal.getDraws());
+        draws_points_table.setTypeface(custom_font);
 
-        TextView time = (TextView) view.findViewById(R.id.time_fixture);
-        time.setText(fixtureItemLocal.getTimeDate());
-        time.setTypeface(custom_font);
+        TextView losses_points_table = (TextView) view.findViewById(R.id.losses_points_table);
+        losses_points_table.setText("L : " + pointsTableItemLocal.getLosses());
+        losses_points_table.setTypeface(custom_font);
 
-        ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1_fixture);
-        team1_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName1()));
-
-        ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2_fixture);
-        team2_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName2()));
+        ImageView image_team_points_table = (ImageView) view.findViewById(R.id.image_team_points_table);
+        image_team_points_table.setImageResource(findTeamLogo(pointsTableItemLocal.getTeamName()));
 
         return view;
     }

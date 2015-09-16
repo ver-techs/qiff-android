@@ -30,7 +30,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
     public FixtureCustomAdapter(Context context, ArrayList<FixtureItemLocal> fixtureItemArray) {
         this.context = context;
         this.fixtureItemArrayList = fixtureItemArray;
-        Log.i("aaki",Integer.toString(fixtureItemArrayList.size()));
+        //Log.i("aaki",Integer.toString(fixtureItemArrayList.size()));
     }
 
     @Override

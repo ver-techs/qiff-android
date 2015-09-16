@@ -4,7 +4,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 //Class to store points table items on parse
-@ParseClassName("FixtureItem")
+@ParseClassName("PointsTableItem")
 public class PointsTableItem extends ParseObject {
 
     //default constructor
@@ -13,6 +13,10 @@ public class PointsTableItem extends ParseObject {
 
     public String getTeamName() {
         return getString("teamName");
+    }
+
+    public String getTotal() {
+        return getString("total");
     }
 
     public String getPlayed() {

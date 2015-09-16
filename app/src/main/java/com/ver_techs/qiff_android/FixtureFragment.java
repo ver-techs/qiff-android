@@ -57,7 +57,7 @@ public class FixtureFragment extends Fragment {
                                 fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
                         fixtureItemArrayList.add(fixtureItemLocal);
                     }
-                    Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
+                    //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
 
                     nDialog.cancel();
                     FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
@@ -66,7 +66,6 @@ public class FixtureFragment extends Fragment {
 
                 } else {
                     Log.d("item", "Error: " + e.getMessage());
-
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.ver_techs.qiff_android;
 
+import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,12 +20,21 @@ import java.util.List;
 //Fixture fragment that contains fixture view
 public class FixtureFragment extends Fragment {
 
+    private ProgressDialog nDialog; //progress dialog to show while parse query is running in background
     ArrayList<FixtureItemLocal> fixtureItemArrayList; //list of fixture items, loaded from parse
     View v;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_fixture, container, false);
+
+        //Set and how the progress dialog
+        nDialog = new ProgressDialog(getActivity());
+        nDialog.setMessage("Getting Fixture !");
+        nDialog.setTitle("Loading...");
+        nDialog.setIndeterminate(false);
+        nDialog.setCancelable(false);
+        nDialog.show();
 
         setRetainInstance(true); //configure the fragment instance to be retained on configuration change
 
@@ -49,6 +59,7 @@ public class FixtureFragment extends Fragment {
                     }
                     Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
 
+                    nDialog.cancel();
                     FixtureCustomAdapter fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
                     ListView fixtureList = (ListView) v.findViewById(R.id.list); //find the listview to load fixture items
                     fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview

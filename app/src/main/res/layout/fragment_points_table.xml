@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/name_group1"
@@ -15,7 +18,61 @@
     </TextView>
 
     <ListView
-        android:id="@+id/list_teams"
+        android:id="@+id/list_teams_group1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/name_group2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:text="GROUP II"
+        android:textColor="@color/color_main"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp">
+    </TextView>
+
+    <ListView
+        android:id="@+id/list_teams_group2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/name_group3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:text="GROUP III"
+        android:textColor="@color/color_main"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp">
+    </TextView>
+
+    <ListView
+        android:id="@+id/list_teams_group3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/name_group4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:text="GROUP IV"
+        android:textColor="@color/color_main"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp">
+    </TextView>
+
+    <ListView
+        android:id="@+id/list_teams_group4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>

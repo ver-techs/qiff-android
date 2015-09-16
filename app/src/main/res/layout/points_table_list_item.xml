@@ -1,5 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:id="@+id/points_table1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="2">
+
+        <TableRow android:layout_width="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_team_points_table"
+                android:layout_column="0"
+                android:gravity="center"
+                android:src="@drawable/team_1"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/name_team_points_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_main"
+                android:gravity="right"
+                android:text="TEAM A"
+                android:textSize="22dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_column="1">
+            </TextView>
+
+            <TextView
+                android:id="@+id/total_points_team_points_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7"
+                android:textColor="@color/color_main"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:layout_column="3"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp">
+            </TextView>
+
+        </TableRow>
+
+        </TableLayout>
+
+    <TableLayout
+        android:id="@+id/points_table2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow android:layout_width="match_parent">
+
+            <TextView
+                android:id="@+id/played_points_table"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="P:0"
+                android:textColor="@color/color_main"
+                android:gravity="center"
+                android:layout_column="0"
+                android:layout_marginTop="10dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/wins_points_table"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="W:0"
+                android:textColor="@color/color_main"
+                android:gravity="center"
+                android:layout_column="1"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/draws_points_table"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="D:0"
+                android:textColor="@color/color_main"
+                android:gravity="center"
+                android:layout_column="2"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/losses_points_table"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="L:0"
+                android:textColor="@color/color_main"
+                android:gravity="center"
+                android:layout_column="3"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp">
+            </TextView>
+        </TableRow>
+
+    </TableLayout>
 
 </LinearLayout>

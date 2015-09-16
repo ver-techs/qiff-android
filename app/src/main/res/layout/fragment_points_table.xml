@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="16dp"
+        android:textSize="25dp"
         android:text="GROUP I"
         android:textColor="@color/color_main"
         android:layout_marginLeft="8dp"

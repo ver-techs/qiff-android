@@ -32,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
         // Register the parse models
         ParseObject.registerSubclass(ChatItem.class);
         ParseObject.registerSubclass(FixtureItem.class);
+        ParseObject.registerSubclass(PointsTableItem.class);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles for the Tabs and Number Of Tabs
         adapter =  new ViewPagerAdapter(this, getSupportFragmentManager(), titles, numbOfTabs);

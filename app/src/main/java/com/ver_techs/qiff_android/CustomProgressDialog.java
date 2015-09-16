@@ -1,7 +1,14 @@
 package com.ver_techs.qiff_android;
 
-/**
- * Created by AAKIFAH RAHMAN on 9/17/2015.
- */
-public class CustomProgressDialog {
+import android.app.ProgressDialog;
+import android.content.Context;
+
+public class CustomProgressDialog extends ProgressDialog {
+
+    public CustomProgressDialog(Context context) {
+        super(context,R.layout.custom_progress_dialog_layout);
+
+        // TODO Auto-generated constructor stub
+    }
+
 }

@@ -53,11 +53,11 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
         //Log.i("aaki", "getView called");
         if (view == null) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext()); //inflate a list item layout
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext()); //inflate a list item progress_spin
             view = inflater.inflate(R.layout.fixture_list_item, parent, false);
         }
 
-        final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index); //get the fixture item from the list to populate into the layout
+        final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index); //get the fixture item from the list to populate into the progress_spin
 
         Typeface custom_font = Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_path));
 

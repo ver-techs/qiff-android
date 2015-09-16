@@ -29,7 +29,7 @@ public class FixtureFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_fixture, container, false);
 
         //Set and how the progress dialog
-        nDialog = new ProgressDialog(getActivity());
+        nDialog = new CustomProgressDialog(getActivity());
         nDialog.setMessage("Getting Fixture !");
         nDialog.setTitle("Loading...");
         nDialog.setIndeterminate(false);

@@ -6,9 +6,14 @@ import android.content.Context;
 public class CustomProgressDialog extends ProgressDialog {
 
     public CustomProgressDialog(Context context) {
-        super(context,R.layout.custom_progress_dialog_layout);
+        super(context, R.style.TransparentProgressDialog);
+        // /super(context,R.layout.custom_progress_dialog_layout);
+    }
 
-        // TODO Auto-generated constructor stub
+    @Override
+    public void show() {
+        super.show();
+        setContentView(R.layout.custom_progress_dialog_layout);
     }
 
 }

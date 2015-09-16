@@ -18,8 +18,8 @@ public class MainActivity extends ActionBarActivity {
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
 
-    CharSequence titles[]={"Fixture","Coming Soon"}; //sequence of title for tabs
-    int numbOfTabs = 2;
+    CharSequence titles[]={"Points Table", "Fixture","Coming Soon"}; //sequence of title for tabs
+    int numbOfTabs = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
-        pager.setCurrentItem(0); //setting default tab to tab number 1 (index starting from 0)
+        pager.setCurrentItem(1); //setting default tab to tab number 1 (index starting from 0)
 
         // Assigning the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);

@@ -37,14 +37,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if(position == 0)
         {
-            FixtureFragment tab1 = new FixtureFragment();
+            HomeFragment tab1 = new HomeFragment();
             return tab1;
         }
-//        else if(position == 1)
-//        {
-//            HomeFragment tab2 = new HomeFragment();
-//            return tab2;
-//        }
+        else if(position == 1)
+        {
+            FixtureFragment tab2 = new FixtureFragment();
+            return tab2;
+        }
         else
         {
             EmptyFragment tab3 = new EmptyFragment();

@@ -7,7 +7,6 @@ public class CustomProgressDialog extends ProgressDialog {
 
     public CustomProgressDialog(Context context) {
         super(context, R.style.TransparentProgressDialog);
-        // /super(context,R.layout.custom_progress_dialog_layout);
     }
 
     @Override

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ver_techs.qiff_android.CustomScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -88,6 +88,6 @@
 
         </LinearLayout>
 
-    </com.ver_techs.qiff_android.CustomScrollView>
+    </ScrollView>
 
 </LinearLayout>

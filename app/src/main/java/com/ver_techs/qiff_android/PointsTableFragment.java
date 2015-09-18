@@ -79,6 +79,7 @@ public class PointsTableFragment extends Fragment{
                     PointsTableCustomAdapter pointsTableListAdapter1 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList1); //get a new istance of adapter for fixture view
                     ListView pointsTableList1 = (ListView) v.findViewById(R.id.list_teams_group1); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList1);
+                    pointsTableList1.setFocusable(false);
                     pointsTableList1.setAdapter(pointsTableListAdapter1); //set the adapter to the listview
 
                 } else {
@@ -116,6 +117,7 @@ public class PointsTableFragment extends Fragment{
                     PointsTableCustomAdapter pointsTableListAdapter2 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList2); //get a new istance of adapter for fixture view
                     ListView pointsTableList2 = (ListView) v.findViewById(R.id.list_teams_group2); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList2);
+                    pointsTableList2.setFocusable(false);
                     pointsTableList2.setAdapter(pointsTableListAdapter2); //set the adapter to the listview
 
                 } else {
@@ -154,6 +156,7 @@ public class PointsTableFragment extends Fragment{
                     PointsTableCustomAdapter pointsTableListAdapter3 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList3); //get a new istance of adapter for fixture view
                     ListView pointsTableList3 = (ListView) v.findViewById(R.id.list_teams_group3); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList3);
+                    pointsTableList3.setFocusable(false);
                     pointsTableList3.setAdapter(pointsTableListAdapter3); //set the adapter to the listview
 
                 } else {
@@ -192,6 +195,7 @@ public class PointsTableFragment extends Fragment{
                     PointsTableCustomAdapter pointsTableListAdapter4 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList4); //get a new istance of adapter for fixture view
                     ListView pointsTableList4 = (ListView) v.findViewById(R.id.list_teams_group4); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList4);
+                    pointsTableList4.setFocusable(false);
                     pointsTableList4.setAdapter(pointsTableListAdapter4); //set the adapter to the listview
 
                 } else {

@@ -30,7 +30,7 @@ import com.parse.ParseQuery;
 import java.util.List;
 
 // Fragment that inflates the home screen
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnTouchListener, View.OnFocusChangeListener {
 
     SharedPreferences sharedPreferences;
     EditText userName_editText, message_editText;
@@ -103,15 +103,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-
-                if(sharedPreferences.getString("UserName", "null").equals("null")){
-                    //Get desired User Name from user
-                    showInputDialog();
-                }
-                else {
                     //send chat with existing User Name
                     sendChatToParse();
-                }
             }
         });
 
@@ -217,6 +210,23 @@ public class HomeFragment extends Fragment {
         // create an alert dialog
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+        if (view instanceof EditText) {
+            view.setOnFocusChangeListener(this); // User touched edittext
+            if(sharedPreferences.getString("UserName", "null").equals("null")){
+                //Get desired User Name from user
+                showInputDialog();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
 
     }
 }

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <com.ver_techs.qiff_android.CustomScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -26,11 +26,11 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <ListView
+            <com.ver_techs.qiff_android.CustomListView
                 android:id="@+id/list_teams_group1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            </ListView>
+            </com.ver_techs.qiff_android.CustomListView>
 
             <TextView
                 android:id="@+id/name_group2"
@@ -44,11 +44,11 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <ListView
+            <com.ver_techs.qiff_android.CustomListView
                 android:id="@+id/list_teams_group2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            </ListView>
+            </com.ver_techs.qiff_android.CustomListView>
 
             <TextView
                 android:id="@+id/name_group3"
@@ -62,11 +62,11 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <ListView
+            <com.ver_techs.qiff_android.CustomListView
                 android:id="@+id/list_teams_group3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            </ListView>
+            </com.ver_techs.qiff_android.CustomListView>
 
             <TextView
                 android:id="@+id/name_group4"
@@ -80,14 +80,14 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <ListView
+            <com.ver_techs.qiff_android.CustomListView
                 android:id="@+id/list_teams_group4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            </ListView>
+            </com.ver_techs.qiff_android.CustomListView>
 
         </LinearLayout>
 
-    </ScrollView>
+    </com.ver_techs.qiff_android.CustomScrollView>
 
 </LinearLayout>

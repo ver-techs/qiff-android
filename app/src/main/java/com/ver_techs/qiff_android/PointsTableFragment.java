@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -77,6 +78,7 @@ public class PointsTableFragment extends Fragment{
                     //nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter1 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList1); //get a new istance of adapter for fixture view
                     ListView pointsTableList1 = (ListView) v.findViewById(R.id.list_teams_group1); //find the listview to load fixture items
+                    setListViewHeightBasedOnChildren(pointsTableList1);
                     pointsTableList1.setAdapter(pointsTableListAdapter1); //set the adapter to the listview
 
                 } else {
@@ -113,6 +115,7 @@ public class PointsTableFragment extends Fragment{
                     //nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter2 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList2); //get a new istance of adapter for fixture view
                     ListView pointsTableList2 = (ListView) v.findViewById(R.id.list_teams_group2); //find the listview to load fixture items
+                    setListViewHeightBasedOnChildren(pointsTableList2);
                     pointsTableList2.setAdapter(pointsTableListAdapter2); //set the adapter to the listview
 
                 } else {
@@ -150,6 +153,7 @@ public class PointsTableFragment extends Fragment{
                     //nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter3 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList3); //get a new istance of adapter for fixture view
                     ListView pointsTableList3 = (ListView) v.findViewById(R.id.list_teams_group3); //find the listview to load fixture items
+                    setListViewHeightBasedOnChildren(pointsTableList3);
                     pointsTableList3.setAdapter(pointsTableListAdapter3); //set the adapter to the listview
 
                 } else {
@@ -187,6 +191,7 @@ public class PointsTableFragment extends Fragment{
                     //nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter4 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList4); //get a new istance of adapter for fixture view
                     ListView pointsTableList4 = (ListView) v.findViewById(R.id.list_teams_group4); //find the listview to load fixture items
+                    setListViewHeightBasedOnChildren(pointsTableList4);
                     pointsTableList4.setAdapter(pointsTableListAdapter4); //set the adapter to the listview
 
                 } else {
@@ -197,6 +202,27 @@ public class PointsTableFragment extends Fragment{
 
         return v;
 
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView)
+    {
+        ListAdapter listAdapter = listView.getAdapter();
+        if(listAdapter == null) return;
+        if(listAdapter.getCount() <= 1) return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+        int totalHeight = 0;
+        View view = null;
+        for(int i = 0; i < listAdapter.getCount(); i++)
+        {
+            view = listAdapter.getView(i, view, listView);
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 
 }

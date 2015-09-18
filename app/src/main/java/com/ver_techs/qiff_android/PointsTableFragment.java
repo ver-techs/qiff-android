@@ -32,11 +32,9 @@ public class PointsTableFragment extends Fragment{
 
         //Set and show the progress dialog
         nDialog = new CustomProgressDialog(getActivity());
-        nDialog.setMessage("Getting Fixture !");
-        nDialog.setTitle("Loading...");
         nDialog.setIndeterminate(false);
         nDialog.setCancelable(false);
-        //nDialog.show();
+        nDialog.show();
 
         final TextView name_group_1 = (TextView) v.findViewById(R.id.name_group1);
         final TextView name_group_2 = (TextView) v.findViewById(R.id.name_group2);
@@ -75,7 +73,7 @@ public class PointsTableFragment extends Fragment{
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList1.size()));
 
-                    //nDialog.cancel();
+                    nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter1 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList1); //get a new istance of adapter for fixture view
                     ListView pointsTableList1 = (ListView) v.findViewById(R.id.list_teams_group1); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList1);

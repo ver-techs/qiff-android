@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
+//Helper class to have a listview that will not collapse into scroll
 public class CustomListView extends ListView {
     public CustomListView(Context context) {
         super(context);

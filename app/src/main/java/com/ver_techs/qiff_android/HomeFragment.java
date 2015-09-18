@@ -67,6 +67,8 @@ public class HomeFragment extends Fragment {
         fan_zone.setTypeface(custom_font);
         message_box.setTypeface(custom_font);
 
+        message_box.setHintTextColor(getResources().getColor(R.color.color_accent));
+
         //ensuring parent and child scroll views work fine on touch
 
         ScrollView parentScroll=(ScrollView) v.findViewById(R.id.parentScroll);
@@ -182,6 +184,7 @@ public class HomeFragment extends Fragment {
         // Save the data to Parse whenever internet is available
         chatItem.saveEventually();
         Toast.makeText(getActivity(), "Chat message has been successfully sent !", Toast.LENGTH_SHORT).show();
+        message_editText.setText("");
     }
 
     protected void showInputDialog() {

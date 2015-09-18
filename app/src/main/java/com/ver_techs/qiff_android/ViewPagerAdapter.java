@@ -17,7 +17,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private int[] imageResId = { //Icons of tabs in order
             R.drawable.icon_points_table,
             R.drawable.icon_calendar,
-            R.drawable.icon_coming_soon
+            R.drawable.icon_coming_soon,
+            R.drawable.icon_home
     };
     Context context;
 
@@ -45,10 +46,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             FixtureFragment tab2 = new FixtureFragment();
             return tab2;
         }
-        else
+        else if(position == 2)
         {
             EmptyFragment tab3 = new EmptyFragment();
             return tab3;
+        }
+        else
+        {
+            HomeFragment tab4 = new HomeFragment();
+            return tab4;
         }
     }
 

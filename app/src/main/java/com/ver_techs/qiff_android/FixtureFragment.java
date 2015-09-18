@@ -30,8 +30,6 @@ public class FixtureFragment extends Fragment {
 
         //Set and show the progress dialog
         nDialog = new CustomProgressDialog(getActivity());
-        nDialog.setMessage("Getting Fixture !");
-        nDialog.setTitle("Loading...");
         nDialog.setIndeterminate(false);
         nDialog.setCancelable(false);
         nDialog.show();

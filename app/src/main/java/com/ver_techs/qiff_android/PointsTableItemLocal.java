@@ -3,16 +3,16 @@ package com.ver_techs.qiff_android;
 //Class to store local points table items
 public class   PointsTableItemLocal{
 
-    String teamName, total, played, wins, draws, losses;
+    String teamName, total, wins, draws, losses, game_difference;
 
     //default constructor
-    public  PointsTableItemLocal(String teamName, String total, String played, String wins, String draws, String losses){
+    public  PointsTableItemLocal(String teamName, String total, String wins, String draws, String losses, String game_difference){
         this.teamName=teamName;
         this.total=total;
-        this.played=played;
         this.wins=wins;
         this.draws=draws;
         this.losses=losses;
+        this.game_difference=game_difference;
     }
 
     public String getTeamName() {
@@ -21,10 +21,6 @@ public class   PointsTableItemLocal{
 
     public String getTotal() {
         return total;
-    }
-
-    public String getPlayed() {
-        return played;
     }
 
     public String getWins() {
@@ -37,5 +33,9 @@ public class   PointsTableItemLocal{
 
     public String getLosses() {
         return losses;
+    }
+
+    public String getGameDifference() {
+        return game_difference;
     }
 }

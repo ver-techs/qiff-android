@@ -19,10 +19,6 @@ public class PointsTableItem extends ParseObject {
         return getString("total");
     }
 
-    public String getPlayed() {
-        return getString("played");
-    }
-
     public String getWins() {
         return getString("wins");
     }
@@ -35,4 +31,7 @@ public class PointsTableItem extends ParseObject {
         return getString("losses");
     }
 
+    public String getGameDifference() {
+        return getString("game_difference");
+    }
 }

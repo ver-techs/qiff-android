@@ -60,10 +60,6 @@ public class PointsTableCustomAdapter extends BaseAdapter {
         total_points_team_points_table.setText(pointsTableItemLocal.getTotal());
         total_points_team_points_table.setTypeface(custom_font);
 
-        TextView played_points_table = (TextView) view.findViewById(R.id.played_points_table);
-        played_points_table.setText("P : " + pointsTableItemLocal.getPlayed());
-        played_points_table.setTypeface(custom_font);
-
         TextView wins_points_table = (TextView) view.findViewById(R.id.wins_points_table);
         wins_points_table.setText("W : " + pointsTableItemLocal.getWins());
         wins_points_table.setTypeface(custom_font);
@@ -75,6 +71,10 @@ public class PointsTableCustomAdapter extends BaseAdapter {
         TextView losses_points_table = (TextView) view.findViewById(R.id.losses_points_table);
         losses_points_table.setText("L : " + pointsTableItemLocal.getLosses());
         losses_points_table.setTypeface(custom_font);
+
+        TextView played_points_table = (TextView) view.findViewById(R.id.game_difference_points_table);
+        played_points_table.setText("GD : " + pointsTableItemLocal.getGameDifference());
+        played_points_table.setTypeface(custom_font);
 
         ImageView image_team_points_table = (ImageView) view.findViewById(R.id.image_team_points_table);
         image_team_points_table.setImageResource(findTeamLogo(pointsTableItemLocal.getTeamName()));

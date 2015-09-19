@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -37,10 +38,12 @@ public class HomeFragment extends Fragment{
     EditText userName_editText, message_editText;
     String userName, message;
     Boolean touchedOnce = false;
+    Typeface custom_font;
+    View v;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_home,container,false);
+        v =inflater.inflate(R.layout.fragment_home,container,false);
 
         //setting font to all textviews
         TextView name_team1 = (TextView) v.findViewById(R.id.name_team1);
@@ -55,7 +58,7 @@ public class HomeFragment extends Fragment{
         TextView fan_zone = (TextView) v.findViewById(R.id.fan_zone);
         EditText message_box = (EditText) v.findViewById(R.id.message_box);
 
-        final Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
+        custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
 
         name_team1.setTypeface(custom_font);
         name_team2.setTypeface(custom_font);
@@ -109,6 +112,9 @@ public class HomeFragment extends Fragment{
                         showInputDialog();
                     }
                     touchedOnce = true;
+                }else{
+                    view.setFocusable(true);
+                    view.setFocusableInTouchMode(true);
                 }
 
                 //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -123,14 +129,24 @@ public class HomeFragment extends Fragment{
 
             @Override
             public void onClick(View v) {
-                    //send chat with existing User Name
-                    sendChatToParse();
+                //send chat with existing User Name
+                sendChatToParse();
             }
         });
 
+        //update fan zone contents
+        updateFanZoneWithParseChats();
+
+        return v;
+    }
+
+    protected void updateFanZoneWithParseChats(){
         // Polulating Fan zone with chat messages from Parse
 
+        Log.i("aaki", "calling update");
         final TableLayout tl = (TableLayout) v.findViewById(R.id.fan_zone_table);
+
+        tl.removeAllViews();
 
         // Parse query to get all chats from server
 
@@ -180,8 +196,6 @@ public class HomeFragment extends Fragment{
                 }
             }
         });
-
-        return v;
     }
 
     protected void sendChatToParse(){
@@ -195,9 +209,20 @@ public class HomeFragment extends Fragment{
         Log.i("***message***", chatItem.getChatMessage());
 
         // Save the data to Parse whenever internet is available
-        chatItem.saveEventually();
+        chatItem.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    updateFanZoneWithParseChats();
+                } else {
+                }
+            }
+        });
         Toast.makeText(getActivity(), "Chat message has been successfully sent !", Toast.LENGTH_SHORT).show();
         message_editText.setText("");
+
+        updateFanZoneWithParseChats();
+
     }
 
     protected void showInputDialog() {

@@ -20,7 +20,10 @@
                 android:layout_width="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:border_width="1dp"
+                app:border_color="@color/color_primary"/>
 
             <TextView
                 android:id="@+id/name_team_points_table"

@@ -65,7 +65,10 @@
                 android:layout_width="0dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:border_width="1dp"
+                app:border_color="@color/color_primary"/>
 
             <TextView
                 android:id="@+id/score_team1_fixture"
@@ -114,7 +117,10 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:border_width="1dp"
+                app:border_color="@color/color_primary"/>
 
         </TableRow>
 

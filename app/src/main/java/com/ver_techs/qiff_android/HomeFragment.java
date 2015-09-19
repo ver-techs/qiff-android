@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -30,11 +31,12 @@ import com.parse.ParseQuery;
 import java.util.List;
 
 // Fragment that inflates the home screen
-public class HomeFragment extends Fragment implements View.OnTouchListener, View.OnFocusChangeListener {
+public class HomeFragment extends Fragment{
 
     SharedPreferences sharedPreferences;
     EditText userName_editText, message_editText;
     String userName, message;
+    Boolean touchedOnce = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -92,11 +94,29 @@ public class HomeFragment extends Fragment implements View.OnTouchListener, View
 
         });
 
-        //Chat send button code - to get username first time, save as sharedpref, use it subsequently, and send chat messages
+        //Code to check if user has focused on message edittext, if so, if there is no username yet, get from user
 
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         message_editText = (EditText) v.findViewById(R.id.message_box);
+
+        message_editText.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(touchedOnce == false) {
+                    if (sharedPreferences.getString("UserName", "null").equals("null")) {
+                        //Get desired User Name from user
+                        showInputDialog();
+                    }
+                    touchedOnce = true;
+                }
+
+                //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                return false;
+            }
+        });
+
+        //Chat send button code - to get username first time, save as sharedpref, use it subsequently, and send chat messages
 
         Button send_chat_button = (Button) v.findViewById(R.id.send_chat_button);
         send_chat_button.setOnClickListener(new View.OnClickListener() {
@@ -202,7 +222,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener, View
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("UserName", userName);
                         editor.commit();
-                        sendChatToParse();
+                        dialog.cancel();
 
                     }
                 });
@@ -213,20 +233,4 @@ public class HomeFragment extends Fragment implements View.OnTouchListener, View
 
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        if (view instanceof EditText) {
-            view.setOnFocusChangeListener(this); // User touched edittext
-            if(sharedPreferences.getString("UserName", "null").equals("null")){
-                //Get desired User Name from user
-                showInputDialog();
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-
-    }
 }

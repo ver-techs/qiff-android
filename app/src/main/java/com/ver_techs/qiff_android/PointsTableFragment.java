@@ -68,7 +68,7 @@ public class PointsTableFragment extends Fragment{
                         PointsTableItemLocal pointsTableItemLocal = new PointsTableItemLocal(
                                 pointsTableItemsList.get(i).getTeamName(), pointsTableItemsList.get(i).getTotal(),
                                 pointsTableItemsList.get(i).getWins(), pointsTableItemsList.get(i).getDraws(),
-                                pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGameDifference());
+                                pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGoalDifference());
                         pointsItemArrayList1.add(pointsTableItemLocal);
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList1.size()));
@@ -106,7 +106,7 @@ public class PointsTableFragment extends Fragment{
                         PointsTableItemLocal pointsTableItemLocal = new PointsTableItemLocal(
                                 pointsTableItemsList.get(i).getTeamName(), pointsTableItemsList.get(i).getTotal(),
                                 pointsTableItemsList.get(i).getWins(), pointsTableItemsList.get(i).getDraws(),
-                                pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGameDifference());
+                                pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGoalDifference());
                         pointsItemArrayList2.add(pointsTableItemLocal);
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList2.size()));
@@ -145,7 +145,7 @@ public class PointsTableFragment extends Fragment{
                         PointsTableItemLocal pointsTableItemLocal = new PointsTableItemLocal(
                                 pointsTableItemsList.get(i).getTeamName(), pointsTableItemsList.get(i).getTotal(),
                                 pointsTableItemsList.get(i).getWins(), pointsTableItemsList.get(i).getDraws(),
-                                pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGameDifference());
+                                pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGoalDifference());
                         pointsItemArrayList3.add(pointsTableItemLocal);
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList3.size()));
@@ -184,7 +184,7 @@ public class PointsTableFragment extends Fragment{
                         PointsTableItemLocal pointsTableItemLocal = new PointsTableItemLocal(
                                 pointsTableItemsList.get(i).getTeamName(), pointsTableItemsList.get(i).getTotal(),
                                 pointsTableItemsList.get(i).getWins(), pointsTableItemsList.get(i).getDraws(),
-                                pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGameDifference());
+                                pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGoalDifference());
                         pointsItemArrayList4.add(pointsTableItemLocal);
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList4.size()));

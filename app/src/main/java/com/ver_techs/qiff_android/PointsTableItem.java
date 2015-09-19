@@ -31,7 +31,7 @@ public class PointsTableItem extends ParseObject {
         return getString("losses");
     }
 
-    public String getGameDifference() {
-        return getString("game_difference");
+    public String getGoalDifference() {
+        return getString("goal_difference");
     }
 }

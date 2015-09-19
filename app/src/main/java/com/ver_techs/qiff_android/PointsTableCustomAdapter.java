@@ -72,8 +72,8 @@ public class PointsTableCustomAdapter extends BaseAdapter {
         losses_points_table.setText("L : " + pointsTableItemLocal.getLosses());
         losses_points_table.setTypeface(custom_font);
 
-        TextView played_points_table = (TextView) view.findViewById(R.id.game_difference_points_table);
-        played_points_table.setText("GD : " + pointsTableItemLocal.getGameDifference());
+        TextView played_points_table = (TextView) view.findViewById(R.id.goal_difference_points_table);
+        played_points_table.setText("GD : " + pointsTableItemLocal.getGoalDifference());
         played_points_table.setTypeface(custom_font);
 
         ImageView image_team_points_table = (ImageView) view.findViewById(R.id.image_team_points_table);

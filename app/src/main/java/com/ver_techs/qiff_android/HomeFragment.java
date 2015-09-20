@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment{
     SharedPreferences sharedPreferences;
     EditText userName_editText, message_editText;
     String userName, message;
-    Boolean touchedOnce = false;
+    Boolean touchedOnce = false; //boolean to determine if chatbox is being focused on for first time or not
     Typeface custom_font;
     View v;
 
@@ -106,18 +106,17 @@ public class HomeFragment extends Fragment{
         message_editText.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                if(touchedOnce == false) {
+                if(touchedOnce == false) { //if message box is being focused first time, get username by showinputdialog()
                     if (sharedPreferences.getString("UserName", "null").equals("null")) {
                         //Get desired User Name from user
                         showInputDialog();
                     }
-                    touchedOnce = true;
-                }else{
+                    touchedOnce = true; //and set boolean to true
+                }else{ //else enable focus on message box and allow for viewing keypad and sending text
                     view.setFocusable(true);
                     view.setFocusableInTouchMode(true);
                 }
 
-                //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                 return false;
             }
         });
@@ -143,10 +142,9 @@ public class HomeFragment extends Fragment{
     protected void updateFanZoneWithParseChats(){
         // Polulating Fan zone with chat messages from Parse
 
-        Log.i("aaki", "calling update");
         final TableLayout tl = (TableLayout) v.findViewById(R.id.fan_zone_table);
 
-        tl.removeAllViews();
+        tl.removeAllViews(); //refresh the fan zone, remove all existing rows from existing tablelayout
 
         // Parse query to get all chats from server
 
@@ -213,15 +211,15 @@ public class HomeFragment extends Fragment{
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    updateFanZoneWithParseChats();
+                    updateFanZoneWithParseChats(); //if save was successful, update the fan zone chats to reflect new chat
                 } else {
                 }
             }
         });
-        Toast.makeText(getActivity(), "Chat message has been successfully sent !", Toast.LENGTH_SHORT).show();
-        message_editText.setText("");
 
-        updateFanZoneWithParseChats();
+        message_editText.setText(""); //clear the message box
+
+        updateFanZoneWithParseChats(); //update fan zone to reflect new chat
 
     }
 
@@ -247,7 +245,7 @@ public class HomeFragment extends Fragment{
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("UserName", userName);
                         editor.commit();
-                        dialog.cancel();
+                        dialog.cancel(); //cancel dialog after clicking OK
 
                     }
                 });

@@ -26,11 +26,11 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <com.ver_techs.qiff_android.CustomListView
+            <com.ver_techs.qiff_android.custom_views.CustomListView
                 android:id="@+id/list_teams_group1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            </com.ver_techs.qiff_android.CustomListView>
+            </com.ver_techs.qiff_android.custom_views.CustomListView>
 
             <TextView
                 android:id="@+id/name_group2"
@@ -44,11 +44,11 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <com.ver_techs.qiff_android.CustomListView
+            <com.ver_techs.qiff_android.custom_views.CustomListView
                 android:id="@+id/list_teams_group2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            </com.ver_techs.qiff_android.CustomListView>
+            </com.ver_techs.qiff_android.custom_views.CustomListView>
 
             <TextView
                 android:id="@+id/name_group3"
@@ -62,11 +62,11 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <com.ver_techs.qiff_android.CustomListView
+            <com.ver_techs.qiff_android.custom_views.CustomListView
                 android:id="@+id/list_teams_group3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            </com.ver_techs.qiff_android.CustomListView>
+            </com.ver_techs.qiff_android.custom_views.CustomListView>
 
             <TextView
                 android:id="@+id/name_group4"
@@ -80,11 +80,11 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <com.ver_techs.qiff_android.CustomListView
+            <com.ver_techs.qiff_android.custom_views.CustomListView
                 android:id="@+id/list_teams_group4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            </com.ver_techs.qiff_android.CustomListView>
+            </com.ver_techs.qiff_android.custom_views.CustomListView>
 
         </LinearLayout>
 

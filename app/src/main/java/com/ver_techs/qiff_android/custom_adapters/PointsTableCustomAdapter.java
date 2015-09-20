@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.custom_adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ver_techs.qiff_android.object_classes.PointsTableItemLocal;
+import com.ver_techs.qiff_android.R;
 
 import java.util.ArrayList;
 

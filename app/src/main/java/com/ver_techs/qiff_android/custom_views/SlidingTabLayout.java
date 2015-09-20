@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.custom_views;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ver_techs.qiff_android.R;
 
 /*
  * Copyright 2014 Google Inc. All rights reserved.

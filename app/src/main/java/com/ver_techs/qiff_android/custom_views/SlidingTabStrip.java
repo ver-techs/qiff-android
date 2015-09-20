@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.custom_views;
 
 import android.R;
 import android.content.Context;

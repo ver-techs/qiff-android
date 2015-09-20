@@ -1,15 +1,18 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.view.Window;
 
-import com.parse.Parse;
 import com.parse.ParseObject;
+import com.ver_techs.qiff_android.object_classes.PointsTableItem;
+import com.ver_techs.qiff_android.R;
+import com.ver_techs.qiff_android.custom_views.SlidingTabLayout;
+import com.ver_techs.qiff_android.custom_adapters.ViewPagerAdapter;
+import com.ver_techs.qiff_android.object_classes.ChatItem;
+import com.ver_techs.qiff_android.object_classes.FixtureItem;
 
 // Main Activity class
 public class MainActivity extends ActionBarActivity {

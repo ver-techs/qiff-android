@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.custom_adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,6 +8,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+
+import com.ver_techs.qiff_android.fragments.PointsTableFragment;
+import com.ver_techs.qiff_android.R;
+import com.ver_techs.qiff_android.fragments.EmptyFragment;
+import com.ver_techs.qiff_android.fragments.FixtureFragment;
+import com.ver_techs.qiff_android.fragments.HomeFragment;
 
 //Adapter for tabs
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {

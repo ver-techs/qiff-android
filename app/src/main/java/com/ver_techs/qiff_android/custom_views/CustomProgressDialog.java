@@ -1,7 +1,9 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.custom_views;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+
+import com.ver_techs.qiff_android.R;
 
 public class CustomProgressDialog extends ProgressDialog {
 

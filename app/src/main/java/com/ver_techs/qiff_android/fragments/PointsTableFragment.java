@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.fragments;
 
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
@@ -16,6 +16,11 @@ import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.ver_techs.qiff_android.object_classes.PointsTableItem;
+import com.ver_techs.qiff_android.object_classes.PointsTableItemLocal;
+import com.ver_techs.qiff_android.R;
+import com.ver_techs.qiff_android.custom_adapters.PointsTableCustomAdapter;
+import com.ver_techs.qiff_android.custom_views.CustomProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;

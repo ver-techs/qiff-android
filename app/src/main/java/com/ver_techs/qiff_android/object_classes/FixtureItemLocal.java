@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.object_classes;
 
 //Class to store local fixture items
 public class FixtureItemLocal{

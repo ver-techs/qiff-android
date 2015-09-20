@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.fragments;
 
 import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
@@ -13,6 +13,11 @@ import android.widget.ListView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.ver_techs.qiff_android.custom_adapters.FixtureCustomAdapter;
+import com.ver_techs.qiff_android.object_classes.FixtureItem;
+import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
+import com.ver_techs.qiff_android.R;
+import com.ver_techs.qiff_android.custom_views.CustomProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.object_classes;
 
 import com.parse.ParseObject;
 import com.parse.ParseClassName;

@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.fragments;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.ver_techs.qiff_android.R;
 
 // Fragment created to contain coming soon message
 public class EmptyFragment extends Fragment{

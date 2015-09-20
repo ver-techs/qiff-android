@@ -1,4 +1,4 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.other_custom_classes;
 
 import android.content.Context;
 import android.content.Intent;

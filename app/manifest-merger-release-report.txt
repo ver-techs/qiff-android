@@ -42,7 +42,7 @@ MERGED from de.hdodenhof:circleimageview:1.3.0:9:5
 		ADDED from AndroidManifest.xml:14:9
 	android:name
 		ADDED from AndroidManifest.xml:10:9
-activity#com.ver_techs.qiff_android.SplashScreen
+activity#com.ver_techs.qiff_android.activities.SplashScreen
 ADDED from AndroidManifest.xml:15:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:18:13
@@ -60,7 +60,7 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:21:17
 	android:name
 		ADDED from AndroidManifest.xml:21:27
-activity#com.ver_techs.qiff_android.MainActivity
+activity#com.ver_techs.qiff_android.activities.MainActivity
 ADDED from AndroidManifest.xml:24:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:27:13

@@ -1,25 +1,18 @@
-package com.ver_techs.qiff_android;
+package com.ver_techs.qiff_android.custom_adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
+import com.ver_techs.qiff_android.R;
+import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 
 import java.util.ArrayList;
-import java.util.List;
 
 // Adapter for Fixture tab
 public class FixtureCustomAdapter extends BaseAdapter {

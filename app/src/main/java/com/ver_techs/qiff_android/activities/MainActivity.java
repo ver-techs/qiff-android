@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
 
-    CharSequence titles[]={"Points Table", "Fixture","Coming Soon", "Home"}; //sequence of title for tabs
+    CharSequence titles[] = {"Points Table", "Fixture", "Coming Soon", "Home"}; //sequence of title for tabs
     int numbOfTabs = 4;
 
     @Override
@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
         ParseObject.registerSubclass(PointsTableItem.class);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles for the Tabs and Number Of Tabs
-        adapter =  new ViewPagerAdapter(this, getSupportFragmentManager(), titles, numbOfTabs);
+        adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), titles, numbOfTabs);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -63,26 +63,4 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

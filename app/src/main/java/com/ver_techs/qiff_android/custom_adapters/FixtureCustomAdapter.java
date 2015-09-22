@@ -2,6 +2,7 @@ package com.ver_techs.qiff_android.custom_adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import android.widget.TextView;
 import com.ver_techs.qiff_android.R;
 import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 // Adapter for Fixture tab
 public class FixtureCustomAdapter extends BaseAdapter {
@@ -75,7 +80,14 @@ public class FixtureCustomAdapter extends BaseAdapter {
         scoreTeam2.setTypeface(custom_font);
 
         TextView time = (TextView) view.findViewById(R.id.time_fixture);
-        time.setText(fixtureItemLocal.getTimeDate());
+        if(fixtureItemLocal.getTimeDate().contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
+            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", "")));
+        }
+        else if (fixtureItemLocal.getTimeDate().contains("Second")) {
+            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Second", ""))+ " (2)");
+        }
+        else
+            time.setText(fixtureItemLocal.getTimeDate());
         time.setTypeface(custom_font);
 
         ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1_fixture);
@@ -110,5 +122,20 @@ public class FixtureCustomAdapter extends BaseAdapter {
             case "KPAQ KKD" : resource_id = R.drawable.team_4; break;
         }
         return resource_id;
+    }
+
+    public String elapsedMinutes(String matchStartTime){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm"); //using time format hh:mm
+        Date timeNow = new Date(); //get current time
+        int minutes=0; //no of minutes between current time and matchStartTime
+        try {
+            minutes = (int)
+                    ((simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getTime() -                //parse and get current time
+                            simpleDateFormat.parse(matchStartTime.replace("Start", "")).getTime()         //parse and get matchStartTime
+                    )*0.00001667);                                                                        //find the difference between the two in milliseconds, convert to minutes
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return String.valueOf(minutes) + "\"";  //return the elapsed minutes wid double qoute at the end
     }
 }

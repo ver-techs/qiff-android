@@ -23,7 +23,7 @@ public class PointsTableCustomAdapter extends BaseAdapter {
     public PointsTableCustomAdapter(Context context, ArrayList<PointsTableItemLocal> pointsTableItemArray) {
         this.context = context;
         this.pointsTableArrayList = pointsTableItemArray;
-        Log.i("aaki", "adapter - " + Integer.toString(pointsTableItemArray.size()));
+        //Log.i("aaki", "adapter - " + Integer.toString(pointsTableItemArray.size()));
     }
 
     @Override

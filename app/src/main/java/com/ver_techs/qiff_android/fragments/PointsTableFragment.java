@@ -80,7 +80,7 @@ public class PointsTableFragment extends Fragment{
                                 pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGoalDifference());
                         pointsItemArrayList1.add(pointsTableItemLocal);
                     }
-                    Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList1.size()));
+                    //Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList1.size()));
 
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
@@ -119,7 +119,7 @@ public class PointsTableFragment extends Fragment{
                                 pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGoalDifference());
                         pointsItemArrayList2.add(pointsTableItemLocal);
                     }
-                    Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList2.size()));
+                    //Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList2.size()));
 
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
@@ -159,7 +159,7 @@ public class PointsTableFragment extends Fragment{
                                 pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGoalDifference());
                         pointsItemArrayList3.add(pointsTableItemLocal);
                     }
-                    Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList3.size()));
+                    //Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList3.size()));
 
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
@@ -199,7 +199,7 @@ public class PointsTableFragment extends Fragment{
                                 pointsTableItemsList.get(i).getLosses(), pointsTableItemsList.get(i).getGoalDifference());
                         pointsItemArrayList4.add(pointsTableItemLocal);
                     }
-                    Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList4.size()));
+                    //Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList4.size()));
 
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();

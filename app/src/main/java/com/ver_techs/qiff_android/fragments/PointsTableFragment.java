@@ -30,10 +30,14 @@ public class PointsTableFragment extends Fragment{
     ArrayList<PointsTableItemLocal> pointsItemArrayList1, pointsItemArrayList2, pointsItemArrayList3, pointsItemArrayList4; //list of points table items, loaded from parse
     private ProgressDialog nDialog;
     View v;
+    int allFourQueriesDone=0; //variable to check if all 4 queries have been executed and done
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_points_table, container, false);
+
+        //re-assign varibale to 0
+        allFourQueriesDone=0;
 
         //Set and show the progress dialog
         nDialog = new CustomProgressDialog(getActivity());
@@ -78,7 +82,8 @@ public class PointsTableFragment extends Fragment{
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList1.size()));
 
-                    nDialog.cancel();
+                    allFourQueriesDone++;
+                    if(allFourQueriesDone == 4) nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter1 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList1); //get a new istance of adapter for fixture view
                     ListView pointsTableList1 = (ListView) v.findViewById(R.id.list_teams_group1); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList1);
@@ -116,7 +121,8 @@ public class PointsTableFragment extends Fragment{
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList2.size()));
 
-                    //nDialog.cancel();
+                    allFourQueriesDone++;
+                    if(allFourQueriesDone == 4) nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter2 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList2); //get a new istance of adapter for fixture view
                     ListView pointsTableList2 = (ListView) v.findViewById(R.id.list_teams_group2); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList2);
@@ -155,7 +161,8 @@ public class PointsTableFragment extends Fragment{
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList3.size()));
 
-                    //nDialog.cancel();
+                    allFourQueriesDone++;
+                    if(allFourQueriesDone == 4) nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter3 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList3); //get a new istance of adapter for fixture view
                     ListView pointsTableList3 = (ListView) v.findViewById(R.id.list_teams_group3); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList3);
@@ -194,7 +201,8 @@ public class PointsTableFragment extends Fragment{
                     }
                     Log.i("aaki", "task doing  - " + Integer.toString(pointsItemArrayList4.size()));
 
-                    //nDialog.cancel();
+                    allFourQueriesDone++;
+                    if(allFourQueriesDone == 4) nDialog.cancel();
                     PointsTableCustomAdapter pointsTableListAdapter4 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList4); //get a new istance of adapter for fixture view
                     ListView pointsTableList4 = (ListView) v.findViewById(R.id.list_teams_group4); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList4);

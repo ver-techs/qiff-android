@@ -16,7 +16,6 @@ import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 // Adapter for Fixture tab
@@ -81,10 +80,10 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
         TextView time = (TextView) view.findViewById(R.id.time_fixture);
         if(fixtureItemLocal.getTimeDate().contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
-            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", "")));
+            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", ""))); //remove substring start
         }
         else if (fixtureItemLocal.getTimeDate().contains("Second")) {
-            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Second", ""))+ " (2)");
+            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Second", ""))+ " (2)"); //remove subtsring second
         }
         else
             time.setText(fixtureItemLocal.getTimeDate());
@@ -124,7 +123,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
         return resource_id;
     }
 
-    public String elapsedMinutes(String matchStartTime){
+    public String elapsedMinutes(String matchStartTime){ //function to calcultae minutes elapsed since game start for ongoing games
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm"); //using time format hh:mm
         Date timeNow = new Date(); //get current time
         int minutes=0; //no of minutes between current time and matchStartTime

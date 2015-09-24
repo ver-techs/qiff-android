@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:weightSum="1"
+    android:background="@color/color_accent"
     android:orientation="vertical">
 
     <ImageView
@@ -20,7 +21,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="- LIVE NOTIFICATIONS"
         android:textSize="18dp"
-        android:textColor="@color/color_main"
+        android:textColor="@color/color_primary"
         android:id="@+id/live_commentary_text"
         android:gravity="center" />
 
@@ -31,7 +32,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="- PREDICTION CONTEST"
         android:textSize="18dp"
-        android:textColor="@color/color_main"
+        android:textColor="@color/color_primary"
         android:id="@+id/predictionContest"
         android:gravity="center" />
 
@@ -42,7 +43,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="- FAN CHAT ROOM"
         android:textSize="18dp"
-        android:textColor="@color/color_main"
+        android:textColor="@color/color_primary"
         android:id="@+id/fanChatRooms"
         android:gravity="center" />
 

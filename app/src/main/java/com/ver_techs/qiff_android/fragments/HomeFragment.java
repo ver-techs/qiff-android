@@ -166,21 +166,21 @@ public class HomeFragment extends Fragment{
                         fan_name.setText(chatItemList.get(i).getUserName());
                         fan_name.setTextSize(16);
                         fan_name.setTypeface(custom_font);
-                        fan_name.setTextColor(getResources().getColor(R.color.color_main));
+                        fan_name.setTextColor(getResources().getColor(R.color.color_secondary));
                         tr_1.addView(fan_name);// add the column to the table row here
 
                         TextView colon = new TextView(getActivity());
                         colon.setText(" :   ");
                         colon.setTextSize(16);
                         colon.setTypeface(custom_font);
-                        colon.setTextColor(getResources().getColor(R.color.color_main));
+                        colon.setTextColor(getResources().getColor(R.color.color_secondary));
                         tr_1.addView(colon);// add the column to the table row here
 
                         TextView message = new TextView(getActivity());
                         message.setText(chatItemList.get(i).getChatMessage());
                         message.setTextSize(16);
                         message.setTypeface(custom_font);
-                        message.setTextColor(getResources().getColor(R.color.color_main));
+                        message.setTextColor(getResources().getColor(R.color.color_secondary));
                         tr_1.addView(message);// add the column to the table row here
 
                         tl.addView(tr_1, new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));

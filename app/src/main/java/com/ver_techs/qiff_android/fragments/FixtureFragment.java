@@ -44,18 +44,10 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
         nDialog.show();
 
         fixtureList = (ListView) v.findViewById(R.id.list_fixture); //find the listview to load fixture items
-        fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
         fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
         swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_refresh_layout);
 
         setRetainInstance(true); //configure the fragment instance to be retained on configuration change
-
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         // Define the class we would like to query
         ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
@@ -74,9 +66,10 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
                                 fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
                         fixtureItemArrayList.add(fixtureItemLocal);
                     }
-                    //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
+                    Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
 
                     nDialog.cancel();
+                    fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
                     fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
 
                 } else {
@@ -85,7 +78,9 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
         });
 
-        swipeRefreshLayout.setOnRefreshListener(this);
+        //swipeRefreshLayout.setOnRefreshListener(this);
+
+        return v;
     }
 
     @Override

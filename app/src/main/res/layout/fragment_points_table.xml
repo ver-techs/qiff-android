@@ -37,7 +37,6 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="20dp"
-                        android:text="GROUP I"
                         android:textColor="@color/color_black"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="10dp">
@@ -76,7 +75,6 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="20dp"
-                        android:text="GROUP II"
                         android:textColor="@color/color_black"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="10dp">
@@ -114,7 +112,6 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="20dp"
-                        android:text="GROUP III"
                         android:textColor="@color/color_black"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="10dp">
@@ -152,7 +149,6 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="20dp"
-                        android:text="GROUP IV"
                         android:textColor="@color/color_black"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="10dp">

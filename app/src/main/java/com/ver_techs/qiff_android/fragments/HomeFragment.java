@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment{
         fan_zone.setTypeface(custom_font);
         message_box.setTypeface(custom_font);
 
-        message_box.setHintTextColor(getResources().getColor(R.color.color_accent));
+        message_box.setHintTextColor(getResources().getColor(R.color.color_secondary));
 
         //ensuring parent and child scroll views work fine on touch
 

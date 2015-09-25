@@ -2,6 +2,7 @@ package com.ver_techs.qiff_android.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
@@ -37,6 +38,15 @@ public class MainActivity extends ActionBarActivity {
         ParseObject.registerSubclass(FixtureItem.class);
         ParseObject.registerSubclass(PointsTableItem.class);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+
+            String title = extras.getString("title");
+            String message = extras.getString("message");
+
+            Log.i("aaki", "got title - " + title + " and message " + message);
+
+        }
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles for the Tabs and Number Of Tabs
         adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), titles, numbOfTabs);
 

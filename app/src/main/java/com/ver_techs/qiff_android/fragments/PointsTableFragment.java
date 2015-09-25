@@ -84,6 +84,7 @@ public class PointsTableFragment extends Fragment{
 
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
+                    name_group_1.setText("GROUP I");
                     PointsTableCustomAdapter pointsTableListAdapter1 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList1); //get a new istance of adapter for fixture view
                     ListView pointsTableList1 = (ListView) v.findViewById(R.id.list_teams_group1); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList1);
@@ -123,6 +124,7 @@ public class PointsTableFragment extends Fragment{
 
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
+                    name_group_2.setText("GROUP II");
                     PointsTableCustomAdapter pointsTableListAdapter2 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList2); //get a new istance of adapter for fixture view
                     ListView pointsTableList2 = (ListView) v.findViewById(R.id.list_teams_group2); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList2);
@@ -163,6 +165,7 @@ public class PointsTableFragment extends Fragment{
 
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
+                    name_group_3.setText("GROUP III");
                     PointsTableCustomAdapter pointsTableListAdapter3 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList3); //get a new istance of adapter for fixture view
                     ListView pointsTableList3 = (ListView) v.findViewById(R.id.list_teams_group3); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList3);
@@ -183,7 +186,7 @@ public class PointsTableFragment extends Fragment{
         query4.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
         query4.addDescendingOrder("total");
-        query4.whereEqualTo("groupNo", "I");
+        query4.whereEqualTo("groupNo", "IV");
         // Execute the find asynchronously
         query4.findInBackground(new FindCallback<PointsTableItem>() {
 
@@ -203,6 +206,7 @@ public class PointsTableFragment extends Fragment{
 
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
+                    name_group_4.setText("GROUP IV");
                     PointsTableCustomAdapter pointsTableListAdapter4 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList4); //get a new istance of adapter for fixture view
                     ListView pointsTableList4 = (ListView) v.findViewById(R.id.list_teams_group4); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList4);

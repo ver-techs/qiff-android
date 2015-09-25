@@ -66,7 +66,7 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
                                 fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
                         fixtureItemArrayList.add(fixtureItemLocal);
                     }
-                    Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
+                    //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
 
                     nDialog.cancel();
                     fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view

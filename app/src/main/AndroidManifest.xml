@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.ver_techs.qiff_android.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <permission android:protectionLevel="signature" android:name="com.ver_techs.qiff_android.permission.C2D_MESSAGE" />
 

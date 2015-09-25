@@ -51,8 +51,6 @@ public class HomeFragment extends Fragment{
         TextView colon = (TextView) v.findViewById(R.id.colon);
         TextView score_team2 = (TextView) v.findViewById(R.id.score_team2);
         TextView live_commentary = (TextView) v.findViewById(R.id.live_commentary);
-        TextView comment_text_team1 = (TextView) v.findViewById(R.id.comment_text_team1);
-        TextView comment_text_team2 = (TextView) v.findViewById(R.id.comment_text_team2);
         TextView fan_zone = (TextView) v.findViewById(R.id.fan_zone);
         EditText message_box = (EditText) v.findViewById(R.id.message_box);
 
@@ -65,8 +63,6 @@ public class HomeFragment extends Fragment{
         colon.setTypeface(custom_font);
         score_team2.setTypeface(custom_font);
         live_commentary.setTypeface(custom_font);
-        comment_text_team1.setTypeface(custom_font);
-        comment_text_team2.setTypeface(custom_font);
         fan_zone.setTypeface(custom_font);
         message_box.setTypeface(custom_font);
 
@@ -74,17 +70,17 @@ public class HomeFragment extends Fragment{
 
         //ensuring parent and child scroll views work fine on touch
 
-        ScrollView parentScroll=(ScrollView) v.findViewById(R.id.parentScroll);
+        //ScrollView parentScroll=(ScrollView) v.findViewById(R.id.parentScroll);
         ScrollView childScroll=(ScrollView) v.findViewById(R.id.childScroll);
 
-        parentScroll.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                getView().findViewById(R.id.childScroll).getParent().requestDisallowInterceptTouchEvent(false);
-                return false;
-            }
-
-        });
+//        parentScroll.setOnTouchListener(new View.OnTouchListener() {
+//
+//            public boolean onTouch(View v, MotionEvent event) {
+//                getView().findViewById(R.id.childScroll).getParent().requestDisallowInterceptTouchEvent(false);
+//                return false;
+//            }
+//
+//        });
         childScroll.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
@@ -165,7 +161,7 @@ public class HomeFragment extends Fragment{
                         TextView fan_name = new TextView(getActivity());
                         fan_name.setText(chatItemList.get(i).getUserName());
                         fan_name.setTextSize(16);
-                        fan_name.setTypeface(custom_font);
+                        fan_name.setTypeface(custom_font, Typeface.BOLD);
                         fan_name.setTextColor(getResources().getColor(R.color.color_secondary));
                         tr_1.addView(fan_name);// add the column to the table row here
 

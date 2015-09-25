@@ -21,8 +21,8 @@ public class MainActivity extends ActionBarActivity {
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
 
-    CharSequence titles[] = {"Points Table", "Fixture", "Coming Soon", "Home"}; //sequence of title for tabs
-    int numbOfTabs = 4;
+    CharSequence titles[] = {"Fixture", "Home", "Points Table"}; //sequence of title for tabs
+    int numbOfTabs = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.color_main);
+                return getResources().getColor(R.color.color_accent);
             }
         });
 

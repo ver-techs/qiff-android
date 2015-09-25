@@ -46,7 +46,8 @@
                     <com.ver_techs.qiff_android.custom_views.CustomListView
                         android:id="@+id/list_teams_group1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="7dp">
                     </com.ver_techs.qiff_android.custom_views.CustomListView>
 
                 </LinearLayout>

@@ -39,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
         ParseObject.registerSubclass(PointsTableItem.class);
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
+        if(extras != null) { //check if mainactivity is being created normally or from broadcast reciever
 
             String title = extras.getString("title");
             String message = extras.getString("message");

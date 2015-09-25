@@ -70,17 +70,17 @@ public class HomeFragment extends Fragment{
 
         //ensuring parent and child scroll views work fine on touch
 
-        //ScrollView parentScroll=(ScrollView) v.findViewById(R.id.parentScroll);
+        ScrollView parentScroll=(ScrollView) v.findViewById(R.id.parentScroll);
         ScrollView childScroll=(ScrollView) v.findViewById(R.id.childScroll);
 
-//        parentScroll.setOnTouchListener(new View.OnTouchListener() {
-//
-//            public boolean onTouch(View v, MotionEvent event) {
-//                getView().findViewById(R.id.childScroll).getParent().requestDisallowInterceptTouchEvent(false);
-//                return false;
-//            }
-//
-//        });
+        parentScroll.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                getView().findViewById(R.id.childScroll).getParent().requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+
+        });
         childScroll.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {

@@ -28,7 +28,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
         super.onPushReceive(context, intent);
 
         if (isAppForground(context)) {
-            // App is in Foreground
+            // App is in Foreground, so get the data from the json and refresh app
 
             try {
                 JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data")); // on receiving a parse push, get the json data out of it
@@ -44,7 +44,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
             }
 
         } else {
-            // App is in Background
+            // App is in Background, so no need to refresh app
 
             try {
                 JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
@@ -58,9 +58,6 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
             }
 
         }
-
-//        if (intent == null)
-//            return;
     }
 
     @Override
@@ -89,13 +86,14 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
             new_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             Log.i("aaki", "got to parsing");
-            context.startActivity(new_intent);
+            context.startActivity(new_intent); //start main activity from here to refresh app
 
         } catch (JSONException e) {
             Log.e("aaki", "Push message json exception: " + e.getMessage());
         }
     }
 
+    //Method to check if app is in forground or not, ie if app is open or not
     public boolean isAppForground(Context mContext) {
 
         ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);

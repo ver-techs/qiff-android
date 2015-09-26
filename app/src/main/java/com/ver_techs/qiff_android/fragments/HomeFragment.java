@@ -156,7 +156,7 @@ public class HomeFragment extends Fragment{
                     for (int i = chatItemList.size() - 1; i >= 0; i--) {
 
                         TableRow tr_1 = new TableRow(getActivity());
-                        tr_1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        tr_1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
                         TextView fan_name = new TextView(getActivity());
                         fan_name.setText(chatItemList.get(i).getUserName());
@@ -175,11 +175,13 @@ public class HomeFragment extends Fragment{
                         TextView message = new TextView(getActivity());
                         message.setText(chatItemList.get(i).getChatMessage());
                         message.setTextSize(16);
+                        //message.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT));
+                        //message.setWidth(300);
                         message.setTypeface(custom_font);
                         message.setTextColor(getResources().getColor(R.color.color_secondary));
                         tr_1.addView(message);// add the column to the table row here
 
-                        tl.addView(tr_1, new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        tl.addView(tr_1, new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
                     }
 
@@ -240,7 +242,6 @@ public class HomeFragment extends Fragment{
                         editor.putString("UserName", userName);
                         editor.commit();
                         dialog.cancel(); //cancel dialog after clicking OK
-
                     }
                 });
 

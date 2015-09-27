@@ -20,8 +20,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.parse.ConfigCallback;
 import com.parse.FindCallback;
+import com.parse.Parse;
+import com.parse.ParseConfig;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
@@ -89,6 +93,16 @@ public class HomeFragment extends Fragment{
                 return false;
             }
 
+        });
+
+        //Code to populate Live Score and commentary
+
+        ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
+            @Override
+            public void done(ParseConfig config, ParseException e) {
+                String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
+                Log.d("aaki", currentOrLastMatchId);
+            }
         });
 
         //Code to check if user has focused on message edittext, if so, if there is no username yet, get from user

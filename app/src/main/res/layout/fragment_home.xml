@@ -1,6 +1,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/color_tertiary"
     android:layout_height="match_parent"
     android:id="@+id/parentScroll">
 
@@ -148,7 +149,7 @@
             android:layout_marginLeft="14dp"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:maxHeight="150dp"
             android:layout_weight="3"
             card_view:cardElevation="5sp"
@@ -173,13 +174,20 @@
                 </TextView>
 
                 <ScrollView
+                    android:id="@+id/childScroll1"
                     android:layout_width="match_parent"
                     android:layout_below="@id/live_commentary"
-                    android:layout_height="wrap_content">
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="100dp">
 
                     <TableLayout
+                        android:id="@+id/live_commentary_table"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent"
+                        android:shrinkColumns="2">
+
                     </TableLayout>
 
                 </ScrollView>
@@ -220,7 +228,7 @@
                 </TextView>
 
                 <ScrollView
-                    android:id="@+id/childScroll"
+                    android:id="@+id/childScroll2"
                     android:layout_width="match_parent"
                     android:layout_below="@id/fan_zone"
                     android:layout_marginLeft="7dp"
@@ -242,7 +250,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/childScroll">
+                    android:layout_below="@id/childScroll2">
 
                     <EditText
                         android:textSize="16dp"

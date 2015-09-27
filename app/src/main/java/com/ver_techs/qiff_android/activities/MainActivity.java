@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
 
 import com.parse.ParseObject;
+import com.ver_techs.qiff_android.object_classes.LiveCommentaryItem;
 import com.ver_techs.qiff_android.object_classes.PointsTableItem;
 import com.ver_techs.qiff_android.R;
 import com.ver_techs.qiff_android.custom_views.SlidingTabLayout;
@@ -37,6 +38,7 @@ public class MainActivity extends ActionBarActivity {
         ParseObject.registerSubclass(ChatItem.class);
         ParseObject.registerSubclass(FixtureItem.class);
         ParseObject.registerSubclass(PointsTableItem.class);
+        ParseObject.registerSubclass(LiveCommentaryItem.class);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) { //check if mainactivity is being created normally or from broadcast reciever

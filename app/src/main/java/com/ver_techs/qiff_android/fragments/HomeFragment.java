@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.parse.ConfigCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseConfig;
 import com.parse.ParseException;
@@ -30,7 +31,10 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
 import com.ver_techs.qiff_android.R;
+import com.ver_techs.qiff_android.object_classes.LiveCommentaryItem;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 // Fragment that inflates the home screen
@@ -72,20 +76,22 @@ public class HomeFragment extends Fragment{
 
         message_box.setHintTextColor(getResources().getColor(R.color.color_secondary));
 
-        //ensuring parent and child scroll views work fine on touch
+        //ensuring parent and child scrolls views work fine on touch
 
-        ScrollView parentScroll=(ScrollView) v.findViewById(R.id.parentScroll);
-        ScrollView childScroll=(ScrollView) v.findViewById(R.id.childScroll);
+        ScrollView parentScroll = (ScrollView) v.findViewById(R.id.parentScroll);
+        ScrollView childScroll1 = (ScrollView) v.findViewById(R.id.childScroll1);
+        ScrollView childScroll2 = (ScrollView) v.findViewById(R.id.childScroll2);
 
         parentScroll.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
-                getView().findViewById(R.id.childScroll).getParent().requestDisallowInterceptTouchEvent(false);
+                getView().findViewById(R.id.childScroll1).getParent().requestDisallowInterceptTouchEvent(false);
+                getView().findViewById(R.id.childScroll2).getParent().requestDisallowInterceptTouchEvent(false);
                 return false;
             }
 
         });
-        childScroll.setOnTouchListener(new View.OnTouchListener() {
+        childScroll1.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
                 // Disallow the touch request for parent scroll on touch of child view
@@ -94,15 +100,14 @@ public class HomeFragment extends Fragment{
             }
 
         });
+        childScroll2.setOnTouchListener(new View.OnTouchListener() {
 
-        //Code to populate Live Score and commentary
-
-        ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
-            @Override
-            public void done(ParseConfig config, ParseException e) {
-                String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
-                Log.d("aaki", currentOrLastMatchId);
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
             }
+
         });
 
         //Code to check if user has focused on message edittext, if so, if there is no username yet, get from user
@@ -143,8 +148,113 @@ public class HomeFragment extends Fragment{
 
         //update fan zone contents
         updateFanZoneWithParseChats();
+        //update live commentary content
+        updateLiveCommentary();
+        //update live score
+        updateLiveScore();
 
         return v;
+    }
+
+    protected void updateLiveScore() {
+        //populating live score
+
+        ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
+            @Override
+            public void done(ParseConfig config, ParseException e) { //parse query successful
+                String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
+                Log.d("aaki", currentOrLastMatchId);
+
+                final TextView name_team1 = (TextView) v.findViewById(R.id.name_team1);
+                final TextView name_team2 = (TextView) v.findViewById(R.id.name_team2);
+                final TextView time = (TextView) v.findViewById(R.id.time);
+                final TextView score_team1 = (TextView) v.findViewById(R.id.score_team1);
+                final TextView score_team2 = (TextView) v.findViewById(R.id.score_team2);
+
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("FixtureItem");
+                query.getInBackground(currentOrLastMatchId, new GetCallback<ParseObject>() { //get fixture item with id same as config value
+                    public void done(ParseObject liveMatchItem, ParseException e) {
+                        if (e == null) {
+                            Log.i("aaki", liveMatchItem.getString("teamName1"));
+                            name_team1.setText(liveMatchItem.getString("teamName1"));  //set team names
+                            name_team2.setText(liveMatchItem.getString("teamName2"));
+
+                            if(liveMatchItem.getString("dateTime").contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
+                                time.setText(elapsedMinutes(liveMatchItem.getString("dateTime").replace("Start", ""))); //remove substring start
+                            }
+                            else if (liveMatchItem.getString("dateTime").contains("Second")) {
+                                time.setText(elapsedMinutes(liveMatchItem.getString("dateTime").replace("Second", ""))+ " (2)"); //remove subtsring second
+                            }
+                            else
+                                time.setText(liveMatchItem.getString("dateTime"));
+
+                            score_team1.setText(liveMatchItem.getString("scoreTeam1")); //set scores
+                            score_team2.setText(liveMatchItem.getString("scoreTeam2"));
+                        } else {
+                            Log.i("aaki", "unsuccessful fetch of fixture item for live score update");
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
+    protected void updateLiveCommentary(){
+        // Populating Live Commentary zone with chat messages from Parse
+
+        final TableLayout tl = (TableLayout) v.findViewById(R.id.live_commentary_table);
+
+        tl.removeAllViews(); //refresh the fan zone, remove all existing rows from existing tablelayout
+
+        // Parse query to get all live commentary from server
+
+        // Define the class we would like to query
+        ParseQuery<LiveCommentaryItem> query = ParseQuery.getQuery(LiveCommentaryItem.class);
+        // Execute the find asynchronously
+            query.addAscendingOrder("createdAt"); //order query results
+        query.findInBackground(new FindCallback<LiveCommentaryItem>() {
+
+            public void done(List<LiveCommentaryItem> liveCommentaryItemList, ParseException e) {
+
+                if (e == null) {
+
+                    // Access the array of results here
+                    for (int i = liveCommentaryItemList.size() - 1; i >= 0; i--) {
+
+                        TableRow tr_1 = new TableRow(getActivity());
+                        tr_1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+                        TextView minute = new TextView(getActivity());
+                        minute.setText(liveCommentaryItemList.get(i).getMinute());
+                        minute.setTextSize(16);
+                        minute.setTypeface(custom_font, Typeface.BOLD);
+                        minute.setTextColor(getResources().getColor(R.color.color_secondary));
+                        tr_1.addView(minute);// add the column to the table row here
+
+                        TextView colon = new TextView(getActivity());
+                        colon.setText(" :   ");
+                        colon.setTextSize(16);
+                        colon.setTypeface(custom_font);
+                        colon.setTextColor(getResources().getColor(R.color.color_secondary));
+                        tr_1.addView(colon);// add the column to the table row here
+
+                        TextView commentary = new TextView(getActivity());
+                        commentary.setText(liveCommentaryItemList.get(i).getCommentary());
+                        commentary.setTextSize(16);
+                        commentary.setTypeface(custom_font);
+                        commentary.setTextColor(getResources().getColor(R.color.color_secondary));
+                        tr_1.addView(commentary);// add the column to the table row here
+
+                        tl.addView(tr_1, new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+                    }
+
+                } else {
+                    Log.d("item", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 
     protected void updateFanZoneWithParseChats(){
@@ -189,8 +299,6 @@ public class HomeFragment extends Fragment{
                         TextView message = new TextView(getActivity());
                         message.setText(chatItemList.get(i).getChatMessage());
                         message.setTextSize(16);
-                        //message.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT));
-                        //message.setWidth(300);
                         message.setTypeface(custom_font);
                         message.setTextColor(getResources().getColor(R.color.color_secondary));
                         tr_1.addView(message);// add the column to the table row here
@@ -251,7 +359,7 @@ public class HomeFragment extends Fragment{
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        userName  = userName_editText.getText().toString();
+                        userName = userName_editText.getText().toString();
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("UserName", userName);
                         editor.commit();
@@ -263,6 +371,21 @@ public class HomeFragment extends Fragment{
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
 
+    }
+
+    public String elapsedMinutes(String matchStartTime){ //function to calcultae minutes elapsed since game start for ongoing games
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm"); //using time format hh:mm
+        Date timeNow = new Date(); //get current time
+        int minutes=0; //no of minutes between current time and matchStartTime
+        try {
+            minutes = (int)
+                    ((simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getTime() -                //parse and get current time
+                            simpleDateFormat.parse(matchStartTime.replace("Start", "")).getTime()         //parse and get matchStartTime
+                    )*0.00001667);                                                                        //find the difference between the two in milliseconds, convert to minutes
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return String.valueOf(minutes) + "\"";  //return the elapsed minutes wid double qoute at the end
     }
 
 }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -163,19 +164,22 @@ public class HomeFragment extends Fragment{
             @Override
             public void done(ParseConfig config, ParseException e) { //parse query successful
                 String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
-                Log.d("aaki", currentOrLastMatchId);
+                //Log.d("aaki", currentOrLastMatchId);
 
                 final TextView name_team1 = (TextView) v.findViewById(R.id.name_team1);
                 final TextView name_team2 = (TextView) v.findViewById(R.id.name_team2);
                 final TextView time = (TextView) v.findViewById(R.id.time);
                 final TextView score_team1 = (TextView) v.findViewById(R.id.score_team1);
+                final TextView colon = (TextView) v.findViewById(R.id.colon);
                 final TextView score_team2 = (TextView) v.findViewById(R.id.score_team2);
+                final ImageView team1_logo = (ImageView) v.findViewById(R.id.image_team1);
+                final ImageView team2_logo = (ImageView) v.findViewById(R.id.image_team2);
 
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("FixtureItem");
                 query.getInBackground(currentOrLastMatchId, new GetCallback<ParseObject>() { //get fixture item with id same as config value
                     public void done(ParseObject liveMatchItem, ParseException e) {
                         if (e == null) {
-                            Log.i("aaki", liveMatchItem.getString("teamName1"));
+
                             name_team1.setText(liveMatchItem.getString("teamName1"));  //set team names
                             name_team2.setText(liveMatchItem.getString("teamName2"));
 
@@ -189,10 +193,16 @@ public class HomeFragment extends Fragment{
                                 time.setText(liveMatchItem.getString("dateTime"));
 
                             score_team1.setText(liveMatchItem.getString("scoreTeam1")); //set scores
+                            colon.setText(":");
                             score_team2.setText(liveMatchItem.getString("scoreTeam2"));
+
+                            team1_logo.setImageResource(findTeamLogo(liveMatchItem.getString("teamName1")));
+                            team2_logo.setImageResource(findTeamLogo(liveMatchItem.getString("teamName2")));
+
                         } else {
                             Log.i("aaki", "unsuccessful fetch of fixture item for live score update");
                         }
+
                     }
                 });
             }
@@ -386,6 +396,31 @@ public class HomeFragment extends Fragment{
             e.printStackTrace();
         }
         return String.valueOf(minutes) + "\"";  //return the elapsed minutes wid double qoute at the end
+    }
+
+    public int findTeamLogo(String teamName){
+        // code to find corresponding image of respective teams
+
+        int resource_id = 0;
+        switch (teamName){
+            case "NADHAM TCR" : resource_id = R.drawable.team_1; break;
+            case "KMCC MLP" : resource_id = R.drawable.team_2; break;
+            case "KMCC KKD" : resource_id = R.drawable.team_3; break;
+            case "KMCC PKD" : resource_id = R.drawable.team_4; break;
+            case "SKIA TVM" : resource_id = R.drawable.team_5; break;
+            case "KMCC WND" : resource_id = R.drawable.team_6; break;
+            case "CFQ PTNMTA" : resource_id = R.drawable.team_1; break;
+            case "MAK KKD" : resource_id = R.drawable.team_2; break;
+            case "EDSO EKM" : resource_id = R.drawable.team_3; break;
+            case "MAMWAQ MLP" : resource_id = R.drawable.team_4; break;
+            case "KMCC KNR" : resource_id = R.drawable.team_5; break;
+            case "CFQ KKD" : resource_id =  R.drawable.team_6; break;
+            case "TYC TCR" : resource_id = R.drawable.team_1; break;
+            case "KMCC TCR" : resource_id = R.drawable.team_2; break;
+            case "KMCC KSGD" : resource_id = R.drawable.team_3; break;
+            case "KPAQ KKD" : resource_id = R.drawable.team_4; break;
+        }
+        return resource_id;
     }
 
 }

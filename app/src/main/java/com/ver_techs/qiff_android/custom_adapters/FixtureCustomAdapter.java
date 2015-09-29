@@ -89,6 +89,17 @@ public class FixtureCustomAdapter extends BaseAdapter {
             time.setText(fixtureItemLocal.getTimeDate());
         time.setTypeface(custom_font);
 
+        //code to assign background color to fixture list items and make other widgets visible
+        if(fixtureItemLocal.getTimeDate().matches("FT")) //if match is over
+            view.setBackgroundColor(context.getResources().getColor(R.color.color_tertiary));
+        else if(fixtureItemLocal.getTimeDate().charAt(0) == 'S') { //if match is ongoing
+            view.setBackgroundColor(context.getResources().getColor(R.color.color_main));
+            colon_fixture.setTextColor(context.getResources().getColor(R.color.color_secondary)); //make colon visible
+            teamName1.setTextColor(context.getResources().getColor(R.color.color_secondary));
+            teamName2.setTextColor(context.getResources().getColor(R.color.color_secondary));
+            teamName1.setTypeface(custom_font, Typeface.BOLD);
+            teamName2.setTypeface(custom_font, Typeface.BOLD);
+        }
         ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1_fixture);
         team1_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName1()));
 

@@ -239,7 +239,7 @@ public class HomeFragment extends Fragment{
                         minute.setText(liveCommentaryItemList.get(i).getMinute());
                         minute.setTextSize(16);
                         minute.setTypeface(custom_font, Typeface.BOLD);
-                        minute.setTextColor(getResources().getColor(R.color.color_secondary));
+                        minute.setTextColor(getResources().getColor(R.color.color_main));
                         tr_1.addView(minute);// add the column to the table row here
 
                         TextView colon = new TextView(getActivity());
@@ -296,7 +296,7 @@ public class HomeFragment extends Fragment{
                         fan_name.setText(chatItemList.get(i).getUserName());
                         fan_name.setTextSize(16);
                         fan_name.setTypeface(custom_font, Typeface.BOLD);
-                        fan_name.setTextColor(getResources().getColor(R.color.color_secondary));
+                        fan_name.setTextColor(getResources().getColor(R.color.color_main));
                         tr_1.addView(fan_name);// add the column to the table row here
 
                         TextView colon = new TextView(getActivity());

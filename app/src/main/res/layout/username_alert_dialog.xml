@@ -19,6 +19,7 @@
         android:textSize="16dp"
         android:layout_height="wrap_content"
         android:hint="Enter username (max 7 characters)"
+        android:textCursorDrawable="@null"
         android:padding="10dp" />
 
 </LinearLayout>

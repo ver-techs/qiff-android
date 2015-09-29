@@ -250,6 +250,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:hint="Enter a fan message !"
+                        android:textCursorDrawable="@null"
                         android:textColor="@color/color_primary"/>
 
                     <Button

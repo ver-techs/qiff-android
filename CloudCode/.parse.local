@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "QIFF": {
+      "applicationId": "2WLxFTr9dd04QQf8zClDnwgqvGeKPhmm9f03iaBB"
+    },
+    "_default": {
+      "link": "QIFF"
+    }
+  }
+}

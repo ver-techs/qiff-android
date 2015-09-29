@@ -5,6 +5,12 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ver_techs.qiff_android.R;
@@ -21,6 +27,8 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        StartAnimations();
 
         //Football Facts
         String[] facts = new String[]{"Football is the most played and most watched sport on earth !",
@@ -60,6 +68,16 @@ public class SplashScreen extends Activity {
                 finish();
             }
         }, SPLASH_TIME_OUT);
+    }
+
+    private void StartAnimations() {
+
+        Animation anim = AnimationUtils .loadAnimation(this, R.anim.alpha);
+        anim.reset();
+        RelativeLayout l = (RelativeLayout) findViewById(R.id.relative_layout_splash);
+        l.clearAnimation();
+        l.startAnimation(anim);
+
     }
 
 }

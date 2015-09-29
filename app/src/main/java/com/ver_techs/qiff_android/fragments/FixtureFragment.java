@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.parse.ConfigCallback;
 import com.parse.FindCallback;
+import com.parse.ParseConfig;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.ver_techs.qiff_android.custom_adapters.FixtureCustomAdapter;
@@ -32,6 +34,7 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private SwipeRefreshLayout swipeRefreshLayout;
     ListView fixtureList;
     FixtureCustomAdapter fixtureListAdapter;
+    int currentMatch;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -49,36 +52,48 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         setRetainInstance(true); //configure the fragment instance to be retained on configuration change
 
-        // Define the class we would like to query
-        ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
+            @Override
+            public void done(ParseConfig config, ParseException e) { //parse query successful
+                final String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
+                Log.d("aaki", currentOrLastMatchId);
 
-        // Execute the find asynchronously
-        query.findInBackground(new FindCallback<FixtureItem>() {
+                // Define the class we would like to query
+                ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
+                query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
-            public void done(List<FixtureItem> fixtureItemList, ParseException e) {
+                // Execute the find asynchronously
+                query.findInBackground(new FindCallback<FixtureItem>() {
 
-                if (e == null) {
+                    public void done(List<FixtureItem> fixtureItemList, ParseException e) {
 
-                    // Access the array of results here
-                    for (int i = 0; i < fixtureItemList.size(); i++) {
-                        FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
-                                fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
-                        fixtureItemArrayList.add(fixtureItemLocal);
+                        if (e == null) {
+
+                            // Access the array of results here
+                            for (int i = 0; i < fixtureItemList.size(); i++) {
+                                FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
+                                        fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
+                                fixtureItemArrayList.add(fixtureItemLocal);
+                                if(fixtureItemList.get(i).getObjectId().equals(currentOrLastMatchId))
+                                    currentMatch=i;
+                            }
+                            //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
+                            Log.i("aaki", String.valueOf(currentMatch));
+
+                            nDialog.cancel();
+                            fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
+                            fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
+                            fixtureList.setSelection(currentMatch);
+
+                        } else {
+                            Log.d("item", "Error: " + e.getMessage());
+                        }
                     }
-                    //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
+                });
 
-                    nDialog.cancel();
-                    fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
-                    fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
-
-                } else {
-                    Log.d("item", "Error: " + e.getMessage());
-                }
             }
-        });
 
-        //swipeRefreshLayout.setOnRefreshListener(this);
+        });
 
         return v;
     }

@@ -1,9 +1,22 @@
+Parse.Cloud.afterSave("ChatItem", function(request) {
+  sendRefreshNotification();
+});
 Parse.Cloud.afterSave("FixtureItem", function(request) {
+  sendRefreshNotification();
+});
+Parse.Cloud.afterSave("LiveCommentaryItem", function(request) {
+  sendRefreshNotification();
+});
+Parse.Cloud.afterSave("PointsTableItem", function(request) {
+  sendRefreshNotification();
+});
+
+function sendRefreshNotification ( ) {
   var pushQuery = new Parse.Query(Parse.Installation);
   Parse.Push.send({
       where: pushQuery,
       data: {
-          alert: "Someone just updated the fixture!"
+          alert: "Thou shall refresh!"
       }
   }, {
       success: function() {
@@ -13,4 +26,4 @@ Parse.Cloud.afterSave("FixtureItem", function(request) {
           throw "Got an error " + error.code + " : " + error.message;
       }
   });
-});
+}

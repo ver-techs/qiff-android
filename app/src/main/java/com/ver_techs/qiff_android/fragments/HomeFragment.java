@@ -370,6 +370,8 @@ public class HomeFragment extends Fragment{
                     public void onClick(DialogInterface dialog, int id) {
 
                         userName = userName_editText.getText().toString();
+                        if (userName.length() > 7) //if username is longer than seven characters, take only the first 7 characters
+                            userName=userName.substring(0,6);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("UserName", userName);
                         editor.commit();

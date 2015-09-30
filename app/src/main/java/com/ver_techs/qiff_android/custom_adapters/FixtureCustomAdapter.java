@@ -41,6 +41,16 @@ public class FixtureCustomAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+        return getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public long getItemId(int i) {
         return i; // index number
     }

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
 
+import com.facebook.appevents.AppEventsLogger;
 import com.parse.ParseObject;
 import com.ver_techs.qiff_android.object_classes.LiveCommentaryItem;
 import com.ver_techs.qiff_android.object_classes.PointsTableItem;
@@ -73,6 +74,22 @@ public class MainActivity extends ActionBarActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
     }
 
 }

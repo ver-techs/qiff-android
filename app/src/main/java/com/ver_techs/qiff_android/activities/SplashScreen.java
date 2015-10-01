@@ -96,5 +96,5 @@ public class SplashScreen extends Activity {
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
     }
-    
+
 }

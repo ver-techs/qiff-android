@@ -16,7 +16,7 @@ function sendRefreshNotification ( ) {
   Parse.Push.send({
       where: pushQuery,
       data: {
-          alert: "Thou shall refresh!"
+           "data": { "message": "hello", "title": "hai" }
       }
   }, {
       success: function() {

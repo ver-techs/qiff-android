@@ -347,8 +347,6 @@ public class HomeFragment extends Fragment{
 
         message_editText.setText(""); //clear the message box
 
-        updateFanZoneWithParseChats(); //update fan zone to reflect new chat
-
     }
 
     protected void showInputDialog() {

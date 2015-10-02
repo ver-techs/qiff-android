@@ -78,7 +78,7 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
                                     currentMatch=i;
                             }
                             //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
-                            Log.i("aaki", String.valueOf(currentMatch));
+                            //Log.i("aaki", String.valueOf(currentMatch));
 
                             nDialog.cancel();
                             fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view

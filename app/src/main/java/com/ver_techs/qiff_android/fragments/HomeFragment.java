@@ -331,8 +331,8 @@ public class HomeFragment extends Fragment{
         message = message_editText.getText().toString(); //get message from text box
         ChatItem chatItem = new ChatItem(userName, message); //create a new chatitem
 
-        Log.i("***username***", chatItem.getUserName());
-        Log.i("***message***", chatItem.getChatMessage());
+        //Log.i("***username***", chatItem.getUserName());
+        //Log.i("***message***", chatItem.getChatMessage());
 
         // Save the data to Parse whenever internet is available
         chatItem.saveInBackground(new SaveCallback() {

@@ -47,6 +47,8 @@ public class FacebookLoginActivity extends FragmentActivity {
             public void onCancel() {
                 // App code
                 Log.i("aaki", "fb login cancel");
+                Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
+                startActivity(i);
             }
 
             @Override

@@ -89,6 +89,15 @@ public class FixtureCustomAdapter extends BaseAdapter {
         scoreTeam2.setTypeface(custom_font);
 
         TextView time = (TextView) view.findViewById(R.id.time_fixture);
+
+        if(checkIfMatchDateIsToday(fixtureItemLocal.getTimeDate())){ //check if match is scheduled for today
+            int check = matchStartsIn60Minutes(fixtureItemLocal.getTimeDate()); //check if match starts in 60 minutes
+            if(check != -1)  //if yes, print countdown
+                time.setText("Counting down " + String.valueOf(check) + "\" !");
+            else //if not, say it is an upcoming match
+                time.setText("Upcoming Match !");
+        }
+        else
         if(fixtureItemLocal.getTimeDate().contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
             time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", ""))); //remove substring start
         }
@@ -158,4 +167,43 @@ public class FixtureCustomAdapter extends BaseAdapter {
         }
         return String.valueOf(minutes) + "\"";  //return the elapsed minutes wid double qoute at the end
     }
+
+    public boolean checkIfMatchDateIsToday(String matchDate){ //function to check if a match is scheduled for today
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
+        Boolean result = false;
+        Date timeNow = new Date(); //get current date
+        int dateDifference, monthDifference;
+        try { //get difference between match date and current date
+            dateDifference = simpleDateFormat.parse(matchDate).getDate() - //parse the matchDate, get date
+                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getDate(); //parse the current date, get date
+            monthDifference = simpleDateFormat.parse(matchDate).getMonth() - //parse the matchDate, get month
+                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getMonth(); //parse the current date, get month
+            if(dateDifference == 0 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
+                result=true;
+            else
+                result=false;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int matchStartsIn60Minutes(String matchDate){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
+        int result = -1;
+        Date timeNow = new Date(); //get current date
+        int minuteDifference = -1;
+        try { //get difference between match date and current date
+            minuteDifference =(int) ((simpleDateFormat.parse(matchDate).getTime() - //parse the matchDate, get time in milliseconds
+                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getTime())*0.00001667); //parse the current date, get time in milliseconds
+            if(minuteDifference <= 60) //after converting to minutes, check if minute difference is less than 60
+                result = minuteDifference; //if so return the countdown
+            else
+                result = -1; //if not, return false
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

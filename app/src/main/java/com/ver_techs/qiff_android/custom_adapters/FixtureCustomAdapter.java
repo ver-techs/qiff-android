@@ -16,13 +16,19 @@ import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+
+import android.os.Handler;
 
 // Adapter for Fixture tab
 public class FixtureCustomAdapter extends BaseAdapter {
 
     private Context context;
     ArrayList<FixtureItemLocal> fixtureItemArrayList; //Local variable list that stores all fixture items
+    TextView time; //texview for dateTime in fixture
+    Handler h; //handler to update dateTime field in fiture every minute
+    int delay = 1000; //milliseconds to update dateTime field
 
     public FixtureCustomAdapter(Context context, ArrayList<FixtureItemLocal> fixtureItemArray) {
         this.context = context;
@@ -88,24 +94,24 @@ public class FixtureCustomAdapter extends BaseAdapter {
         scoreTeam2.setText(fixtureItemLocal.getScoreTeam2());
         scoreTeam2.setTypeface(custom_font);
 
-        TextView time = (TextView) view.findViewById(R.id.time_fixture);
+        time = (TextView) view.findViewById(R.id.time_fixture);
 
-        if(checkIfMatchDateIsToday(fixtureItemLocal.getTimeDate())){ //check if match is scheduled for today
-            int check = matchStartsIn60Minutes(fixtureItemLocal.getTimeDate()); //check if match starts in 60 minutes
-            if(check != -1)  //if yes, print countdown
-                time.setText("Counting down " + String.valueOf(check) + "\" !");
-            else //if not, say it is an upcoming match
-                time.setText("Upcoming Match !");
-        }
-        else
-        if(fixtureItemLocal.getTimeDate().contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
-            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", ""))); //remove substring start
-        }
-        else if (fixtureItemLocal.getTimeDate().contains("Second")) {
-            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Second", ""))+ " (2)"); //remove subtsring second
-        }
-        else
-            time.setText(fixtureItemLocal.getTimeDate());
+//        if(checkIfMatchDateIsToday(fixtureItemLocal.getTimeDate())){ //check if match is scheduled for today
+//            int check = matchStartsIn60Minutes(fixtureItemLocal.getTimeDate()); //check if match starts in 60 minutes
+//            if(check != -1)  //if yes, print countdown
+//                time.setText("Counting down " + String.valueOf(check) + "\" !");
+//            else //if not, say it is an upcoming match
+//                time.setText("Upcoming Match !");
+//        }
+//        else
+//        if(fixtureItemLocal.getTimeDate().contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
+//            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", ""))); //remove substring start
+//        }
+//        else if (fixtureItemLocal.getTimeDate().contains("Second")) {
+//            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Second", ""))+ " (2)"); //remove subtsring second
+//        }
+//        else
+//            time.setText(fixtureItemLocal.getTimeDate());
         time.setTypeface(custom_font);
 
         //code to assign background color to fixture list items and make other widgets visible

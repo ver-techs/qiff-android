@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.facebook.appevents.AppEventsLogger;
 import com.ver_techs.qiff_android.R;
 
@@ -61,14 +62,26 @@ public class SplashScreen extends Activity {
 
             @Override
             public void run() {
-                // Executed once the timer is over, start main activity
-                Intent i = new Intent(SplashScreen.this, FacebookLoginActivity.class);
-                startActivity(i);
-
+                if(isLoggedIn()) {
+                    // Executed once the timer is over, start main activity
+                    Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                    startActivity(i);
+                }
+                else
+                {
+                    // Executed once the timer is over, start fb login activity
+                    Intent i = new Intent(SplashScreen.this, FacebookLoginActivity.class);
+                    startActivity(i);
+                }
                 // Close this activity
                 finish();
             }
         }, SPLASH_TIME_OUT);
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 
     private void StartAnimations() {

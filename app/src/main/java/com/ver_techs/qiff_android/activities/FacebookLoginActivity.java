@@ -6,8 +6,10 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -26,10 +28,25 @@ public class FacebookLoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fb_login);
 
+        if(isLoggedIn()){
+            Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
+            startActivity(i);
+        }
+
+
         loginButton = (LoginButton) findViewById(R.id.login_button);
         continueAsGuest = (TextView) findViewById(R.id.continueAsGuest);
 
         continueAsGuest.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG); //underline continue as guest text
+
+        continueAsGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         callbackManager = CallbackManager.Factory.create(); //create facebook callbackmanager
 
@@ -57,6 +74,11 @@ public class FacebookLoginActivity extends FragmentActivity {
                 Log.i("aaki", "fb login error");
             }
         });
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 
     @Override

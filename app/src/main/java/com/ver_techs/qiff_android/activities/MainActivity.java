@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.appevents.AppEventsLogger;
 import com.parse.ParseObject;
 import com.ver_techs.qiff_android.object_classes.LiveCommentaryItem;
@@ -96,12 +97,19 @@ public class MainActivity extends ActionBarActivity {
         AppEventsLogger.deactivateApp(this);
     }
 
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
+    }
+
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        if(isLoggedIn()) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 
 }

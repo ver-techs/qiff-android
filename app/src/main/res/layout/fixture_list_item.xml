@@ -58,7 +58,7 @@
 
         <TableRow android:layout_width="match_parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/image_team1_fixture"
                 android:layout_column="0"
                 android:gravity="center"
@@ -66,10 +66,7 @@
                 android:layout_width="0dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_height="40dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:border_width="1dp"
-                app:border_color="@color/color_primary"/>
+                android:layout_height="40dp" />
 
             <TextView
                 android:id="@+id/score_team1_fixture"
@@ -110,7 +107,7 @@
                 android:layout_marginTop="10dp">
             </TextView>
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/image_team2_fixture"
                 android:layout_column="4"
                 android:layout_weight="2"
@@ -118,10 +115,7 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_height="40dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:border_width="1dp"
-                app:border_color="@color/color_primary"/>
+                android:layout_height="40dp" />
 
         </TableRow>
 

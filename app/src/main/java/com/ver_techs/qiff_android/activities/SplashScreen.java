@@ -62,17 +62,17 @@ public class SplashScreen extends Activity {
 
             @Override
             public void run() {
-                if(isLoggedIn()) {
+//                if(isLoggedIn()) {
                     // Executed once the timer is over, start main activity
                     Intent i = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(i);
-                }
-                else
-                {
-                    // Executed once the timer is over, start fb login activity
-                    Intent i = new Intent(SplashScreen.this, FacebookLoginActivity.class);
-                    startActivity(i);
-                }
+//                }
+//                else
+//                {
+//                    // Executed once the timer is over, start fb login activity
+//                    Intent i = new Intent(SplashScreen.this, FacebookLoginActivity.class);
+//                    startActivity(i);
+//                }
                 // Close this activity
                 finish();
             }

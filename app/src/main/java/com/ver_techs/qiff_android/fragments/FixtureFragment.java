@@ -65,295 +65,120 @@ public class FixtureFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
                 if (position == 1) {
-
-                    Log.i("aaki", "1");
-
-                    fixtureList = (ListView) v.findViewById(R.id.list_fixture); //find the listview to load fixture items
-                    fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
-                    swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_refresh_layout);
-
-                    setRetainInstance(true); //configure the fragment instance to be retained on configuration change
-
-                    ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
-                        @Override
-                        public void done(ParseConfig config, ParseException e) { //parse query successful
-                            final String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
-                            Log.d("aaki", currentOrLastMatchId);
-
-                            // Define the class we would like to query
-                            ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
-                            query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-
-                            query.addAscendingOrder("createdAt"); //get results in ascending order of creation
-                            // Execute the find asynchronously
-                            query.findInBackground(new FindCallback<FixtureItem>() {
-
-                                public void done(List<FixtureItem> fixtureItemList, ParseException e) {
-
-                                    if (e == null) {
-
-                                        // Access the array of results here
-                                        for (int i = 0; i < fixtureItemList.size(); i++) {
-
-                                            isSeparator = false; //initialize the boolean variable to false
-
-                                            // If it is the first item then we need a separator header
-                                            if (i == 0) {
-                                                isSeparator = true;
-                                                dateTime = fixtureItemList.get(i).getTimeDate();
-                                            } else {
-                                                // Move to previous
-                                                String previousFixtureItemDate = fixtureItemList.get(i - 1).getTimeDate();
-                                                String currentFixtureItemDate = fixtureItemList.get(i).getTimeDate();
-
-                                                // Compare the dates for non-equality - ie compare first 6 characters of date
-                                                if (previousFixtureItemDate.equals("FT") && currentFixtureItemDate.equals("FT"))
-                                                    isSeparator = false;
-                                                else if (previousFixtureItemDate.equals("FT") && !currentFixtureItemDate.equals("FT"))
-                                                    isSeparator = true;
-                                                else if (previousFixtureItemDate.charAt(0) != currentFixtureItemDate.charAt(0) ||
-                                                        previousFixtureItemDate.charAt(1) != currentFixtureItemDate.charAt(1) ||
-                                                        previousFixtureItemDate.charAt(2) != currentFixtureItemDate.charAt(2) ||
-                                                        previousFixtureItemDate.charAt(3) != currentFixtureItemDate.charAt(3) ||
-                                                        previousFixtureItemDate.charAt(4) != currentFixtureItemDate.charAt(4) ||
-                                                        previousFixtureItemDate.charAt(5) != currentFixtureItemDate.charAt(5)) {
-                                                    isSeparator = true;
-                                                }
-
-                                            }
-
-                                /* If we need a separator, create a FixtureItem object and save it's date as the section
-                                 header while passing everything else as null */
-                                            if (isSeparator) {
-                                                String headerText;
-                                                if (i == 0)
-                                                    headerText = "FT";
-                                                else
-                                                    headerText = fixtureItemList.get(i).getTimeDate().substring(0, 6);
-                                                FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, true);
-                                                fixtureItemArrayList.add(fixtureItemLocal);
-                                            }
-
-                                            FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
-                                                    fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate(), false);
-                                            fixtureItemArrayList.add(fixtureItemLocal);
-
-                                            if (fixtureItemList.get(i).getObjectId().equals(currentOrLastMatchId))
-                                                currentMatch = i;
-                                        }
-                                        //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
-                                        //Log.i("aaki", String.valueOf(currentMatch));
-
-                                        nDialog.cancel();
-                                        fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
-                                        fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
-                                        //fixtureList.setSelection(currentMatch);
-
-                                    } else {
-                                        Log.d("item", "Error: " + e.getMessage());
-                                    }
-                                }
-                            });
-
-                        }
-
-                    });
+                    loadFixtureItems(true);
                 }
-                else {
-                    Log.i("aaki", "2");
-
-                    fixtureList = (ListView) v.findViewById(R.id.list_fixture); //find the listview to load fixture items
-                    fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
-                    swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_refresh_layout);
-
-                    setRetainInstance(true); //configure the fragment instance to be retained on configuration change
-
-                    ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
-                        @Override
-                        public void done(ParseConfig config, ParseException e) { //parse query successful
-                            final String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
-                            Log.d("aaki", currentOrLastMatchId);
-
-                            // Define the class we would like to query
-                            ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
-                            query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-
-                            query.addAscendingOrder("createdAt"); //get results in ascending order of creation
-                            // Execute the find asynchronously
-                            query.findInBackground(new FindCallback<FixtureItem>() {
-
-                                public void done(List<FixtureItem> fixtureItemList, ParseException e) {
-
-                                    if (e == null) {
-
-                                        // Access the array of results here
-                                        for (int i = 0; i < fixtureItemList.size(); i++) {
-
-                                            isSeparator = false; //initialize the boolean variable to false
-
-                                            // If it is the first item then we need a separator header
-                                            if (i == 0) {
-                                                isSeparator = true;
-                                                dateTime = fixtureItemList.get(i).getTimeDate();
-                                            } else {
-                                                // Move to previous
-                                                String previousFixtureItemDate = fixtureItemList.get(i - 1).getTimeDate();
-                                                String currentFixtureItemDate = fixtureItemList.get(i).getTimeDate();
-
-                                                // Compare the dates for non-equality - ie compare first 6 characters of date
-                                                if (previousFixtureItemDate.equals("FT") && currentFixtureItemDate.equals("FT"))
-                                                    isSeparator = false;
-                                                else if (previousFixtureItemDate.equals("FT") && !currentFixtureItemDate.equals("FT"))
-                                                    isSeparator = true;
-                                                else if (previousFixtureItemDate.charAt(0) != currentFixtureItemDate.charAt(0) ||
-                                                        previousFixtureItemDate.charAt(1) != currentFixtureItemDate.charAt(1) ||
-                                                        previousFixtureItemDate.charAt(2) != currentFixtureItemDate.charAt(2) ||
-                                                        previousFixtureItemDate.charAt(3) != currentFixtureItemDate.charAt(3) ||
-                                                        previousFixtureItemDate.charAt(4) != currentFixtureItemDate.charAt(4) ||
-                                                        previousFixtureItemDate.charAt(5) != currentFixtureItemDate.charAt(5)) {
-                                                    isSeparator = true;
-                                                }
-
-                                            }
-
-                                    /* If we need a separator, create a FixtureItem object and save it's date as the section
-                                     header while passing everything else as null */
-                                            if (isSeparator) {
-                                                String headerText;
-                                                if (i == 0)
-                                                    headerText = "FT";
-                                                else
-                                                    headerText = fixtureItemList.get(i).getTimeDate().substring(0, 6);
-                                                FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, true);
-                                                fixtureItemArrayList.add(fixtureItemLocal);
-                                            }
-
-                                            FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
-                                                    fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate(), false);
-                                            fixtureItemArrayList.add(fixtureItemLocal);
-
-                                            if (fixtureItemList.get(i).getObjectId().equals(currentOrLastMatchId))
-                                                currentMatch = i;
-                                        }
-                                        //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
-                                        //Log.i("aaki", String.valueOf(currentMatch));
-
-                                        nDialog.cancel();
-                                        fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
-                                        fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
-                                        //fixtureList.setSelection(currentMatch);
-
-                                    } else {
-                                        Log.d("item", "Error: " + e.getMessage());
-                                    }
-                                }
-                            });
-
-                        }
-
-                    });
+                else{
+                    loadFixtureItems(false);
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
-                fixtureList = (ListView) v.findViewById(R.id.list_fixture); //find the listview to load fixture items
-                fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
-                swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_refresh_layout);
-
-                setRetainInstance(true); //configure the fragment instance to be retained on configuration change
-
-                ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
-                    @Override
-                    public void done(ParseConfig config, ParseException e) { //parse query successful
-                        final String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
-                        Log.d("aaki", currentOrLastMatchId);
-
-                        // Define the class we would like to query
-                        ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
-                        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-
-                        query.addAscendingOrder("createdAt"); //get results in ascending order of creation
-                        // Execute the find asynchronously
-                        query.findInBackground(new FindCallback<FixtureItem>() {
-
-                            public void done(List<FixtureItem> fixtureItemList, ParseException e) {
-
-                                if (e == null) {
-
-                                    // Access the array of results here
-                                    for (int i = 0; i < fixtureItemList.size(); i++) {
-
-                                        isSeparator = false; //initialize the boolean variable to false
-
-                                        // If it is the first item then we need a separator header
-                                        if (i == 0) {
-                                            isSeparator = true;
-                                            dateTime = fixtureItemList.get(i).getTimeDate();
-                                        } else {
-                                            // Move to previous
-                                            String previousFixtureItemDate = fixtureItemList.get(i - 1).getTimeDate();
-                                            String currentFixtureItemDate = fixtureItemList.get(i).getTimeDate();
-
-                                            // Compare the dates for non-equality - ie compare first 6 characters of date
-                                            if (previousFixtureItemDate.equals("FT") && currentFixtureItemDate.equals("FT"))
-                                                isSeparator = false;
-                                            else if (previousFixtureItemDate.equals("FT") && !currentFixtureItemDate.equals("FT"))
-                                                isSeparator = true;
-                                            else if (previousFixtureItemDate.charAt(0) != currentFixtureItemDate.charAt(0) ||
-                                                    previousFixtureItemDate.charAt(1) != currentFixtureItemDate.charAt(1) ||
-                                                    previousFixtureItemDate.charAt(2) != currentFixtureItemDate.charAt(2) ||
-                                                    previousFixtureItemDate.charAt(3) != currentFixtureItemDate.charAt(3) ||
-                                                    previousFixtureItemDate.charAt(4) != currentFixtureItemDate.charAt(4) ||
-                                                    previousFixtureItemDate.charAt(5) != currentFixtureItemDate.charAt(5)) {
-                                                isSeparator = true;
-                                            }
-
-                                        }
-
-                                /* If we need a separator, create a FixtureItem object and save it's date as the section
-                                 header while passing everything else as null */
-                                        if (isSeparator) {
-                                            String headerText;
-                                            if (i == 0)
-                                                headerText = "FT";
-                                            else
-                                                headerText = fixtureItemList.get(i).getTimeDate().substring(0, 6);
-                                            FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, true);
-                                            fixtureItemArrayList.add(fixtureItemLocal);
-                                        }
-
-                                        FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
-                                                fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate(), false);
-                                        fixtureItemArrayList.add(fixtureItemLocal);
-
-                                        if (fixtureItemList.get(i).getObjectId().equals(currentOrLastMatchId))
-                                            currentMatch = i;
-                                    }
-                                    //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
-                                    //Log.i("aaki", String.valueOf(currentMatch));
-
-                                    nDialog.cancel();
-                                    fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
-                                    fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
-                                    //fixtureList.setSelection(currentMatch);
-
-                                } else {
-                                    Log.d("item", "Error: " + e.getMessage());
-                                }
-                            }
-                        });
-
-                    }
-
-                });
+                loadFixtureItems(true);
             }
 
         });
 
         return v;
+    }
+
+    public void loadFixtureItems(final boolean upcomingSelected){
+        fixtureList = (ListView) v.findViewById(R.id.list_fixture); //find the listview to load fixture items
+        fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
+        swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_refresh_layout);
+
+        setRetainInstance(true); //configure the fragment instance to be retained on configuration change
+
+        ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
+            @Override
+            public void done(ParseConfig config, ParseException e) { //parse query successful
+                final String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
+                Log.d("aaki", currentOrLastMatchId);
+
+                // Define the class we would like to query
+                ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
+                query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+
+                if(upcomingSelected)
+                    query.whereNotEqualTo("dateTime", "FT");
+                else
+                    query.whereEqualTo("dateTime", "FT");
+                query.addAscendingOrder("createdAt"); //get results in ascending order of creation
+                // Execute the find asynchronously
+                query.findInBackground(new FindCallback<FixtureItem>() {
+
+                    public void done(List<FixtureItem> fixtureItemList, ParseException e) {
+
+                        if (e == null) {
+
+                            // Access the array of results here
+                            for (int i = 0; i < fixtureItemList.size(); i++) {
+
+                                isSeparator = false; //initialize the boolean variable to false
+
+                                // If it is the first item then we need a separator header
+                                if (i == 0) {
+                                    isSeparator = true;
+                                    dateTime = fixtureItemList.get(i).getTimeDate();
+                                } else {
+                                    // Move to previous
+                                    String previousFixtureItemDate = fixtureItemList.get(i - 1).getTimeDate();
+                                    String currentFixtureItemDate = fixtureItemList.get(i).getTimeDate();
+
+                                    // Compare the dates for non-equality - ie compare first 6 characters of date
+                                    if (previousFixtureItemDate.equals("FT") && currentFixtureItemDate.equals("FT"))
+                                        isSeparator = false;
+                                    else if (previousFixtureItemDate.equals("FT") && !currentFixtureItemDate.equals("FT"))
+                                        isSeparator = true;
+                                    else if (previousFixtureItemDate.charAt(0) != currentFixtureItemDate.charAt(0) ||
+                                            previousFixtureItemDate.charAt(1) != currentFixtureItemDate.charAt(1) ||
+                                            previousFixtureItemDate.charAt(2) != currentFixtureItemDate.charAt(2) ||
+                                            previousFixtureItemDate.charAt(3) != currentFixtureItemDate.charAt(3) ||
+                                            previousFixtureItemDate.charAt(4) != currentFixtureItemDate.charAt(4) ||
+                                            previousFixtureItemDate.charAt(5) != currentFixtureItemDate.charAt(5)) {
+                                        isSeparator = true;
+                                    }
+
+                                }
+
+                                /* If we need a separator, create a FixtureItem object and save it's date as the section
+                                 header while passing everything else as null */
+                                if (isSeparator) {
+                                    String headerText;
+                                    if (i == 0 && fixtureItemList.get(i).getTimeDate().equals("FT"))
+                                        headerText = "FT";
+                                    else
+                                        headerText = fixtureItemList.get(i).getTimeDate().substring(0, 6);
+                                    FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, true);
+                                    fixtureItemArrayList.add(fixtureItemLocal);
+                                }
+
+                                FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
+                                        fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate(), false);
+                                fixtureItemArrayList.add(fixtureItemLocal);
+
+                                if (fixtureItemList.get(i).getObjectId().equals(currentOrLastMatchId))
+                                    currentMatch = i;
+                            }
+                            //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
+                            //Log.i("aaki", String.valueOf(currentMatch));
+
+                            nDialog.cancel();
+                            fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
+                            fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
+                            //fixtureList.setSelection(currentMatch);
+
+                        } else {
+                            Log.d("item", "Error: " + e.getMessage());
+                        }
+                    }
+                });
+
+            }
+
+        });
     }
 
 

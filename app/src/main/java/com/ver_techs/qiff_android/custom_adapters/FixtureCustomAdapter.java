@@ -29,6 +29,8 @@ public class FixtureCustomAdapter extends BaseAdapter {
     TextView time; //texview for dateTime in fixture
     Handler h; //handler to update dateTime field in fiture every minute
     int delay = 1000; //milliseconds to update dateTime field
+    private static final int ITEM_TYPE_HEADER = 0;  // View Type for Headers
+    private static final int ITEM_TYPE_REGULAR = 1; // View Type for Regular rows
 
     public FixtureCustomAdapter(Context context, ArrayList<FixtureItemLocal> fixtureItemArray) {
         this.context = context;
@@ -53,7 +55,14 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        return position;
+        boolean isSection = fixtureItemArrayList.get(position).isAHeader();
+
+        if (isSection) {
+            return ITEM_TYPE_HEADER;
+        }
+        else {
+            return ITEM_TYPE_REGULAR;
+        }
     }
 
     @Override
@@ -62,74 +71,100 @@ public class FixtureCustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int index, View view, final ViewGroup parent) {
+    public View getView(int index, View convertView, final ViewGroup parent) {
 
+        View view;
+        int itemViewType = getItemViewType(index);
+        
         //Log.i("aaki", "getView called");
-        if (view == null) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext()); //inflate a list item progress_spin
-            view = inflater.inflate(R.layout.fixture_list_item, parent, false);
+
+            if (itemViewType == ITEM_TYPE_HEADER) {
+                // If its a section
+                view = inflater.inflate(R.layout.layout_date_section_header, parent, false);
+            }
+            else {
+                // Regular row
+                view = inflater.inflate(R.layout.fixture_list_item, parent, false);
+            }
+        }
+        else
+        {
+            view = convertView;
         }
 
-        final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index); //get the fixture item from the list to populate into the progress_spin
+        if(itemViewType == ITEM_TYPE_HEADER) {
 
-        Typeface custom_font = Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_path));
+            final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index);
 
-        //set the textviews and imageviews
-        TextView teamName1 = (TextView) view.findViewById(R.id.name_team1_fixture);
-        teamName1.setText(fixtureItemLocal.getTeamName1());
-        teamName1.setTypeface(custom_font);
-
-        TextView teamName2 = (TextView) view.findViewById(R.id.name_team2_fixture);
-        teamName2.setText(fixtureItemLocal.getTeamName2());
-        teamName2.setTypeface(custom_font);
-
-        TextView scoreTeam1 = (TextView) view.findViewById(R.id.score_team1_fixture);
-        scoreTeam1.setText(fixtureItemLocal.getScoreTeam1());
-        scoreTeam1.setTypeface(custom_font);
-
-        TextView colon_fixture = (TextView) view.findViewById(R.id.colon_fixture);
-        colon_fixture.setTypeface(custom_font);
-
-        TextView scoreTeam2 = (TextView) view.findViewById(R.id.score_team2_fixture);
-        scoreTeam2.setText(fixtureItemLocal.getScoreTeam2());
-        scoreTeam2.setTypeface(custom_font);
-
-        time = (TextView) view.findViewById(R.id.time_fixture);
-
-//        if(checkIfMatchDateIsToday(fixtureItemLocal.getTimeDate())){ //check if match is scheduled for today
-//            int check = matchStartsIn60Minutes(fixtureItemLocal.getTimeDate()); //check if match starts in 60 minutes
-//            if(check != -1)  //if yes, print countdown
-//                time.setText("Counting down " + String.valueOf(check) + "\" !");
-//            else //if not, say it is an upcoming match
-//                time.setText("Upcoming Match !");
-//        }
-//        else
-//        if(fixtureItemLocal.getTimeDate().contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
-//            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", ""))); //remove substring start
-//        }
-//        else if (fixtureItemLocal.getTimeDate().contains("Second")) {
-//            time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Second", ""))+ " (2)"); //remove subtsring second
-//        }
-//        else
-//            time.setText(fixtureItemLocal.getTimeDate());
-        time.setTypeface(custom_font);
-
-        //code to assign background color to fixture list items and make other widgets visible
-        if(fixtureItemLocal.getTimeDate().matches("FT")) //if match is over
-            view.setBackgroundColor(context.getResources().getColor(R.color.color_tertiary));
-        else if(fixtureItemLocal.getTimeDate().charAt(0) == 'S') { //if match is ongoing
-            view.setBackgroundColor(context.getResources().getColor(R.color.color_main));
-            colon_fixture.setTextColor(context.getResources().getColor(R.color.color_secondary)); //make colon visible
-            teamName1.setTextColor(context.getResources().getColor(R.color.color_secondary));
-            teamName2.setTextColor(context.getResources().getColor(R.color.color_secondary));
-            teamName1.setTypeface(custom_font, Typeface.BOLD);
-            teamName2.setTypeface(custom_font, Typeface.BOLD);
+            TextView separatorView = (TextView) view.findViewById(R.id.header_text_view);
+            separatorView.setText(fixtureItemLocal.getTimeDate());
         }
-        ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1_fixture);
-        team1_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName1()));
+        else {
 
-        ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2_fixture);
-        team2_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName2()));
+            final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index); //get the fixture item from the list to populate into the progress_spin
+
+            Typeface custom_font = Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_path));
+
+            //set the textviews and imageviews
+            TextView teamName1 = (TextView) view.findViewById(R.id.name_team1_fixture);
+            teamName1.setText(fixtureItemLocal.getTeamName1());
+            teamName1.setTypeface(custom_font);
+
+            TextView teamName2 = (TextView) view.findViewById(R.id.name_team2_fixture);
+            teamName2.setText(fixtureItemLocal.getTeamName2());
+            teamName2.setTypeface(custom_font);
+
+            TextView scoreTeam1 = (TextView) view.findViewById(R.id.score_team1_fixture);
+            scoreTeam1.setText(fixtureItemLocal.getScoreTeam1());
+            scoreTeam1.setTypeface(custom_font);
+
+            TextView colon_fixture = (TextView) view.findViewById(R.id.colon_fixture);
+            colon_fixture.setTypeface(custom_font);
+
+            TextView scoreTeam2 = (TextView) view.findViewById(R.id.score_team2_fixture);
+            scoreTeam2.setText(fixtureItemLocal.getScoreTeam2());
+            scoreTeam2.setTypeface(custom_font);
+
+            time = (TextView) view.findViewById(R.id.time_fixture);
+
+            if(checkIfMatchDateIsToday(fixtureItemLocal.getTimeDate())){ //check if match is scheduled for today
+                int check = matchStartsIn60Minutes(fixtureItemLocal.getTimeDate()); //check if match starts in 60 minutes
+                if(check != -1)  //if yes, print countdown
+                    time.setText("Counting down " + String.valueOf(check) + "\" !");
+                else //if not, say it is an upcoming match
+                    time.setText("Upcoming Match !");
+            }
+            else
+            if(fixtureItemLocal.getTimeDate().contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
+                time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", ""))); //remove substring start
+            }
+            else if (fixtureItemLocal.getTimeDate().contains("Second")) {
+                time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Second", ""))+ " (2)"); //remove subtsring second
+            }
+            else
+                time.setText(fixtureItemLocal.getTimeDate());
+            time.setTypeface(custom_font);
+
+            //code to assign background color to fixture list items and make other widgets visible
+            if(fixtureItemLocal.getTimeDate().matches("FT")) //if match is over
+                view.setBackgroundColor(context.getResources().getColor(R.color.color_tertiary));
+            else if(fixtureItemLocal.getTimeDate().charAt(0) == 'S') { //if match is ongoing
+                view.setBackgroundColor(context.getResources().getColor(R.color.color_main));
+                colon_fixture.setTextColor(context.getResources().getColor(R.color.color_secondary)); //make colon visible
+                teamName1.setTextColor(context.getResources().getColor(R.color.color_secondary));
+                teamName2.setTextColor(context.getResources().getColor(R.color.color_secondary));
+                teamName1.setTypeface(custom_font, Typeface.BOLD);
+                teamName2.setTypeface(custom_font, Typeface.BOLD);
+            }
+            ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1_fixture);
+            team1_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName1()));
+
+            ImageView team2_logo = (ImageView) view.findViewById(R.id.image_team2_fixture);
+            team2_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName2()));
+
+        }
 
         return view;
     }

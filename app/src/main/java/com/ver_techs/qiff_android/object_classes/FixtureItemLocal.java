@@ -6,14 +6,16 @@ public class FixtureItemLocal{
     String teamName1, teamName2;
     String scoreTeam1, scoreTeam2;
     String timeDate;
+    Boolean isAHeader;
 
     //default constructor
-    public  FixtureItemLocal(String teamName1, String teamName2, String scoreTeam1, String scoreTeam2, String timeDate){
+    public  FixtureItemLocal(String teamName1, String teamName2, String scoreTeam1, String scoreTeam2, String timeDate, Boolean isAHeader){
         this.teamName1=teamName1;
         this.teamName2=teamName2;
         this.scoreTeam1=scoreTeam1;
         this.scoreTeam2=scoreTeam2;
         this.timeDate=timeDate;
+        this.isAHeader=isAHeader;
     }
 
     public String getTeamName1() {
@@ -36,4 +38,5 @@ public class FixtureItemLocal{
         return timeDate;
     }
 
+    public boolean isAHeader(){ return isAHeader; }
 }

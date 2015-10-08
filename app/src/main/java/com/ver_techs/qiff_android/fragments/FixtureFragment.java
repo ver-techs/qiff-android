@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Fixture fragment that contains fixture view
-public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class FixtureFragment extends Fragment {
 
     private ProgressDialog nDialog; //progress dialog to show while parse query is running in background
     ArrayList<FixtureItemLocal> fixtureItemArrayList; //list of fixture items, loaded from parse
@@ -35,6 +35,8 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
     ListView fixtureList;
     FixtureCustomAdapter fixtureListAdapter;
     int currentMatch;
+    boolean isSeparator = false; //to check if current item should create a separator or not
+    String dateTime;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -62,6 +64,7 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
                 query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
+                query.addAscendingOrder("createdAt"); //get results in ascending order of creation
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<FixtureItem>() {
 
@@ -71,9 +74,53 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
                             // Access the array of results here
                             for (int i = 0; i < fixtureItemList.size(); i++) {
+
+                                isSeparator = false; //initialize the boolean variable to false
+
+                                // If it is the first item then we need a separator header
+                                if (i == 0) {
+                                    isSeparator = true;
+                                    dateTime = fixtureItemList.get(i).getTimeDate();
+                                }
+                                else {
+                                    // Move to previous
+                                    String previousFixtureItemDate = fixtureItemList.get(i-1).getTimeDate();
+                                    String currentFixtureItemDate = fixtureItemList.get(i).getTimeDate();
+
+                                    // Compare the dates for non-equality - ie compare first 6 characters of date
+                                    if(previousFixtureItemDate.equals("FT") && currentFixtureItemDate.equals("FT"))
+                                        isSeparator=false;
+                                    else
+                                    if(previousFixtureItemDate.equals("FT") && !currentFixtureItemDate.equals("FT"))
+                                        isSeparator=true;
+                                    else
+                                    if (previousFixtureItemDate.charAt(0) != currentFixtureItemDate.charAt(0) ||
+                                            previousFixtureItemDate.charAt(1) != currentFixtureItemDate.charAt(1) ||
+                                            previousFixtureItemDate.charAt(2) != currentFixtureItemDate.charAt(2) ||
+                                            previousFixtureItemDate.charAt(3) != currentFixtureItemDate.charAt(3) ||
+                                            previousFixtureItemDate.charAt(4) != currentFixtureItemDate.charAt(4) ||
+                                            previousFixtureItemDate.charAt(5) != currentFixtureItemDate.charAt(5) ) {
+                                        isSeparator = true;
+                                    }
+
+                                }
+
+                                /* If we need a separator, create a FixtureItem object and save it's date as the section
+                                 header while passing everything else as null */
+                                if (isSeparator) {
+                                    String headerText;
+                                    if(i == 0)
+                                        headerText="FT";
+                                    else
+                                        headerText=fixtureItemList.get(i).getTimeDate().substring(0,6);
+                                    FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, true);
+                                    fixtureItemArrayList.add(fixtureItemLocal);
+                                }
+
                                 FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
-                                        fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate());
+                                        fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate(), false);
                                 fixtureItemArrayList.add(fixtureItemLocal);
+
                                 if(fixtureItemList.get(i).getObjectId().equals(currentOrLastMatchId))
                                     currentMatch=i;
                             }
@@ -83,7 +130,7 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
                             nDialog.cancel();
                             fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
                             fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
-                            fixtureList.setSelection(currentMatch);
+                            //fixtureList.setSelection(currentMatch);
 
                         } else {
                             Log.d("item", "Error: " + e.getMessage());
@@ -98,8 +145,5 @@ public class FixtureFragment extends Fragment implements SwipeRefreshLayout.OnRe
         return v;
     }
 
-    @Override
-    public void onRefresh() {
-        Log.i("aaki", "refresh");
-    }
+
 }

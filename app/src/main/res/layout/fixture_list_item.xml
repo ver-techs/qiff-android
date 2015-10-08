@@ -41,6 +41,7 @@
                 android:id="@+id/image_team1_fixture"
                 android:layout_column="0"
                 android:gravity="center"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_marginLeft="5dp"
@@ -85,6 +86,7 @@
             <ImageView
                 android:id="@+id/image_team2_fixture"
                 android:layout_column="4"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:gravity="center"

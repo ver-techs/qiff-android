@@ -1,6 +1,7 @@
 package com.ver_techs.qiff_android.fragments;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ConfigCallback;
@@ -52,13 +54,15 @@ public class FixtureFragment extends Fragment {
         nDialog.setCancelable(false);
         nDialog.show();
 
+        TextView match_schedule_text = (TextView) v.findViewById(R.id.match_schedule_text);
+        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getActivity().getString(R.string.font_path));
+        match_schedule_text.setTypeface(custom_font);
+
         Spinner spinner = (Spinner) v.findViewById(R.id.spinner_drop_down);
 
         // Create an ArrayAdapter using the string array and a default spinner
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.drop_down_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.drop_down_array, R.layout.spinner_item);
 
-        // Specify the layout to use when the list of choices appears
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(spinnerAdapter);
 
@@ -104,7 +108,7 @@ public class FixtureFragment extends Fragment {
                 if(upcomingSelected)
                     query.whereNotEqualTo("dateTime", "FT");
                 else
-                    query.whereEqualTo("dateTime", "FT");
+                    query.whereContains("dateTime", "FT");
                 query.addAscendingOrder("createdAt"); //get results in ascending order of creation
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<FixtureItem>() {

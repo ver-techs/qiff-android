@@ -22,7 +22,7 @@ import java.util.Date;
 import android.os.Handler;
 
 // Adapter for Fixture tab
-public class FixtureCustomAdapter extends BaseAdapter {
+public class ForgoingFixtureCustomAdapter extends BaseAdapter {
 
     private Context context;
     ArrayList<FixtureItemLocal> fixtureItemArrayList; //Local variable list that stores all fixture items
@@ -32,7 +32,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
     private static final int ITEM_TYPE_HEADER = 0;  // View Type for Headers
     private static final int ITEM_TYPE_REGULAR = 1; // View Type for Regular rows
 
-    public FixtureCustomAdapter(Context context, ArrayList<FixtureItemLocal> fixtureItemArray) {
+    public ForgoingFixtureCustomAdapter(Context context, ArrayList<FixtureItemLocal> fixtureItemArray) {
         this.context = context;
         this.fixtureItemArrayList = fixtureItemArray;
         //Log.i("aaki",Integer.toString(fixtureItemArrayList.size()));
@@ -98,8 +98,12 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
             final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index);
 
-            TextView separatorView = (TextView) view.findViewById(R.id.header_text_view);
-            separatorView.setText(fixtureItemLocal.getTimeDate());
+            Typeface custom_font = Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_path));
+
+            TextView separatorTextView = (TextView) view.findViewById(R.id.header_text_view);
+            separatorTextView.setText(fixtureItemLocal.getTimeDate());
+            separatorTextView.setTypeface(custom_font);
+
         }
         else {
 

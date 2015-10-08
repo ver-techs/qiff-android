@@ -15,14 +15,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.parse.ConfigCallback;
 import com.parse.FindCallback;
 import com.parse.ParseConfig;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.ver_techs.qiff_android.custom_adapters.FixtureCustomAdapter;
+import com.ver_techs.qiff_android.custom_adapters.ForgoingFixtureCustomAdapter;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
 import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 import com.ver_techs.qiff_android.R;
@@ -39,7 +38,7 @@ public class FixtureFragment extends Fragment {
     View v;
     private SwipeRefreshLayout swipeRefreshLayout;
     ListView fixtureList;
-    FixtureCustomAdapter fixtureListAdapter;
+    ForgoingFixtureCustomAdapter fixtureListAdapter;
     int currentMatch;
     boolean isSeparator = false; //to check if current item should create a separator or not
     String dateTime;
@@ -151,7 +150,7 @@ public class FixtureFragment extends Fragment {
                                  header while passing everything else as null */
                                 if (isSeparator) {
                                     String headerText;
-                                    headerText = fixtureItemList.get(i).getTimeDate().substring(0, 6);
+                                    headerText = "  " + fixtureItemList.get(i).getTimeDate().substring(0, 6) + "  ";
                                     FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, true);
                                     fixtureItemArrayList.add(fixtureItemLocal);
                                 }
@@ -167,7 +166,7 @@ public class FixtureFragment extends Fragment {
                             //Log.i("aaki", String.valueOf(currentMatch));
 
                             nDialog.cancel();
-                            fixtureListAdapter = new FixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
+                            fixtureListAdapter = new ForgoingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
                             fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
                             //fixtureList.setSelection(currentMatch);
 

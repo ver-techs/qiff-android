@@ -7,4 +7,9 @@
     <string name="font_path">fonts/droid_sans.ttf</string>
     <string name="app_id">790799324376943</string>
 
+    <string-array name="drop_down_array">
+        <item>FORGOING</item>
+        <item>UPCOMING</item>
+    </string-array>
+
 </resources>

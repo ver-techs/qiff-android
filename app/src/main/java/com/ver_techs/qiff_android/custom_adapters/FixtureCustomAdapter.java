@@ -75,7 +75,7 @@ public class FixtureCustomAdapter extends BaseAdapter {
 
         View view;
         int itemViewType = getItemViewType(index);
-        
+
         //Log.i("aaki", "getView called");
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext()); //inflate a list item progress_spin

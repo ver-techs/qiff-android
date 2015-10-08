@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.parse.ConfigCallback;
 import com.parse.FindCallback;
@@ -47,6 +49,16 @@ public class FixtureFragment extends Fragment {
         nDialog.setIndeterminate(false);
         nDialog.setCancelable(false);
         nDialog.show();
+
+        Spinner staticSpinner = (Spinner) v.findViewById(R.id.spinner_drop_down);
+
+        // Create an ArrayAdapter using the string array and a default spinner
+        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.drop_down_array, android.R.layout.simple_spinner_item);
+
+        // Specify the layout to use when the list of choices appears
+        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        staticSpinner.setAdapter(staticAdapter);
 
         fixtureList = (ListView) v.findViewById(R.id.list_fixture); //find the listview to load fixture items
         fixtureItemArrayList = new ArrayList<FixtureItemLocal>();

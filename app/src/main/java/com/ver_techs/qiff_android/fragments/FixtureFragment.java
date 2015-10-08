@@ -43,6 +43,7 @@ public class FixtureFragment extends Fragment {
     int currentMatch;
     boolean isSeparator = false; //to check if current item should create a separator or not
     String dateTime;
+    boolean upcomingSelected;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -71,16 +72,19 @@ public class FixtureFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
                 if (position == 1) {
-                    loadFixtureItems(true);
+                    upcomingSelected = true;
+                    loadFixtureItems(upcomingSelected);
                 }
                 else{
-                    loadFixtureItems(false);
+                    upcomingSelected = false;
+                    loadFixtureItems(upcomingSelected);
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                loadFixtureItems(true);
+                upcomingSelected = true;
+                loadFixtureItems(upcomingSelected);
             }
 
         });
@@ -106,9 +110,10 @@ public class FixtureFragment extends Fragment {
                 query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
                 if(upcomingSelected)
-                    query.whereNotEqualTo("dateTime", "FT");
+                    query.whereNotEqualTo("matchCompleted", "FT");
                 else
-                    query.whereContains("dateTime", "FT");
+                    query.whereEqualTo("matchCompleted", "FT");
+
                 query.addAscendingOrder("createdAt"); //get results in ascending order of creation
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<FixtureItem>() {
@@ -125,18 +130,13 @@ public class FixtureFragment extends Fragment {
                                 // If it is the first item then we need a separator header
                                 if (i == 0) {
                                     isSeparator = true;
-                                    dateTime = fixtureItemList.get(i).getTimeDate();
                                 } else {
                                     // Move to previous
                                     String previousFixtureItemDate = fixtureItemList.get(i - 1).getTimeDate();
                                     String currentFixtureItemDate = fixtureItemList.get(i).getTimeDate();
 
                                     // Compare the dates for non-equality - ie compare first 6 characters of date
-                                    if (previousFixtureItemDate.equals("FT") && currentFixtureItemDate.equals("FT"))
-                                        isSeparator = false;
-                                    else if (previousFixtureItemDate.equals("FT") && !currentFixtureItemDate.equals("FT"))
-                                        isSeparator = true;
-                                    else if (previousFixtureItemDate.charAt(0) != currentFixtureItemDate.charAt(0) ||
+                                    if (previousFixtureItemDate.charAt(0) != currentFixtureItemDate.charAt(0) ||
                                             previousFixtureItemDate.charAt(1) != currentFixtureItemDate.charAt(1) ||
                                             previousFixtureItemDate.charAt(2) != currentFixtureItemDate.charAt(2) ||
                                             previousFixtureItemDate.charAt(3) != currentFixtureItemDate.charAt(3) ||
@@ -151,10 +151,7 @@ public class FixtureFragment extends Fragment {
                                  header while passing everything else as null */
                                 if (isSeparator) {
                                     String headerText;
-                                    if (i == 0 && fixtureItemList.get(i).getTimeDate().equals("FT"))
-                                        headerText = "FT";
-                                    else
-                                        headerText = fixtureItemList.get(i).getTimeDate().substring(0, 6);
+                                    headerText = fixtureItemList.get(i).getTimeDate().substring(0, 6);
                                     FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, true);
                                     fixtureItemArrayList.add(fixtureItemLocal);
                                 }
@@ -185,5 +182,17 @@ public class FixtureFragment extends Fragment {
         });
     }
 
+    public static String right(String str, int len) {
+        if (str == null) {
+            return null;
+        }
+        if (len < 0) {
+            return "";
+        }
+        if (str.length() <= len) {
+            return str;
+        }
+        return str.substring(str.length() - len);
+    }
 
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ver_techs.qiff_android.object_classes.PointsTableItemLocal;
@@ -57,30 +58,36 @@ public class PointsTableCustomAdapter extends BaseAdapter {
         //set the textviews and imageviews
         TextView name_team_points_table = (TextView) view.findViewById(R.id.name_team_points_table);
         name_team_points_table.setText(pointsTableItemLocal.getTeamName());
-        name_team_points_table.setTypeface(custom_font);
+        name_team_points_table.setTypeface(custom_font, Typeface.BOLD);
 
         TextView total_points_team_points_table = (TextView) view.findViewById(R.id.total_points_team_points_table);
         total_points_team_points_table.setText(pointsTableItemLocal.getTotal());
-        total_points_team_points_table.setTypeface(custom_font);
+        total_points_team_points_table.setTypeface(custom_font, Typeface.BOLD);
 
         TextView wins_points_table = (TextView) view.findViewById(R.id.wins_points_table);
-        wins_points_table.setText("Win : " + pointsTableItemLocal.getWins());
+        wins_points_table.setText("WIN : " + pointsTableItemLocal.getWins());
         wins_points_table.setTypeface(custom_font);
 
         TextView draws_points_table = (TextView) view.findViewById(R.id.draws_points_table);
-        draws_points_table.setText("Draw : " + pointsTableItemLocal.getDraws());
+        draws_points_table.setText("DRAW : " + pointsTableItemLocal.getDraws());
         draws_points_table.setTypeface(custom_font);
 
         TextView losses_points_table = (TextView) view.findViewById(R.id.losses_points_table);
-        losses_points_table.setText("Loss : " + pointsTableItemLocal.getLosses());
+        losses_points_table.setText("LOSS : " + pointsTableItemLocal.getLosses());
         losses_points_table.setTypeface(custom_font);
 
         TextView played_points_table = (TextView) view.findViewById(R.id.goal_difference_points_table);
-        played_points_table.setText("Goal Diff : " + pointsTableItemLocal.getGoalDifference());
+        played_points_table.setText("GOAL DIFF : " + pointsTableItemLocal.getGoalDifference());
         played_points_table.setTypeface(custom_font);
 
         ImageView image_team_points_table = (ImageView) view.findViewById(R.id.image_team_points_table);
         image_team_points_table.setImageResource(findTeamLogo(pointsTableItemLocal.getTeamName()));
+
+        LinearLayout total_points_layout = (LinearLayout) view.findViewById(R.id.total_points_layout);
+        if(pointsTableItemLocal.isTopTwoInGroup())
+            total_points_layout.setBackgroundColor(context.getResources().getColor(R.color.color_main));
+        else
+            total_points_layout.setBackgroundColor(context.getResources().getColor(R.color.color_primary));
 
         return view;
     }

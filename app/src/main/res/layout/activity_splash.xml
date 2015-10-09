@@ -10,43 +10,56 @@
         android:id="@+id/FootballFact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:textSize="17dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
         android:textColor="@color/color_main"
         android:gravity="center_horizontal"
-        android:layout_alignParentTop="true"
         android:textStyle="italic"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:text="Football is the most played and most watched sport on earth !"/>
+        android:text="Football is the most played and most watched sport on earth !"
+        android:layout_below="@+id/qiff_logo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:id="@+id/qiff_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/qiff_logo"
-        />
-
-    <TextView
-        android:id="@+id/PoweredBy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:textSize="17dp"
-        android:textColor="@color/color_main"
-        android:gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:text="Powered by"/>
-
-    <ImageView
-        android:id="@+id/vertechs_logo"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:src="@drawable/vertechs"
-        android:gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/color_accent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/linearLayout"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Powered By"
+            android:id="@+id/PoweredBy" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:id="@+id/vertechs_logo"
+            android:src="@drawable/vertechs"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
 </RelativeLayout>

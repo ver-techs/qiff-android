@@ -11,7 +11,6 @@ import android.text.style.ImageSpan;
 
 import com.ver_techs.qiff_android.fragments.PointsTableFragment;
 import com.ver_techs.qiff_android.R;
-import com.ver_techs.qiff_android.fragments.EmptyFragment;
 import com.ver_techs.qiff_android.fragments.FixtureFragment;
 import com.ver_techs.qiff_android.fragments.HomeFragment;
 

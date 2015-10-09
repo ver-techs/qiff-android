@@ -126,6 +126,21 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
             scoreTeam2.setText(fixtureItemLocal.getScoreTeam2());
             scoreTeam2.setTypeface(custom_font, Typeface.BOLD);
 
+            //code to set background color to winning and losing teams
+
+            if(fixtureItemLocal.getScoreTeam1().compareTo(fixtureItemLocal.getScoreTeam2()) != 0) {
+                if (fixtureItemLocal.getScoreTeam1().compareTo(fixtureItemLocal.getScoreTeam2()) > 0) {
+                    teamName1.setBackgroundResource(R.drawable.rectangle_background_winning_team);
+                    teamName2.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                } else {
+                    teamName1.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                    teamName2.setBackgroundResource(R.drawable.rectangle_background_winning_team);
+                }
+            }else{
+                teamName1.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                teamName2.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+            }
+
             //code to assign background color to fixture list items and make other widgets visible
             if(fixtureItemLocal.getTimeDate().matches("FT")) //if match is over
                 view.setBackgroundColor(context.getResources().getColor(R.color.color_tertiary));

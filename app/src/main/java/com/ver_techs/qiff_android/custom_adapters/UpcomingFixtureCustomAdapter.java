@@ -124,21 +124,20 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
             time = (TextView) view.findViewById(R.id.time);
 
             if(checkIfMatchDateIsToday(fixtureItemLocal.getTimeDate())){ //check if match is scheduled for today
-                int check = matchStartsIn60Minutes(fixtureItemLocal.getTimeDate()); //check if match starts in 60 minutes
-                if(check != -1)  //if yes, print countdown
-                    time.setText("Counting down " + String.valueOf(check) + "\" !");
-                else //if not, say it is an upcoming match
-                    time.setText("Upcoming Match !");
+                if(fixtureItemLocal.getMatchStatus().contains("Start"))  //control logic for dateTime field to account for various fixture scenarios
+                    time.setText(elapsedMinutes(fixtureItemLocal.getMatchStatus().replace("Start", ""))); //remove substring start
+                else if (fixtureItemLocal.getTimeDate().contains("Second"))
+                    time.setText(elapsedMinutes(fixtureItemLocal.getMatchStatus().replace("Second", ""))+ " (2)"); //remove subtsring second
+                else{
+                    int check = matchStartsIn60Minutes(fixtureItemLocal.getTimeDate()); //check if match starts in 60 minutes
+                    if(check != -1)  //if yes, print countdown
+                        time.setText("Counting down " + String.valueOf(check) + "\" !");
+                    else //if not, say it is an upcoming match
+                        time.setText("Upcoming Match !");
+                }
             }
             else
-            if(fixtureItemLocal.getTimeDate().contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
-                time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Start", ""))); //remove substring start
-            }
-            else if (fixtureItemLocal.getTimeDate().contains("Second")) {
-                time.setText(elapsedMinutes(fixtureItemLocal.getTimeDate().replace("Second", ""))+ " (2)"); //remove subtsring second
-            }
-            else
-                time.setText(fixtureItemLocal.getTimeDate().substring(6,13));
+                time.setText(fixtureItemLocal.getTimeDate().substring(6,14));
             time.setTypeface(custom_font, Typeface.ITALIC);
 
             //code to assign background color to fixture list items and make other widgets visible
@@ -200,6 +199,7 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return String.valueOf(minutes) + "\"";  //return the elapsed minutes wid double qoute at the end
     }
 
@@ -238,7 +238,10 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return result;
+        if(result > 0)
+            return result;
+
+        return -1;
     }
 
 }

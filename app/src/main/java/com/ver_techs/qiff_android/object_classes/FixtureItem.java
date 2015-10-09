@@ -31,4 +31,7 @@ public class FixtureItem extends ParseObject{
         return getString("dateTime");
     }
 
+    public String getMatchStatus() {
+        return getString("matchCompleted");
+    }
 }

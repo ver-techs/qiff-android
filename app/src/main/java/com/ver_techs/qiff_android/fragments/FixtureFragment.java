@@ -115,7 +115,11 @@ public class FixtureFragment extends Fragment {
                 else
                     query.whereEqualTo("matchCompleted", "FT");
 
-                query.addAscendingOrder("createdAt"); //get results in ascending order of creation
+                if(upcomingSelected)
+                    query.addAscendingOrder("createdAt"); //get results in ascending order of creation
+                else
+                    query.addDescendingOrder("createdAt"); //get results in descending order of creation
+
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<FixtureItem>() {
 
@@ -153,12 +157,12 @@ public class FixtureFragment extends Fragment {
                                 if (isSeparator) {
                                     String headerText;
                                     headerText = "  " + fixtureItemList.get(i).getTimeDate().substring(0, 6) + "  ";
-                                    FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, true);
+                                    FixtureItemLocal fixtureItemLocal = new FixtureItemLocal("", "", "", "", headerText, "", true);
                                     fixtureItemArrayList.add(fixtureItemLocal);
                                 }
 
                                 FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
-                                        fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate(), false);
+                                        fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate(), fixtureItemList.get(i).getMatchStatus(),false);
                                 fixtureItemArrayList.add(fixtureItemLocal);
 
                                 if (fixtureItemList.get(i).getObjectId().equals(currentOrLastMatchId))

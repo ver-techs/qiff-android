@@ -117,14 +117,14 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
 
             TextView scoreTeam1 = (TextView) view.findViewById(R.id.score_team1_fixture);
             scoreTeam1.setText(fixtureItemLocal.getScoreTeam1());
-            scoreTeam1.setTypeface(custom_font);
+            scoreTeam1.setTypeface(custom_font, Typeface.BOLD);
 
             TextView colon_fixture = (TextView) view.findViewById(R.id.colon_fixture);
             colon_fixture.setTypeface(custom_font);
 
             TextView scoreTeam2 = (TextView) view.findViewById(R.id.score_team2_fixture);
             scoreTeam2.setText(fixtureItemLocal.getScoreTeam2());
-            scoreTeam2.setTypeface(custom_font);
+            scoreTeam2.setTypeface(custom_font, Typeface.BOLD);
 
             //code to assign background color to fixture list items and make other widgets visible
             if(fixtureItemLocal.getTimeDate().matches("FT")) //if match is over

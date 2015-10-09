@@ -22,6 +22,7 @@ import com.parse.ParseConfig;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.ver_techs.qiff_android.custom_adapters.ForgoingFixtureCustomAdapter;
+import com.ver_techs.qiff_android.custom_adapters.UpcomingFixtureCustomAdapter;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
 import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 import com.ver_techs.qiff_android.R;
@@ -38,7 +39,8 @@ public class FixtureFragment extends Fragment {
     View v;
     private SwipeRefreshLayout swipeRefreshLayout;
     ListView fixtureList;
-    ForgoingFixtureCustomAdapter fixtureListAdapter;
+    ForgoingFixtureCustomAdapter forgoingFixtureListAdapter;
+    UpcomingFixtureCustomAdapter upcomingFixtureCustomAdapter;
     int currentMatch;
     boolean isSeparator = false; //to check if current item should create a separator or not
     String dateTime;
@@ -166,8 +168,15 @@ public class FixtureFragment extends Fragment {
                             //Log.i("aaki", String.valueOf(currentMatch));
 
                             nDialog.cancel();
-                            fixtureListAdapter = new ForgoingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
-                            fixtureList.setAdapter(fixtureListAdapter); //set the adapter to the listview
+
+                            if(upcomingSelected) {
+                                upcomingFixtureCustomAdapter = new UpcomingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
+                                fixtureList.setAdapter(upcomingFixtureCustomAdapter); //set the adapter to the listview
+                            }
+                            else {
+                                forgoingFixtureListAdapter = new ForgoingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
+                                fixtureList.setAdapter(forgoingFixtureListAdapter); //set the adapter to the listview
+                            }
                             //fixtureList.setSelection(currentMatch);
 
                         } else {

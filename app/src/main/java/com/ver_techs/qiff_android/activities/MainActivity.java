@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.appevents.AppEventsLogger;
@@ -19,8 +16,6 @@ import com.ver_techs.qiff_android.custom_views.SlidingTabLayout;
 import com.ver_techs.qiff_android.custom_adapters.ViewPagerAdapter;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
-
-import java.util.logging.Handler;
 
 // Main Activity class
 public class MainActivity extends ActionBarActivity {
@@ -72,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.color_accent);
+                return getResources().getColor(R.color.color_white);
             }
         });
 

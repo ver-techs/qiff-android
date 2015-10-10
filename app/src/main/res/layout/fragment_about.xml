@@ -6,12 +6,30 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@color/color_primary" >
+
+        <TextView
+            android:id="@+id/about_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ABOUT"
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"
+            android:textColor="@color/color_secondary"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageView"
         android:src="@drawable/qiff_logo"
-        android:layout_above="@+id/textView2"
+        android:layout_above="@+id/version_text"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -19,8 +37,8 @@
         android:layout_height="wrap_content"
         android:text="Version 1.0"
         android:layout_marginTop="10dp"
-        android:textColor="@color/color_main"
-        android:id="@+id/textView2"
+        android:textColor="@color/color_secondary"
+        android:id="@+id/version_text"
         android:layout_gravity="center_horizontal"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -29,27 +47,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email : info@qiff.com"
-        android:id="@+id/textView3"
-        android:textColor="@color/color_accent"
+        android:id="@+id/email_text"
+        android:textColor="@color/color_white"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/textView4" />
+        android:layout_above="@+id/mobile_text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mobile : +974-55773322"
-        android:id="@+id/textView4"
-        android:textColor="@color/color_accent"
+        android:id="@+id/mobile_text"
+        android:textColor="@color/color_white"
         android:layout_centerVertical="true"
         android:layout_above="@+id/linearLayout"
         android:layout_marginBottom="66dp"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_alignLeft="@+id/textView3"/>
+        android:layout_alignStart="@+id/email_text"
+        android:layout_alignLeft="@+id/email_text"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/color_accent"
+        android:background="@color/color_white"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
@@ -66,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Powered By"
-            android:id="@+id/textView5" />
+            android:id="@+id/powered_by" />
 
         <ImageView
             android:layout_width="80dp"

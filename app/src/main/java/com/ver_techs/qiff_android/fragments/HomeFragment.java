@@ -239,7 +239,7 @@ public class HomeFragment extends Fragment{
                         minute.setText(liveCommentaryItemList.get(i).getMinute());
                         minute.setTextSize(16);
                         minute.setTypeface(custom_font, Typeface.BOLD);
-                        minute.setTextColor(getResources().getColor(R.color.color_main));
+                        minute.setTextColor(getResources().getColor(R.color.color_white));
                         tr_1.addView(minute);// add the column to the table row here
 
                         TextView colon = new TextView(getActivity());
@@ -296,7 +296,7 @@ public class HomeFragment extends Fragment{
                         fan_name.setText(chatItemList.get(i).getUserName());
                         fan_name.setTextSize(16);
                         fan_name.setTypeface(custom_font, Typeface.BOLD);
-                        fan_name.setTextColor(getResources().getColor(R.color.color_main));
+                        fan_name.setTextColor(getResources().getColor(R.color.color_black));
                         tr_1.addView(fan_name);// add the column to the table row here
 
                         TextView colon = new TextView(getActivity());
@@ -403,7 +403,7 @@ public class HomeFragment extends Fragment{
 
         int resource_id = 0;
         switch (teamName){
-            case "NADHAM TCR" : resource_id = R.drawable.kmcc_mlp; break;
+            case "NADHAM TCR" : resource_id = R.drawable.kmcc_wnd; break;
             case "KMCC MLP" : resource_id = R.drawable.kmcc_mlp; break;
             case "KMCC KKD" : resource_id = R.drawable.kmcc_kkd; break;
             case "KMCC PKD" : resource_id = R.drawable.kmcc_pkd; break;

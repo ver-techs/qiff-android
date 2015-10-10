@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#707070</color>
-    <color name="color_secondary">#BDBDBD</color>
-    <color name="color_tertiary">#E0E0E0</color>
-    <color name="color_main">#A30032</color>
-    <color name="color_accent">#FFFFFF</color>
+    <color name="color_primary">#046B58</color>
+    <color name="color_secondary">#F5A623</color>
+    <color name="color_tertiary">#2D3941</color>
+    <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
+    <color name="color_complementary_1">#61002B</color>
+    <color name="color_complementary_2">#4CAF50</color>
 </resources>

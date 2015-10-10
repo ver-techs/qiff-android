@@ -58,7 +58,7 @@ public class FixtureFragment extends Fragment {
 
         TextView match_schedule_text = (TextView) v.findViewById(R.id.match_schedule_text);
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getActivity().getString(R.string.font_path));
-        match_schedule_text.setTypeface(custom_font);
+        match_schedule_text.setTypeface(custom_font, Typeface.BOLD);
 
         Spinner spinner = (Spinner) v.findViewById(R.id.spinner_drop_down);
 

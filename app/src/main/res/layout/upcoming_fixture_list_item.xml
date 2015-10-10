@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="70dp"
-    android:background="@color/color_accent">
+    android:background="@color/color_white">
 
     <TableLayout
         android:id="@+id/table_fixture"
@@ -16,7 +16,7 @@
             <TextView
                 android:id="@+id/time"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_secondary"
+                android:textColor="@color/color_tertiary"
                 android:layout_gravity="center"
                 android:textSize="14dp"
                 android:layout_column="2">
@@ -54,7 +54,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="X"
-                android:textColor="@color/color_main"
+                android:textColor="@color/color_complementary_1"
                 android:gravity="center"
                 android:textSize="25dp"
                 android:layout_column="2">

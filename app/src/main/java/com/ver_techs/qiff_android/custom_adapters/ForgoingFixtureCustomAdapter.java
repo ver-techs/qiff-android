@@ -97,7 +97,7 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
 
             TextView separatorTextView = (TextView) view.findViewById(R.id.header_text_view);
             separatorTextView.setText(fixtureItemLocal.getTimeDate());
-            separatorTextView.setTypeface(custom_font);
+            separatorTextView.setTypeface(custom_font, Typeface.BOLD);
 
         }
         else {
@@ -145,7 +145,6 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
             if(fixtureItemLocal.getTimeDate().matches("FT")) //if match is over
                 view.setBackgroundColor(context.getResources().getColor(R.color.color_tertiary));
             else if(fixtureItemLocal.getTimeDate().charAt(0) == 'S') { //if match is ongoing
-                view.setBackgroundColor(context.getResources().getColor(R.color.color_main));
                 colon_fixture.setTextColor(context.getResources().getColor(R.color.color_secondary)); //make colon visible
                 teamName1.setTextColor(context.getResources().getColor(R.color.color_secondary));
                 teamName2.setTextColor(context.getResources().getColor(R.color.color_secondary));
@@ -168,7 +167,7 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
 
         int resource_id = 0;
         switch (teamName){
-            case "NADHAM TCR" : resource_id = R.drawable.kmcc_mlp; break;
+            case "NADHAM TCR" : resource_id = R.drawable.kmcc_wnd; break;
             case "KMCC MLP" : resource_id = R.drawable.kmcc_mlp; break;
             case "KMCC KKD" : resource_id = R.drawable.kmcc_kkd; break;
             case "KMCC PKD" : resource_id = R.drawable.kmcc_pkd; break;

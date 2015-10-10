@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_accent">
+    android:background="@color/color_white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -45,13 +45,13 @@
 
                         <TextView
                             android:id="@+id/name_group1"
-                            android:layout_width="90dp"
-                            android:background="@color/color_accent"
+                            android:layout_width="56dp"
+                            android:background="@color/color_white"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:textColor="@color/color_black"
-                            android:layout_marginTop="5dp"
+                            android:textSize="14dp"
+                            android:textColor="@color/color_primary"
+                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="8dp" />
 
                     </LinearLayout>
@@ -97,13 +97,13 @@
 
                         <TextView
                             android:id="@+id/name_group2"
-                            android:layout_width="90dp"
-                            android:background="@color/color_accent"
+                            android:layout_width="60dp"
+                            android:background="@color/color_white"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:textColor="@color/color_black"
-                            android:layout_marginTop="5dp"
+                            android:textSize="14dp"
+                            android:textColor="@color/color_primary"
+                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="8dp" />
 
                     </LinearLayout>
@@ -148,13 +148,13 @@
 
                         <TextView
                             android:id="@+id/name_group3"
-                            android:layout_width="90dp"
-                            android:background="@color/color_accent"
+                            android:layout_width="64dp"
+                            android:background="@color/color_white"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:textColor="@color/color_black"
-                            android:layout_marginTop="5dp"
+                            android:textSize="14dp"
+                            android:textColor="@color/color_primary"
+                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="8dp" />
 
                     </LinearLayout>
@@ -199,13 +199,13 @@
 
                         <TextView
                             android:id="@+id/name_group4"
-                            android:layout_width="90dp"
-                            android:background="@color/color_accent"
+                            android:layout_width="64dp"
+                            android:background="@color/color_white"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:textColor="@color/color_black"
-                            android:layout_marginTop="5dp"
+                            android:textSize="14dp"
+                            android:textColor="@color/color_primary"
+                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="8dp" />
 
                     </LinearLayout>

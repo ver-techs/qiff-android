@@ -67,27 +67,31 @@ public class PointsTableCustomAdapter extends BaseAdapter {
         TextView wins_points_table = (TextView) view.findViewById(R.id.wins_points_table);
         wins_points_table.setText("WIN : " + pointsTableItemLocal.getWins());
         wins_points_table.setTypeface(custom_font);
+        wins_points_table.setTextColor(context.getResources().getColor(R.color.color_tertiary));
 
         TextView draws_points_table = (TextView) view.findViewById(R.id.draws_points_table);
         draws_points_table.setText("DRAW : " + pointsTableItemLocal.getDraws());
         draws_points_table.setTypeface(custom_font);
+        draws_points_table.setTextColor(context.getResources().getColor(R.color.color_tertiary));
 
         TextView losses_points_table = (TextView) view.findViewById(R.id.losses_points_table);
         losses_points_table.setText("LOSS : " + pointsTableItemLocal.getLosses());
         losses_points_table.setTypeface(custom_font);
+        losses_points_table.setTextColor(context.getResources().getColor(R.color.color_tertiary));
 
         TextView played_points_table = (TextView) view.findViewById(R.id.goal_difference_points_table);
         played_points_table.setText("GOAL DIFF : " + pointsTableItemLocal.getGoalDifference());
         played_points_table.setTypeface(custom_font);
+        played_points_table.setTextColor(context.getResources().getColor(R.color.color_tertiary));
 
         ImageView image_team_points_table = (ImageView) view.findViewById(R.id.image_team_points_table);
         image_team_points_table.setImageResource(findTeamLogo(pointsTableItemLocal.getTeamName()));
 
         LinearLayout total_points_layout = (LinearLayout) view.findViewById(R.id.total_points_layout);
         if(pointsTableItemLocal.isTopTwoInGroup())
-            total_points_layout.setBackgroundColor(context.getResources().getColor(R.color.color_main));
-        else
             total_points_layout.setBackgroundColor(context.getResources().getColor(R.color.color_primary));
+        else
+            total_points_layout.setBackgroundColor(context.getResources().getColor(R.color.color_complementary_1));
 
         return view;
     }
@@ -97,7 +101,7 @@ public class PointsTableCustomAdapter extends BaseAdapter {
 
         int resource_id = 0;
         switch (teamName){
-            case "NADHAM TCR" : resource_id = R.drawable.kmcc_mlp; break;
+            case "NADHAM TCR" : resource_id = R.drawable.kmcc_wnd; break;
             case "KMCC MLP" : resource_id = R.drawable.kmcc_mlp; break;
             case "KMCC KKD" : resource_id = R.drawable.kmcc_kkd; break;
             case "KMCC PKD" : resource_id = R.drawable.kmcc_pkd; break;

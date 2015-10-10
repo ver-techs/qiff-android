@@ -14,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:textColor="@color/color_main"
+        android:textColor="@color/color_white"
         android:gravity="center_horizontal"
         android:textStyle="italic"
         android:text="Football is the most played and most watched sport on earth !"
@@ -32,7 +32,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/color_accent"
+        android:background="@color/color_white"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"

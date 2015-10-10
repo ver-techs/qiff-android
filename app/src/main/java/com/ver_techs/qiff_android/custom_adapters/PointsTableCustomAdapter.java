@@ -97,22 +97,22 @@ public class PointsTableCustomAdapter extends BaseAdapter {
 
         int resource_id = 0;
         switch (teamName){
-            case "NADHAM TCR" : resource_id = R.drawable.team_1; break;
-            case "KMCC MLP" : resource_id = R.drawable.team_2; break;
-            case "KMCC KKD" : resource_id = R.drawable.team_3; break;
-            case "KMCC PKD" : resource_id = R.drawable.team_4; break;
-            case "SKIA TVM" : resource_id = R.drawable.team_5; break;
-            case "KMCC WND" : resource_id = R.drawable.team_6; break;
-            case "CFQ PTNMTA" : resource_id = R.drawable.team_1; break;
-            case "MAK KKD" : resource_id = R.drawable.team_2; break;
-            case "EDSO EKM" : resource_id = R.drawable.team_3; break;
-            case "MAMWAQ MLP" : resource_id = R.drawable.team_4; break;
-            case "KMCC KNR" : resource_id = R.drawable.team_5; break;
-            case "CFQ KKD" : resource_id =  R.drawable.team_6; break;
-            case "TYC TCR" : resource_id = R.drawable.team_1; break;
-            case "KMCC TCR" : resource_id = R.drawable.team_2; break;
-            case "KMCC KSGD" : resource_id = R.drawable.team_3; break;
-            case "KPAQ KKD" : resource_id = R.drawable.team_4; break;
+            case "NADHAM TCR" : resource_id = R.drawable.kmcc_mlp; break;
+            case "KMCC MLP" : resource_id = R.drawable.kmcc_mlp; break;
+            case "KMCC KKD" : resource_id = R.drawable.kmcc_kkd; break;
+            case "KMCC PKD" : resource_id = R.drawable.kmcc_pkd; break;
+            case "SKIA TVM" : resource_id = R.drawable.skia_tvm; break;
+            case "KMCC WND" : resource_id = R.drawable.kmcc_wnd; break;
+            case "CFQ PTNMTA" : resource_id = R.drawable.cfq_ptnmta; break;
+            case "MAK KKD" : resource_id = R.drawable.mak_kkd; break;
+            case "EDSO EKM" : resource_id = R.drawable.edso_ekm; break;
+            case "MAMWAQ MLP" : resource_id = R.drawable.mamwaq_mlp; break;
+            case "KMCC KNR" : resource_id = R.drawable.kmcc_knr; break;
+            case "CFQ KKD" : resource_id =  R.drawable.cfq_kkd; break;
+            case "TYC TCR" : resource_id = R.drawable.tyc_tcr; break;
+            case "KMCC TCR" : resource_id = R.drawable.kmcc_tcr; break;
+            case "KMCC KSGD" : resource_id = R.drawable.kmcc_ksgd; break;
+            case "KPAQ KKD" : resource_id = R.drawable.kpaq_kkd; break;
         }
         return resource_id;
     }

@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color_secondary</item>
-        <item name="colorPrimaryDark">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_tertiary</item>
         <item name="colorAccent">@color/color_white</item>
     </style>
 

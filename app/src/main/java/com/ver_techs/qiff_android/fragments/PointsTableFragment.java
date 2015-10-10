@@ -49,6 +49,7 @@ public class PointsTableFragment extends Fragment{
         final TextView name_group_2 = (TextView) v.findViewById(R.id.name_group2);
         final TextView name_group_3 = (TextView) v.findViewById(R.id.name_group3);
         final TextView name_group_4 = (TextView) v.findViewById(R.id.name_group4);
+        final TextView group_text = (TextView) v.findViewById(R.id.group_text);
 
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
 
@@ -56,6 +57,7 @@ public class PointsTableFragment extends Fragment{
         name_group_2.setTypeface(custom_font);
         name_group_3.setTypeface(custom_font);
         name_group_4.setTypeface(custom_font);
+        group_text.setTypeface(custom_font, Typeface.BOLD);
 
         pointsItemArrayList1 = new ArrayList<PointsTableItemLocal>();
 

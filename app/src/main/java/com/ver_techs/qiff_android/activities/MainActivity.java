@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
-        pager.setCurrentItem(1); //setting default tab to tab number 1 (index starting from 0)
+        pager.setCurrentItem(2); //setting default tab to tab number 1 (index starting from 0)
 
         // Assigning the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);

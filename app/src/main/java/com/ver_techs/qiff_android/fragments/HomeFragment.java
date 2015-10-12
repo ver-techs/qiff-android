@@ -55,7 +55,6 @@ public class HomeFragment extends Fragment{
         //setting font to all textviews
         TextView name_team1 = (TextView) v.findViewById(R.id.name_team1);
         TextView name_team2 = (TextView) v.findViewById(R.id.name_team2);
-        TextView time = (TextView) v.findViewById(R.id.time);
         TextView score_team1 = (TextView) v.findViewById(R.id.score_team1);
         TextView colon = (TextView) v.findViewById(R.id.colon);
         TextView score_team2 = (TextView) v.findViewById(R.id.score_team2);
@@ -65,7 +64,6 @@ public class HomeFragment extends Fragment{
 
         name_team1.setTypeface(custom_font);
         name_team2.setTypeface(custom_font);
-        time.setTypeface(custom_font);
         score_team1.setTypeface(custom_font);
         colon.setTypeface(custom_font);
         score_team2.setTypeface(custom_font);
@@ -74,18 +72,18 @@ public class HomeFragment extends Fragment{
 
         //ensuring parent and child scrolls views work fine on touch
 
-        ScrollView parentScroll = (ScrollView) v.findViewById(R.id.parentScroll);
+        //ScrollView parentScroll = (ScrollView) v.findViewById(R.id.parentScroll);
         ScrollView childScroll1 = (ScrollView) v.findViewById(R.id.childScroll1);
 
-        parentScroll.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                getView().findViewById(R.id.childScroll1).getParent().requestDisallowInterceptTouchEvent(false);
-                getView().findViewById(R.id.childScroll2).getParent().requestDisallowInterceptTouchEvent(false);
-                return false;
-            }
-
-        });
+//        parentScroll.setOnTouchListener(new View.OnTouchListener() {
+//
+//            public boolean onTouch(View v, MotionEvent event) {
+//                getView().findViewById(R.id.childScroll1).getParent().requestDisallowInterceptTouchEvent(false);
+//                getView().findViewById(R.id.childScroll2).getParent().requestDisallowInterceptTouchEvent(false);
+//                return false;
+//            }
+//
+//        });
         childScroll1.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
@@ -129,15 +127,6 @@ public class HomeFragment extends Fragment{
 
                             name_team1.setText(liveMatchItem.getString("teamName1"));  //set team names
                             name_team2.setText(liveMatchItem.getString("teamName2"));
-
-                            if(liveMatchItem.getString("dateTime").contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
-                                time.setText(elapsedMinutes(liveMatchItem.getString("dateTime").replace("Start", ""))); //remove substring start
-                            }
-                            else if (liveMatchItem.getString("dateTime").contains("Second")) {
-                                time.setText(elapsedMinutes(liveMatchItem.getString("dateTime").replace("Second", ""))+ " (2)"); //remove subtsring second
-                            }
-                            else
-                                time.setText(liveMatchItem.getString("dateTime"));
 
                             score_team1.setText(liveMatchItem.getString("scoreTeam1")); //set scores
                             colon.setText(":");

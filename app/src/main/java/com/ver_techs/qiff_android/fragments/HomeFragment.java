@@ -57,6 +57,7 @@ public class HomeFragment extends Fragment{
         TextView name_team2 = (TextView) v.findViewById(R.id.name_team2);
         TextView score_team1 = (TextView) v.findViewById(R.id.score_team1);
         TextView colon = (TextView) v.findViewById(R.id.colon);
+        TextView time = (TextView) v.findViewById(R.id.time);
         TextView score_team2 = (TextView) v.findViewById(R.id.score_team2);
         TextView live_commentary = (TextView) v.findViewById(R.id.live_commentary);
 
@@ -66,6 +67,7 @@ public class HomeFragment extends Fragment{
         name_team2.setTypeface(custom_font);
         score_team1.setTypeface(custom_font);
         colon.setTypeface(custom_font);
+        time.setTypeface(custom_font);
         score_team2.setTypeface(custom_font);
         live_commentary.setTypeface(custom_font);
 
@@ -128,8 +130,17 @@ public class HomeFragment extends Fragment{
                             name_team1.setText(liveMatchItem.getString("teamName1"));  //set team names
                             name_team2.setText(liveMatchItem.getString("teamName2"));
 
+                            if(liveMatchItem.getString("dateTime").contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
+                                time.setText(elapsedMinutes(liveMatchItem.getString("dateTime").replace("Start", ""))); //remove substring start
+                            }
+                            else if (liveMatchItem.getString("dateTime").contains("Second")) {
+                                time.setText(elapsedMinutes(liveMatchItem.getString("dateTime").replace("Second", ""))+ " (2)"); //remove subtsring second
+                            }
+                            else
+                                time.setText(liveMatchItem.getString("dateTime"));
+
                             score_team1.setText(liveMatchItem.getString("scoreTeam1")); //set scores
-                            colon.setText(":");
+                            colon.setText("X");
                             score_team2.setText(liveMatchItem.getString("scoreTeam2"));
 
                             team1_logo.setImageResource(findTeamLogo(liveMatchItem.getString("teamName1")));
@@ -175,7 +186,7 @@ public class HomeFragment extends Fragment{
                         minute.setText(liveCommentaryItemList.get(i).getMinute());
                         minute.setTextSize(16);
                         minute.setTypeface(custom_font, Typeface.BOLD);
-                        minute.setTextColor(getResources().getColor(R.color.color_white));
+                        minute.setTextColor(getResources().getColor(R.color.color_complementary_1));
                         tr_1.addView(minute);// add the column to the table row here
 
                         TextView colon = new TextView(getActivity());

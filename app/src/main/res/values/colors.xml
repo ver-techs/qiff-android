@@ -6,6 +6,7 @@
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
     <color name="color_complementary_1">#61002B</color>
-    <color name="color_complementary_2">#4CAF50</color>
-    <color name="color_complementary_3">#BDBDBD</color>
+    <color name="color_complementary_2">#4DB6AC</color>
+    <color name="color_complementary_3">#E0E0E0</color>
+    <color name="color_complementary_4">#308474</color>
 </resources>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ver_techs.qiff_android.R;
@@ -128,17 +129,26 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
 
             //code to set background color to winning and losing teams
 
+            RelativeLayout teamName1RelativeLayout = (RelativeLayout) view.findViewById(R.id.teamName1RelativeLayout);
+            RelativeLayout teamName2RelativeLayout = (RelativeLayout) view.findViewById(R.id.teamName2RelativeLayout);
+
             if(fixtureItemLocal.getScoreTeam1().compareTo(fixtureItemLocal.getScoreTeam2()) != 0) {
                 if (fixtureItemLocal.getScoreTeam1().compareTo(fixtureItemLocal.getScoreTeam2()) > 0) {
-                    teamName1.setBackgroundResource(R.drawable.rectangle_background_winning_team);
-                    teamName2.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                    teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_winning_team);
+                    teamName1.setTextColor(context.getResources().getColor(R.color.color_white));
+                    teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                    teamName2.setTextColor(context.getResources().getColor(R.color.color_primary));
                 } else {
-                    teamName1.setBackgroundResource(R.drawable.rectangle_background_losing_team);
-                    teamName2.setBackgroundResource(R.drawable.rectangle_background_winning_team);
+                    teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                    teamName1.setTextColor(context.getResources().getColor(R.color.color_primary));
+                    teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_winning_team);
+                    teamName2.setTextColor(context.getResources().getColor(R.color.color_white));
                 }
             }else{
-                teamName1.setBackgroundResource(R.drawable.rectangle_background_losing_team);
-                teamName2.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
+                teamName1.setTextColor(context.getResources().getColor(R.color.color_primary));
+                teamName2.setTextColor(context.getResources().getColor(R.color.color_primary));
             }
 
             //code to assign background color to fixture list items and make other widgets visible

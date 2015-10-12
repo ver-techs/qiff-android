@@ -48,16 +48,26 @@
                 android:layout_marginLeft="5dp"
                 android:layout_height="25dp" />
 
-            <TextView
-                android:id="@+id/name_team1_fixture"
+            <RelativeLayout
+                android:id="@+id/teamName1RelativeLayout"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="14dp"
-                android:textColor="@color/color_primary"
                 android:layout_column="1">
-            </TextView>
+
+                <TextView
+                    android:id="@+id/name_team1_fixture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_centerInParent="true"
+                    android:textSize="14dp"
+                    android:textColor="@color/color_primary">
+                </TextView>
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/colon_fixture"
@@ -71,16 +81,26 @@
                 android:layout_column="2">
             </TextView>
 
-            <TextView
-                android:id="@+id/name_team2_fixture"
+            <RelativeLayout
+                android:id="@+id/teamName2RelativeLayout"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="14dp"
-                android:textColor="@color/color_primary"
                 android:layout_column="3">
-            </TextView>
+
+                <TextView
+                    android:id="@+id/name_team2_fixture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"
+                    android:textSize="14dp"
+                    android:textColor="@color/color_primary">
+                </TextView>
+
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/image_team2_fixture"

@@ -52,6 +52,7 @@
                 android:id="@+id/colon_fixture"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:text="X"
                 android:textColor="@color/color_complementary_1"

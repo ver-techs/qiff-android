@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.ver_techs.qiff_android.R;
 
+//Class to define custom design to progress dialog
 public class CustomProgressDialog extends ProgressDialog {
 
     public CustomProgressDialog(Context context) {

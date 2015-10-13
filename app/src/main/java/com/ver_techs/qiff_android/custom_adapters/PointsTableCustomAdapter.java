@@ -86,6 +86,7 @@ public class PointsTableCustomAdapter extends BaseAdapter {
         ImageView image_team_points_table = (ImageView) view.findViewById(R.id.image_team_points_table);
         image_team_points_table.setImageResource(findTeamLogo(pointsTableItemLocal.getTeamName()));
 
+        //if the teams are the top two in the respective groups, set background of their total points to green, else to red
         LinearLayout total_points_layout = (LinearLayout) view.findViewById(R.id.total_points_layout);
         if(pointsTableItemLocal.isTopTwoInGroup())
             total_points_layout.setBackgroundColor(context.getResources().getColor(R.color.color_primary));

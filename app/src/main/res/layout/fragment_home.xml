@@ -18,10 +18,9 @@
             android:background="@drawable/rectangle_background_heading_home_fragment">
 
         <TextView
-            android:id="@+id/about_text"
+            android:id="@+id/home_fragment_heading_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TODAY'S MATCH"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:textSize="16dp"
@@ -125,11 +124,10 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/colon"
+                        android:id="@+id/colon_home"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="X"
                         android:textColor="@color/color_secondary"
                         android:gravity="center"
                         android:textSize="40dp"

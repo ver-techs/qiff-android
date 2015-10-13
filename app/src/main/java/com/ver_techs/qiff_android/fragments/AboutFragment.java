@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ver_techs.qiff_android.R;
 
+//Class that defines Fragment with details about QIFF
 public class AboutFragment extends Fragment{
 
     View v;
@@ -20,6 +21,7 @@ public class AboutFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_about, container, false);
 
+        //set custom font to all the text views
         custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
 
         TextView match_schedule_text = (TextView) v.findViewById(R.id.about_text);

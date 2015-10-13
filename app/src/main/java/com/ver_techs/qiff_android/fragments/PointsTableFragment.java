@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,6 +51,10 @@ public class PointsTableFragment extends Fragment{
         final TextView name_group_3 = (TextView) v.findViewById(R.id.name_group3);
         final TextView name_group_4 = (TextView) v.findViewById(R.id.name_group4);
         final TextView group_text = (TextView) v.findViewById(R.id.group_text);
+        final ImageView image_people_group_1 = (ImageView) v.findViewById(R.id.image_people_group_1);
+        final ImageView image_people_group_2 = (ImageView) v.findViewById(R.id.image_people_group_2);
+        final ImageView image_people_group_3 = (ImageView) v.findViewById(R.id.image_people_group_3);
+        final ImageView image_people_group_4 = (ImageView) v.findViewById(R.id.image_people_group_4);
 
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
 
@@ -77,6 +82,7 @@ public class PointsTableFragment extends Fragment{
                     // Access the array of results here
                     for (int i = 0; i < pointsTableItemsList.size(); i++) {
 
+                        //check if the list item is among the top two in the group
                         boolean isTopTwoInGroup;
                         if(i < 2)
                             isTopTwoInGroup=true;
@@ -94,6 +100,7 @@ public class PointsTableFragment extends Fragment{
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
                     name_group_1.setText("GROUP I");
+                    image_people_group_1.setImageResource(R.drawable.icon_people);
                     PointsTableCustomAdapter pointsTableListAdapter1 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList1); //get a new istance of adapter for fixture view
                     ListView pointsTableList1 = (ListView) v.findViewById(R.id.list_teams_group1); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList1);
@@ -140,6 +147,7 @@ public class PointsTableFragment extends Fragment{
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
                     name_group_2.setText("GROUP II");
+                    image_people_group_2.setImageResource(R.drawable.icon_people);
                     PointsTableCustomAdapter pointsTableListAdapter2 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList2); //get a new istance of adapter for fixture view
                     ListView pointsTableList2 = (ListView) v.findViewById(R.id.list_teams_group2); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList2);
@@ -187,6 +195,7 @@ public class PointsTableFragment extends Fragment{
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
                     name_group_3.setText("GROUP III");
+                    image_people_group_3.setImageResource(R.drawable.icon_people);
                     PointsTableCustomAdapter pointsTableListAdapter3 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList3); //get a new istance of adapter for fixture view
                     ListView pointsTableList3 = (ListView) v.findViewById(R.id.list_teams_group3); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList3);
@@ -234,6 +243,7 @@ public class PointsTableFragment extends Fragment{
                     allFourQueriesDone++;
                     if(allFourQueriesDone == 4) nDialog.cancel();
                     name_group_4.setText("GROUP IV");
+                    image_people_group_4.setImageResource(R.drawable.icon_people);
                     PointsTableCustomAdapter pointsTableListAdapter4 = new PointsTableCustomAdapter(getActivity(), pointsItemArrayList4); //get a new istance of adapter for fixture view
                     ListView pointsTableList4 = (ListView) v.findViewById(R.id.list_teams_group4); //find the listview to load fixture items
                     setListViewHeightBasedOnChildren(pointsTableList4);

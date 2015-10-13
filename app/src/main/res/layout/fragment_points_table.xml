@@ -57,9 +57,9 @@
                         android:background="@drawable/header_line">
 
                         <ImageView
+                            android:id="@+id/image_people_group_1"
                             android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/icon_people"/>
+                            android:layout_height="40dp"/>
 
                         <TextView
                             android:id="@+id/name_group1"
@@ -109,9 +109,9 @@
                         android:background="@drawable/header_line">
 
                         <ImageView
+                            android:id="@+id/image_people_group_2"
                             android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/icon_people"/>
+                            android:layout_height="40dp"/>
 
                         <TextView
                             android:id="@+id/name_group2"
@@ -160,9 +160,9 @@
                         android:background="@drawable/header_line">
 
                         <ImageView
+                            android:id="@+id/image_people_group_3"
                             android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/icon_people"/>
+                            android:layout_height="40dp"/>
 
                         <TextView
                             android:id="@+id/name_group3"
@@ -211,9 +211,9 @@
                         android:background="@drawable/header_line">
 
                         <ImageView
+                            android:id="@+id/image_people_group_4"
                             android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/icon_people"/>
+                            android:layout_height="40dp"/>
 
                         <TextView
                             android:id="@+id/name_group4"

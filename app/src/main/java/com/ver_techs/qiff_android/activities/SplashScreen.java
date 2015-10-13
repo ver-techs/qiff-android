@@ -46,6 +46,7 @@ public class SplashScreen extends Activity {
         Random rand = new Random();
         int randomNum = rand.nextInt(facts.length);
 
+        //Set fonts on all text views
         final TextView factView = (TextView) findViewById(R.id.FootballFact);
         factView.setText(facts[randomNum]);
 
@@ -79,11 +80,13 @@ public class SplashScreen extends Activity {
         }, SPLASH_TIME_OUT);
     }
 
+    //function to check if facebook is logged in
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
     }
 
+    //function to animate splash view as fade in
     private void StartAnimations() {
 
         Animation anim = AnimationUtils .loadAnimation(this, R.anim.alpha);

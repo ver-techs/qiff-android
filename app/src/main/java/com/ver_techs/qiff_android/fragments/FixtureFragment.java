@@ -56,6 +56,10 @@ public class FixtureFragment extends Fragment {
         nDialog.setCancelable(false);
         nDialog.show();
 
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setEnabled(false); //disable the swipe refresh
+
+        //set font to header in the fragment
         TextView match_schedule_text = (TextView) v.findViewById(R.id.match_schedule_text);
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), getActivity().getString(R.string.font_path));
         match_schedule_text.setTypeface(custom_font, Typeface.BOLD);
@@ -68,22 +72,23 @@ public class FixtureFragment extends Fragment {
         // Apply the adapter to the spinner
         spinner.setAdapter(spinnerAdapter);
 
+        //set a listener to the spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-                if (position == 1) {
+                if (position == 1) { //if Upcoming is selected, load the upcoming fixture items
                     upcomingSelected = true;
                     loadFixtureItems(upcomingSelected);
                 }
-                else{
+                else{ //if Forgoing is selected, load the forgoing fixture items
                     upcomingSelected = false;
                     loadFixtureItems(upcomingSelected);
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
+            public void onNothingSelected(AdapterView<?> parentView) { //if no selection is done on the spinner drop, down, load the upcoming fixture items by default
                 upcomingSelected = true;
                 loadFixtureItems(upcomingSelected);
             }
@@ -93,32 +98,31 @@ public class FixtureFragment extends Fragment {
         return v;
     }
 
-    public void loadFixtureItems(final boolean upcomingSelected){
+    public void loadFixtureItems(final boolean upcomingSelected){ //function to get fixture items from parse, and set adapter on it, in fixture fragment
+
         fixtureList = (ListView) v.findViewById(R.id.list_fixture); //find the listview to load fixture items
         fixtureItemArrayList = new ArrayList<FixtureItemLocal>();
-        swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_refresh_layout);
 
         setRetainInstance(true); //configure the fragment instance to be retained on configuration change
 
-        ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
+        ParseConfig.getInBackground(new ConfigCallback() {
+
             @Override
             public void done(ParseConfig config, ParseException e) { //parse query successful
-                final String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
-                Log.d("aaki", currentOrLastMatchId);
 
                 // Define the class we would like to query
                 ParseQuery<FixtureItem> query = ParseQuery.getQuery(FixtureItem.class);
                 query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
-                if(upcomingSelected)
+                if(upcomingSelected) //check which list items to fetch from parse - forgoing or upcmoming
                     query.whereNotEqualTo("matchCompleted", "FT");
                 else
                     query.whereEqualTo("matchCompleted", "FT");
 
                 if(upcomingSelected)
-                    query.addAscendingOrder("createdAt"); //get results in ascending order of creation
+                    query.addAscendingOrder("createdAt"); //get results in ascending order of creation - for upcoming items
                 else
-                    query.addDescendingOrder("createdAt"); //get results in descending order of creation
+                    query.addDescendingOrder("createdAt"); //get results in descending order of creation - for forgoing items
 
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<FixtureItem>() {
@@ -136,7 +140,7 @@ public class FixtureFragment extends Fragment {
                                 if (i == 0) {
                                     isSeparator = true;
                                 } else {
-                                    // Move to previous
+                                    // Get dates of current and previous fixture, check if date has changed, if so add a header to list
                                     String previousFixtureItemDate = fixtureItemList.get(i - 1).getTimeDate();
                                     String currentFixtureItemDate = fixtureItemList.get(i).getTimeDate();
 
@@ -161,19 +165,18 @@ public class FixtureFragment extends Fragment {
                                     fixtureItemArrayList.add(fixtureItemLocal);
                                 }
 
+                                //always create one fixture item to correspond to the object returned by query
                                 FixtureItemLocal fixtureItemLocal = new FixtureItemLocal(fixtureItemList.get(i).getTeamName1(), fixtureItemList.get(i).getTeamName2(),
                                         fixtureItemList.get(i).getScoreTeam1(), fixtureItemList.get(i).getScoreTeam2(), fixtureItemList.get(i).getTimeDate(), fixtureItemList.get(i).getMatchStatus(),false);
                                 fixtureItemArrayList.add(fixtureItemLocal);
 
-                                if (fixtureItemList.get(i).getObjectId().equals(currentOrLastMatchId))
-                                    currentMatch = i;
                             }
                             //Log.i("aaki", "task doing " + Integer.toString(fixtureItemArrayList.size()));
                             //Log.i("aaki", String.valueOf(currentMatch));
 
-                            nDialog.cancel();
+                            nDialog.cancel(); //cancel the dialog once load has completed
 
-                            if(upcomingSelected) {
+                            if(upcomingSelected) { //set the appropriate adapter to the list based on dropdown selection
                                 upcomingFixtureCustomAdapter = new UpcomingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
                                 fixtureList.setAdapter(upcomingFixtureCustomAdapter); //set the adapter to the listview
                             }
@@ -181,7 +184,6 @@ public class FixtureFragment extends Fragment {
                                 forgoingFixtureListAdapter = new ForgoingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
                                 fixtureList.setAdapter(forgoingFixtureListAdapter); //set the adapter to the listview
                             }
-                            //fixtureList.setSelection(currentMatch);
 
                         } else {
                             Log.d("item", "Error: " + e.getMessage());
@@ -192,19 +194,6 @@ public class FixtureFragment extends Fragment {
             }
 
         });
-    }
-
-    public static String right(String str, int len) {
-        if (str == null) {
-            return null;
-        }
-        if (len < 0) {
-            return "";
-        }
-        if (str.length() <= len) {
-            return str;
-        }
-        return str.substring(str.length() - len);
     }
 
 }

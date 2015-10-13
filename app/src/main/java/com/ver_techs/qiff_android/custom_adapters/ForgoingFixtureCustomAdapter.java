@@ -46,11 +46,11 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return getCount();
+        return getCount(); //return total number of all list items of all view types
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public int getItemViewType(int position) { //function to decide view type of a list item - whether it a regular list item or a header
         boolean isSection = fixtureItemArrayList.get(position).isAHeader();
 
         if (isSection) {
@@ -77,7 +77,7 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext()); //inflate a list item progress_spin
 
             if (itemViewType == ITEM_TYPE_HEADER) {
-                // If its a section
+                // If its a section header
                 view = inflater.inflate(R.layout.layout_date_section_header, parent, false);
             }
             else {
@@ -90,7 +90,7 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
             view = convertView;
         }
 
-        if(itemViewType == ITEM_TYPE_HEADER) {
+        if(itemViewType == ITEM_TYPE_HEADER) {  //if item is a header
 
             final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index);
 
@@ -101,7 +101,7 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
             separatorTextView.setTypeface(custom_font, Typeface.BOLD);
 
         }
-        else {
+        else { //if item is a regular fixture list item
 
             final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index); //get the fixture item from the list to populate into the progress_spin
 
@@ -133,34 +133,25 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
             RelativeLayout teamName2RelativeLayout = (RelativeLayout) view.findViewById(R.id.teamName2RelativeLayout);
 
             if(fixtureItemLocal.getScoreTeam1().compareTo(fixtureItemLocal.getScoreTeam2()) != 0) {
-                if (fixtureItemLocal.getScoreTeam1().compareTo(fixtureItemLocal.getScoreTeam2()) > 0) {
+                if (fixtureItemLocal.getScoreTeam1().compareTo(fixtureItemLocal.getScoreTeam2()) > 0) { //if team1 won
                     teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_winning_team);
                     teamName1.setTextColor(context.getResources().getColor(R.color.color_white));
                     teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
                     teamName2.setTextColor(context.getResources().getColor(R.color.color_primary));
-                } else {
+                } else { //if team2 won
                     teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
                     teamName1.setTextColor(context.getResources().getColor(R.color.color_primary));
                     teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_winning_team);
                     teamName2.setTextColor(context.getResources().getColor(R.color.color_white));
                 }
-            }else{
+            }else{ //if it is a draw
                 teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
                 teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
                 teamName1.setTextColor(context.getResources().getColor(R.color.color_primary));
                 teamName2.setTextColor(context.getResources().getColor(R.color.color_primary));
             }
 
-            //code to assign background color to fixture list items and make other widgets visible
-            if(fixtureItemLocal.getTimeDate().matches("FT")) //if match is over
-                view.setBackgroundColor(context.getResources().getColor(R.color.color_tertiary));
-            else if(fixtureItemLocal.getTimeDate().charAt(0) == 'S') { //if match is ongoing
-                colon_fixture.setTextColor(context.getResources().getColor(R.color.color_secondary)); //make colon visible
-                teamName1.setTextColor(context.getResources().getColor(R.color.color_secondary));
-                teamName2.setTextColor(context.getResources().getColor(R.color.color_secondary));
-                teamName1.setTypeface(custom_font, Typeface.BOLD);
-                teamName2.setTypeface(custom_font, Typeface.BOLD);
-            }
+            //set team logos
             ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1_fixture);
             team1_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName1()));
 

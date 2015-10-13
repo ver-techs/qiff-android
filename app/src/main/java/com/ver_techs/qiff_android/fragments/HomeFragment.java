@@ -47,16 +47,18 @@ public class HomeFragment extends Fragment{
     Boolean touchedOnce = false; //boolean to determine if chatbox is being focused on for first time or not
     Typeface custom_font;
     View v;
+    TextView aboutText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v =inflater.inflate(R.layout.fragment_home,container,false);
 
         //setting font to all textviews
+        aboutText = (TextView) v.findViewById(R.id.home_fragment_heading_text);
         TextView name_team1 = (TextView) v.findViewById(R.id.name_team1);
         TextView name_team2 = (TextView) v.findViewById(R.id.name_team2);
         TextView score_team1 = (TextView) v.findViewById(R.id.score_team1);
-        TextView colon = (TextView) v.findViewById(R.id.colon);
+        TextView colon = (TextView) v.findViewById(R.id.colon_home);
         TextView time = (TextView) v.findViewById(R.id.time);
         TextView score_team2 = (TextView) v.findViewById(R.id.score_team2);
         TextView live_commentary = (TextView) v.findViewById(R.id.live_commentary);
@@ -117,7 +119,7 @@ public class HomeFragment extends Fragment{
                 final TextView name_team2 = (TextView) v.findViewById(R.id.name_team2);
                 final TextView time = (TextView) v.findViewById(R.id.time);
                 final TextView score_team1 = (TextView) v.findViewById(R.id.score_team1);
-                final TextView colon = (TextView) v.findViewById(R.id.colon);
+                final TextView colon = (TextView) v.findViewById(R.id.colon_home);
                 final TextView score_team2 = (TextView) v.findViewById(R.id.score_team2);
                 final ImageView team1_logo = (ImageView) v.findViewById(R.id.image_team1);
                 final ImageView team2_logo = (ImageView) v.findViewById(R.id.image_team2);
@@ -130,15 +132,26 @@ public class HomeFragment extends Fragment{
                             name_team1.setText(liveMatchItem.getString("teamName1"));  //set team names
                             name_team2.setText(liveMatchItem.getString("teamName2"));
 
-                            if(liveMatchItem.getString("dateTime").contains("Start")) { //control logic for dateTime field to account for various fixture scenarios
-                                time.setText(elapsedMinutes(liveMatchItem.getString("dateTime").replace("Start", ""))); //remove substring start
-                            }
-                            else if (liveMatchItem.getString("dateTime").contains("Second")) {
-                                time.setText(elapsedMinutes(liveMatchItem.getString("dateTime").replace("Second", ""))+ " (2)"); //remove subtsring second
-                            }
-                            else
-                                time.setText(liveMatchItem.getString("dateTime"));
+                            if(checkIfMatchDateIsToday(liveMatchItem.getString("dateTime"))){ //check if match is scheduled for today
+                                //change home fragment header according to if match is today or not
+                                aboutText.setText("TODAY'S MATCH");
 
+                                if(liveMatchItem.getString("matchCompleted").contains("Start"))  //control logic for dateTime field to account for various fixture scenarios
+                                    time.setText(elapsedMinutes(liveMatchItem.getString("matchCompleted").replace("Start", ""))); //remove substring start
+                                else if (liveMatchItem.getString("matchCompleted").contains("Second"))
+                                    time.setText(elapsedMinutes(liveMatchItem.getString("matchCompleted").replace("Second", ""))+ " (2)"); //remove subtsring second
+                                else{
+                                    int check = matchStartsIn60Minutes(liveMatchItem.getString("dateTime")); //check if match starts in 60 minutes
+                                    if(check != -1)  //if yes, print countdown
+                                        time.setText("Counting down " + String.valueOf(check) + "\" !");
+                                    else //if not, say it is an upcoming match
+                                        time.setText("Upcoming Match !");
+                                }
+                            }
+                            else {
+                                aboutText.setText("LAST MATCH");
+                                time.setText(liveMatchItem.getString("dateTime"));
+                            }
                             score_team1.setText(liveMatchItem.getString("scoreTeam1")); //set scores
                             colon.setText("X");
                             score_team2.setText(liveMatchItem.getString("scoreTeam2"));
@@ -226,8 +239,51 @@ public class HomeFragment extends Fragment{
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
+
         return String.valueOf(minutes) + "\"";  //return the elapsed minutes wid double qoute at the end
     }
+
+    public boolean checkIfMatchDateIsToday(String matchDate){ //function to check if a match is scheduled for today
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
+        Boolean result = false;
+        Date timeNow = new Date(); //get current date
+        int dateDifference, monthDifference;
+        try { //get difference between match date and current date
+            dateDifference = simpleDateFormat.parse(matchDate).getDate() - //parse the matchDate, get date
+                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getDate(); //parse the current date, get date
+            monthDifference = simpleDateFormat.parse(matchDate).getMonth() - //parse the matchDate, get month
+                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getMonth(); //parse the current date, get month
+            if(dateDifference == 0 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
+                result=true;
+            else
+                result=false;
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int matchStartsIn60Minutes(String matchDate){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
+        int result = -1;
+        Date timeNow = new Date(); //get current date
+        int minuteDifference = -1;
+        try { //get difference between match date and current date
+            minuteDifference =(int) ((simpleDateFormat.parse(matchDate).getTime() - //parse the matchDate, get time in milliseconds
+                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getTime())*0.00001667); //parse the current date, get time in milliseconds
+            if(minuteDifference <= 60) //after converting to minutes, check if minute difference is less than 60
+                result = minuteDifference; //if so return the countdown
+            else
+                result = -1; //if not, return false
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        if(result > 0)
+            return result;
+
+        return -1;
+    }
+
 
     public int findTeamLogo(String teamName){
         // code to find corresponding image of respective teams

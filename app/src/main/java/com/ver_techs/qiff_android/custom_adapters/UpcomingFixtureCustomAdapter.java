@@ -52,7 +52,7 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public int getItemViewType(int position) { //get type of list item, whether it is regular or a header item
         boolean isSection = fixtureItemArrayList.get(position).isAHeader();
 
         if (isSection) {
@@ -92,7 +92,7 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
             view = convertView;
         }
 
-        if(itemViewType == ITEM_TYPE_HEADER) {
+        if(itemViewType == ITEM_TYPE_HEADER) { // if list item is a header
 
             final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index);
 
@@ -103,7 +103,7 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
             separatorTextView.setTypeface(custom_font, Typeface.BOLD);
 
         }
-        else {
+        else { //if list item is a regular fixture item
 
             final FixtureItemLocal fixtureItemLocal = fixtureItemArrayList.get(index); //get the fixture item from the list to populate into the progress_spin
 
@@ -126,7 +126,7 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
             if(checkIfMatchDateIsToday(fixtureItemLocal.getTimeDate())){ //check if match is scheduled for today
                 if(fixtureItemLocal.getMatchStatus().contains("Start"))  //control logic for dateTime field to account for various fixture scenarios
                     time.setText(elapsedMinutes(fixtureItemLocal.getMatchStatus().replace("Start", ""))); //remove substring start
-                else if (fixtureItemLocal.getTimeDate().contains("Second"))
+                else if (fixtureItemLocal.getMatchStatus().contains("Second"))
                     time.setText(elapsedMinutes(fixtureItemLocal.getMatchStatus().replace("Second", ""))+ " (2)"); //remove subtsring second
                 else{
                     int check = matchStartsIn60Minutes(fixtureItemLocal.getTimeDate()); //check if match starts in 60 minutes
@@ -140,16 +140,6 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
                 time.setText(fixtureItemLocal.getTimeDate().substring(6,14));
             time.setTypeface(custom_font, Typeface.ITALIC);
 
-            //code to assign background color to fixture list items and make other widgets visible
-            if(fixtureItemLocal.getTimeDate().matches("FT")) //if match is over
-                view.setBackgroundColor(context.getResources().getColor(R.color.color_tertiary));
-            else if(fixtureItemLocal.getTimeDate().charAt(0) == 'S') { //if match is ongoing
-                colon_fixture.setTextColor(context.getResources().getColor(R.color.color_secondary)); //make colon visible
-                teamName1.setTextColor(context.getResources().getColor(R.color.color_secondary));
-                teamName2.setTextColor(context.getResources().getColor(R.color.color_secondary));
-                teamName1.setTypeface(custom_font, Typeface.BOLD);
-                teamName2.setTypeface(custom_font, Typeface.BOLD);
-            }
             ImageView team1_logo = (ImageView) view.findViewById(R.id.image_team1_fixture);
             team1_logo.setImageResource(findTeamLogo(fixtureItemLocal.getTeamName1()));
 

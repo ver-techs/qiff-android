@@ -24,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
 
-    CharSequence titles[] = {"About", "Fixture", "Home", "Points Table"}; //sequence of title for tabs
+    CharSequence titles[] = {"Fixture", "Home", "Points Table", "About"}; //sequence of title for tabs
     int numbOfTabs = 4;
 
     @Override
@@ -99,12 +99,12 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        if(isLoggedIn()) {
+        //if(isLoggedIn()) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
+        //}
     }
 
 }

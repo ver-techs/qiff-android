@@ -46,11 +46,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/time"
-            android:layout_marginTop="15dp"
-            android:textSize="30dp"
+            android:layout_marginTop="14dp"
+            android:textSize="25dp"
             android:layout_centerHorizontal="true"
             android:textColor="@color/color_white"
-            android:layout_height="50dp" />
+            android:layout_height="40dp" />
 
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -62,8 +62,7 @@
             android:layout_marginLeft="14dp"
             android:layout_marginBottom="25dp"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="3"
+            android:layout_height="120dp"
             card_view:cardElevation="5sp"
             card_view:cardBackgroundColor="@color/color_complementary_4">
 
@@ -165,7 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:orientation="vertical"
-        android:weightSum="4">
+        android:weightSum="10">
 
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -174,10 +173,10 @@
             android:layout_marginTop="14dp"
             android:layout_marginRight="14dp"
             android:layout_marginLeft="14dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="1dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="9"
             card_view:cardElevation="5sp"
             card_view:cardBackgroundColor="@color/color_white">
 
@@ -221,7 +220,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_height="100dp">
+                    android:layout_height="140dp">
 
                     <TableLayout
                         android:id="@+id/live_commentary_table"
@@ -239,12 +238,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
             android:src="@drawable/image_crowd"/>
 
         </RelativeLayout>

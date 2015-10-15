@@ -46,7 +46,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email : info@qiff.com"
+        android:text="Email : info@qiff.qa"
         android:id="@+id/email_text"
         android:textColor="@color/color_white"
         android:layout_centerVertical="true"
@@ -89,12 +89,24 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:id="@+id/imageView2"
+            android:id="@+id/vertechs_logo_about"
             android:src="@drawable/vertechs"
             android:layout_gravity="right"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:clickable="true"/>
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/icon_facebook"
+        android:src="@drawable/icon_facebook"
+        android:layout_alignBottom="@+id/mobile_text"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="7dp"
+        android:layout_toLeftOf="@+id/email_text"
+        android:layout_toStartOf="@+id/email_text" />
 
 </RelativeLayout>

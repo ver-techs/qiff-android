@@ -1,12 +1,15 @@
 package com.ver_techs.qiff_android.fragments;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ver_techs.qiff_android.R;
@@ -38,6 +41,30 @@ public class AboutFragment extends Fragment{
 
         TextView powered_by = (TextView) v.findViewById(R.id.powered_by);
         powered_by.setTypeface(custom_font);
+
+        ImageView vertechs_logo_about = (ImageView) v.findViewById(R.id.vertechs_logo_about);
+        vertechs_logo_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://www.facebook.com/Vertechs?fref=ts"));
+                startActivity(intent);
+            }
+        });
+
+        ImageView icon_facebook = (ImageView) v.findViewById(R.id.icon_facebook);
+        icon_facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://www.facebook.com/QatarIndianFootballForum"));
+                startActivity(intent);
+            }
+        });
 
         return v;
     }

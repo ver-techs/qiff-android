@@ -137,18 +137,18 @@ public class ForgoingFixtureCustomAdapter extends BaseAdapter {
                     teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_winning_team);
                     teamName1.setTextColor(context.getResources().getColor(R.color.color_white));
                     teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
-                    teamName2.setTextColor(context.getResources().getColor(R.color.color_primary));
+                    teamName2.setTextColor(context.getResources().getColor(R.color.color_white));
                 } else { //if team2 won
                     teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
-                    teamName1.setTextColor(context.getResources().getColor(R.color.color_primary));
+                    teamName1.setTextColor(context.getResources().getColor(R.color.color_white));
                     teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_winning_team);
                     teamName2.setTextColor(context.getResources().getColor(R.color.color_white));
                 }
             }else{ //if it is a draw
                 teamName1RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
                 teamName2RelativeLayout.setBackgroundResource(R.drawable.rectangle_background_losing_team);
-                teamName1.setTextColor(context.getResources().getColor(R.color.color_primary));
-                teamName2.setTextColor(context.getResources().getColor(R.color.color_primary));
+                teamName1.setTextColor(context.getResources().getColor(R.color.color_white));
+                teamName2.setTextColor(context.getResources().getColor(R.color.color_white));
             }
 
             //set team logos

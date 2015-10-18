@@ -3,7 +3,7 @@
 <android.support.design.widget.CoordinatorLayout
     android:id="@+id/main_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,15 +25,15 @@
                 android:layout_height="40dp"
                 android:background="@drawable/rectangle_background_heading_home_fragment">
 
-            <TextView
-                android:id="@+id/home_fragment_heading_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
-                android:textSize="16dp"
-                android:textColor="@color/color_secondary"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/home_fragment_heading_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/color_secondary"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -63,9 +63,9 @@
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/score_card"
-                    android:minHeight="100dp"
+                    android:minHeight="150dp"
                     android:layout_below="@id/time"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginRight="14dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginBottom="25dp"
@@ -162,7 +162,7 @@
 
                         </TableRow>
 
-                     </TableLayout>
+                    </TableLayout>
 
                 </android.support.v7.widget.CardView>
 
@@ -214,11 +214,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/live_commentary">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_mic"
-                            android:layout_centerInParent="true"  />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_mic"
+                                android:layout_centerInParent="true"  />
 
                         </RelativeLayout>
 
@@ -246,24 +246,36 @@
 
                 </android.support.v7.widget.CardView>
 
-                <RelativeLayout
+                <FrameLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content">
 
-                    <ImageView
+                    <com.melnykov.fab.FloatingActionButton
+                        android:id="@+id/fab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/icon_chat"
+                        fab:fab_colorNormal="@color/color_white"
+                        fab:fab_colorPressed="@color/color_primary" />
+
+                    <RelativeLayout
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/relative_layout_image_crowd"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/image_crowd"/>
+                        android:layout_height="wrap_content">
 
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:src="@drawable/image_crowd"/>
 
-                <android.support.design.widget.FloatingActionButton
-                    android:src="@drawable/icon_chat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_anchor="@id/linear_layout_lower"
-                    app:layout_anchorGravity="bottom|right|end"/>
+                    </RelativeLayout>
+
+                </FrameLayout>
 
             </LinearLayout>
 

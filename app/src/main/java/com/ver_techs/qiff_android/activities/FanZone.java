@@ -26,9 +26,6 @@ import com.ver_techs.qiff_android.object_classes.ChatItem;
 
 import java.util.List;
 
-/**
- * Created by AAKIFAH RAHMAN on 10/12/2015.
- */
 public class FanZone extends Activity {
 
     SharedPreferences sharedPreferences;
@@ -40,7 +37,7 @@ public class FanZone extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_sliding_tab);
+        setContentView(R.layout.fan_zone);
 
         TextView fan_zone = (TextView) findViewById(R.id.fan_zone);
         EditText message_box = (EditText) findViewById(R.id.message_box);
@@ -89,6 +86,8 @@ public class FanZone extends Activity {
             }
 
         );
+
+        updateFanZoneWithParseChats();
 
     }
 
@@ -208,7 +207,5 @@ public class FanZone extends Activity {
             }
         });
     }
-
-
 
 }

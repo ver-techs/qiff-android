@@ -3,8 +3,10 @@ package com.ver_techs.qiff_android.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.parse.ConfigCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -30,6 +33,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
+import com.ver_techs.qiff_android.activities.FanZone;
+import com.ver_techs.qiff_android.activities.Suggestion;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
 import com.ver_techs.qiff_android.R;
 import com.ver_techs.qiff_android.object_classes.LiveCommentaryItem;
@@ -48,6 +53,7 @@ public class HomeFragment extends Fragment{
     Typeface custom_font;
     View v;
     TextView aboutText;
+    FloatingActionButton floatingActionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,6 +102,16 @@ public class HomeFragment extends Fragment{
                 return false;
             }
 
+        });
+
+        floatingActionButton = (FloatingActionButton) v.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), FanZone.class);
+                startActivity(i);
+            }
         });
 
         //update live commentary content

@@ -33,6 +33,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
+import com.ver_techs.qiff_android.activities.FacebookLoginActivity;
 import com.ver_techs.qiff_android.activities.FanZone;
 import com.ver_techs.qiff_android.activities.Suggestion;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
@@ -109,7 +110,7 @@ public class HomeFragment extends Fragment{
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), FanZone.class);
+                Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
                 startActivity(i);
             }
         });

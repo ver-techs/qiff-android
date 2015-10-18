@@ -20,33 +20,20 @@ import com.ver_techs.qiff_android.R;
 public class FacebookLoginActivity extends FragmentActivity {
 
     private LoginButton loginButton;
-    private TextView continueAsGuest;
     CallbackManager callbackManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fb_login);
 
         if(isLoggedIn()){
-            Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
+            Intent i = new Intent(FacebookLoginActivity.this, FanZone.class);
             startActivity(i);
         }
 
+        setContentView(R.layout.activity_fb_login);
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        continueAsGuest = (TextView) findViewById(R.id.continueAsGuest);
-
-        continueAsGuest.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG); //underline continue as guest text
-
-        continueAsGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
-                startActivity(i);
-            }
-        });
 
         callbackManager = CallbackManager.Factory.create(); //create facebook callbackmanager
 
@@ -56,7 +43,7 @@ public class FacebookLoginActivity extends FragmentActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Log.i("aaki", "fb login success");
-                Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
+                Intent i = new Intent(FacebookLoginActivity.this, FanZone.class);
                 startActivity(i);
             }
 

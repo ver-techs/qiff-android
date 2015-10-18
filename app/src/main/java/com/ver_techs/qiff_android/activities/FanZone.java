@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -58,13 +60,13 @@ public class FanZone extends Activity {
         message_editText.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                if(touchedOnce == false) { //if message box is being focused first time, get username by showinputdialog()
+                if (touchedOnce == false) { //if message box is being focused first time, get username by showinputdialog()
                     if (sharedPreferences.getString("UserName", "null").equals("null")) {
                         //Get desired User Name from user
                         showInputDialog();
                     }
                     touchedOnce = true; //and set boolean to true
-                }else{ //else enable focus on message box and allow for viewing keypad and sending text
+                } else { //else enable focus on message box and allow for viewing keypad and sending text
                     view.setFocusable(true);
                     view.setFocusableInTouchMode(true);
                 }
@@ -112,7 +114,7 @@ public class FanZone extends Activity {
 
                         userName = userName_editText.getText().toString();
                         if (userName.length() > 7) //if username is longer than seven characters, take only the first 7 characters
-                            userName=userName.substring(0,6);
+                            userName = userName.substring(0, 6);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("UserName", userName);
                         editor.commit();
@@ -206,6 +208,13 @@ public class FanZone extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }

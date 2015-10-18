@@ -93,18 +93,17 @@ public class Suggestion extends Activity {
                             public void done(com.parse.ParseException e) {
 
                                 if (e == null) {
-
-                                    name_suggestion.setText(""); //clear the message box
-                                    email_suggestion.setText(""); //clear the message box
-                                    complaint_suggestion.setText(""); //clear the message box
-
-                                    Intent i = new Intent(Suggestion.this, MainActivity.class);
-                                    startActivity(i);
-
                                 } else {
                                 }
                             }
                         });
+
+                        name_suggestion.setText(""); //clear the message box
+                        email_suggestion.setText(""); //clear the message box
+                        complaint_suggestion.setText(""); //clear the message box
+
+                        Intent i = new Intent(Suggestion.this, MainActivity.class);
+                        startActivity(i);
 
                     }
                     catch(Exception ex){

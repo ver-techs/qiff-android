@@ -1,255 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/color_complementary_3">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:background="@color/color_primary">
-
-        <RelativeLayout
-            android:layout_width="230dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="40dp"
-            android:background="@drawable/rectangle_background_heading_home_fragment">
-
-        <TextView
-            android:id="@+id/home_fragment_heading_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:textSize="16dp"
-            android:textColor="@color/color_secondary"
-            android:textStyle="bold" />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="10"
-        android:orientation="vertical" >
-
-    <RelativeLayout android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
         android:orientation="vertical"
-        android:background="@color/color_primary">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/time"
-            android:layout_marginTop="14dp"
-            android:textSize="25dp"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/color_white"
-            android:layout_height="40dp" />
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/score_card"
-            android:minHeight="100dp"
-            android:layout_below="@id/time"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginBottom="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            card_view:cardElevation="5sp"
-            card_view:cardBackgroundColor="@color/color_complementary_4">
-
-            <TableLayout android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:stretchColumns="*">
-
-                <TableRow
-                    android:layout_width="match_parent">
-
-                    <TextView
-                        android:id="@+id/name_team1"
-                        android:layout_width="0dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="2"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="16dp"
-                        android:textColor="@color/color_white"
-                        android:layout_column="1">
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/name_team2"
-                        android:layout_width="0dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="2"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="16dp"
-                        android:textColor="@color/color_white"
-                        android:layout_column="3">
-                    </TextView>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent">
-
-                    <ImageView
-                        android:id="@+id/image_team1"
-                        android:layout_column="0"
-                        android:gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_height="50dp" />
-
-                    <TextView
-                        android:id="@+id/score_team1"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_white"
-                        android:layout_gravity="center"
-                        android:textStyle="bold"
-                        android:textSize="40dp"
-                        android:layout_column="1">
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/colon_home"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_secondary"
-                        android:gravity="center"
-                        android:textSize="40dp"
-                        android:layout_column="2">
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/score_team2"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textColor="@color/color_white"
-                        android:textSize="40dp"
-                        android:textStyle="bold"
-                        android:layout_column="3">
-                    </TextView>
-
-                    <ImageView
-                        android:id="@+id/image_team2"
-                        android:layout_column="4"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:gravity="center"
-                        android:layout_height="50dp" />
-
-                </TableRow>
-
-             </TableLayout>
-
-        </android.support.v7.widget.CardView>
-
-    </RelativeLayout>
-
-    <LinearLayout android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:orientation="vertical"
-        android:weightSum="10">
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/commentary_card"
-            android:layout_below="@id/score_card"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginBottom="1dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
-            card_view:cardElevation="5sp"
-            card_view:cardBackgroundColor="@color/color_white">
-
-            <RelativeLayout
-                android:id="@+id/relative_layout_commentary"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent">
-
-                <TextView
-                    android:id="@+id/live_commentary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="LIVE COMMENTARY"
-                    android:textColor="@color/color_primary"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:layout_marginLeft="7dp"
-                    android:layout_column="0"
-                    android:layout_marginTop="10dp">
-                </TextView>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/relative_layout_mic_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/live_commentary">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_mic"
-                    android:layout_centerInParent="true"  />
-
-                </RelativeLayout>
-
-                <ScrollView
-                    android:id="@+id/childScroll1"
-                    android:layout_width="match_parent"
-                    android:layout_below="@id/relative_layout_mic_icon"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_height="140dp">
-
-                    <TableLayout
-                        android:id="@+id/live_commentary_table"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:shrinkColumns="2">
-
-                    </TableLayout>
-
-                </ScrollView>
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
+        android:background="@color/color_complementary_3">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="60dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@color/color_primary">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_height="50dp"
-            android:src="@drawable/image_crowd"/>
+            <RelativeLayout
+                android:layout_width="230dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="40dp"
+                android:background="@drawable/rectangle_background_heading_home_fragment">
+
+            <TextView
+                android:id="@+id/home_fragment_heading_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+                android:textColor="@color/color_secondary"
+                android:textStyle="bold" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="10"
+            android:orientation="vertical" >
+
+            <RelativeLayout android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                android:background="@color/color_primary">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/time"
+                    android:layout_marginTop="14dp"
+                    android:textSize="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/color_white"
+                    android:layout_height="40dp" />
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/score_card"
+                    android:minHeight="100dp"
+                    android:layout_below="@id/time"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    card_view:cardElevation="5sp"
+                    card_view:cardBackgroundColor="@color/color_complementary_4">
+
+                    <TableLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:stretchColumns="*">
+
+                        <TableRow
+                            android:layout_width="match_parent">
+
+                            <TextView
+                                android:id="@+id/name_team1"
+                                android:layout_width="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="16dp"
+                                android:textColor="@color/color_white"
+                                android:layout_column="1">
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/name_team2"
+                                android:layout_width="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="16dp"
+                                android:textColor="@color/color_white"
+                                android:layout_column="3">
+                            </TextView>
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent">
+
+                            <ImageView
+                                android:id="@+id/image_team1"
+                                android:layout_column="0"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_height="50dp" />
+
+                            <TextView
+                                android:id="@+id/score_team1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_white"
+                                android:layout_gravity="center"
+                                android:textStyle="bold"
+                                android:textSize="40dp"
+                                android:layout_column="1">
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/colon_home"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_secondary"
+                                android:gravity="center"
+                                android:textSize="40dp"
+                                android:layout_column="2">
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/score_team2"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textColor="@color/color_white"
+                                android:textSize="40dp"
+                                android:textStyle="bold"
+                                android:layout_column="3">
+                            </TextView>
+
+                            <ImageView
+                                android:id="@+id/image_team2"
+                                android:layout_column="4"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:gravity="center"
+                                android:layout_height="50dp" />
+
+                        </TableRow>
+
+                     </TableLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_lower"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                android:weightSum="10">
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/commentary_card"
+                    android:layout_below="@id/score_card"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    card_view:cardElevation="5sp"
+                    card_view:cardBackgroundColor="@color/color_white">
+
+                    <RelativeLayout
+                        android:id="@+id/relative_layout_commentary"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent">
+
+                        <TextView
+                            android:id="@+id/live_commentary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="LIVE COMMENTARY"
+                            android:textColor="@color/color_primary"
+                            android:gravity="center"
+                            android:textSize="18dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_column="0"
+                            android:layout_marginTop="10dp">
+                        </TextView>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/relative_layout_mic_icon"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/live_commentary">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_mic"
+                            android:layout_centerInParent="true"  />
+
+                        </RelativeLayout>
+
+                        <ScrollView
+                            android:id="@+id/childScroll1"
+                            android:layout_width="match_parent"
+                            android:layout_below="@id/relative_layout_mic_icon"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_height="140dp">
+
+                            <TableLayout
+                                android:id="@+id/live_commentary_table"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:shrinkColumns="2">
+
+                            </TableLayout>
+
+                        </ScrollView>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/image_crowd"/>
+
+                </RelativeLayout>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:src="@drawable/icon_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_anchor="@id/linear_layout_lower"
+                    app:layout_anchorGravity="bottom|right|end"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

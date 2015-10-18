@@ -18,6 +18,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -31,7 +33,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.SaveCallback;
 import com.ver_techs.qiff_android.R;
+import com.ver_techs.qiff_android.object_classes.ChatItem;
+import com.ver_techs.qiff_android.object_classes.SuggestionItem;
 
 public class Suggestion extends Activity {
 
@@ -59,109 +64,56 @@ public class Suggestion extends Activity {
         complaint_suggestion.getBackground().setColorFilter(getResources().getColor(R.color.color_tertiary), PorterDuff.Mode.SRC_ATOP);
         email_suggestion.getBackground().setColorFilter(getResources().getColor(R.color.color_tertiary), PorterDuff.Mode.SRC_ATOP);
 
-//        send.setOnClickListener(new OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//
-//                boolean ok = true;
-//                name = name_suggestion.getText().toString();
-//                suggestion = complaint_suggestion.getText().toString();
-//                email = email_suggestion.getText().toString();
-//
-//                if(suggestion.length() == 0){
-//                    Toast.makeText(Suggestion.this, "Complaint Field cannot be left blank !", Toast.LENGTH_SHORT).show();
-//                    ok = false;
-//                }
-//                else if(suggestion.length() != 0 && !(suggestion.charAt(0)=='M' || suggestion.charAt(0)=='B' || suggestion.charAt(0)=='P')){
-//                    ok = false;
-//                    Toast.makeText(Suggestion.this, "Invalid RollNo !", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(suggestion.length() != 9){
-//                    ok = false;
-//                    Toast.makeText(Suggestion.this, "Invalid RollNo !", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if(ok == true){
-//                    try{
-//                        new Task().execute();
-//                    }
-//                    catch(Exception ex){
-//                        ex.printStackTrace();
-//                        Toast.makeText(Suggestion.this, "URL Exception !", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                else{
-//                    Toast.makeText(Suggestion.this, "Check Network Connection !", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        send.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
 
-    }
+                boolean ok = true;
+                name = name_suggestion.getText().toString();
+                suggestion = complaint_suggestion.getText().toString();
+                email = email_suggestion.getText().toString();
 
-    class Task extends AsyncTask<Void, Void, Void> {
-
-        protected Void doInBackground(Void... arg0) {
-
-            String postReceiverUrl = "http://aakifah.co.nf/recieve.php";
-
-            HttpClient httpClient = new DefaultHttpClient();
-
-            HttpPost httpPost = new HttpPost(postReceiverUrl);
-
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("name", name));
-            nameValuePairs.add(new BasicNameValuePair("email", email));
-            nameValuePairs.add(new BasicNameValuePair("suggestion", suggestion));
-
-            try {
-                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            }
-            catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            HttpResponse response = null;
-            try {
-                response = httpClient.execute(httpPost);
-            }
-            catch (ClientProtocolException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            HttpEntity resEntity = response.getEntity();
-
-            if (resEntity != null) {
-
-                String responseStr = null;
-                try {
-                    responseStr = EntityUtils.toString(resEntity).trim();
+                if(suggestion.length() == 0){
+                    Toast.makeText(Suggestion.this, "Complaint Field cannot be left blank !", Toast.LENGTH_SHORT).show();
+                    ok = false;
                 }
-                catch (ParseException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                else if(name.length() == 0){
+                    ok = false;
+                    Toast.makeText(Suggestion.this, "Name cannot be left blank !", Toast.LENGTH_SHORT).show();
                 }
-                catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                Log.v("aaki", "Response: " +  responseStr);
 
+                if(ok == true){
+                    try{
+
+                        SuggestionItem suggestionItem = new SuggestionItem(name, email, suggestion); //create a new chatitem
+
+                        // Save the data to Parse whenever internet is available
+                        suggestionItem.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(com.parse.ParseException e) {
+
+                                if (e == null) {
+
+                                    name_suggestion.setText(""); //clear the message box
+                                    email_suggestion.setText(""); //clear the message box
+                                    complaint_suggestion.setText(""); //clear the message box
+
+                                    Intent i = new Intent(Suggestion.this, MainActivity.class);
+                                    startActivity(i);
+
+                                } else {
+                                }
+                            }
+                        });
+
+                    }
+                    catch(Exception ex){
+                        ex.printStackTrace();
+                    }
+                }
             }
+        });
 
-            return null;
-
-        }
-
-        protected void onPostExecute(Void result) {
-
-            // TODO: do something with the feed
-            Toast.makeText(Suggestion.this, "Sent successfully !", Toast.LENGTH_SHORT).show();
-        }
     }
 
 }

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@color/color_primary" >
+
+            <TextView
+                android:id="@+id/about_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SUGGESTIONS"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+                android:textColor="@color/color_secondary"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/icon_name"
+                    android:layout_margin="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icon_name"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_alignLeft="@+id/icon_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColorHighlight="@color/color_tertiary"
+                    android:textColor="@color/color_tertiary"
+                    android:ems="10"
+                    android:textColorLink="@color/color_tertiary"
+                    android:textColorHint="@color/color_tertiary"
+                    android:hint="Name"
+                    android:layout_weight="9">
+                    <requestFocus />
+                </EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/icon_email"
+                    android:layout_margin="10dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/icon_email"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_alignLeft="@+id/icon_email"
+                    android:textColorHighlight="@color/color_tertiary"
+                    android:textColor="@color/color_tertiary"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/color_tertiary"
+                    android:layout_margin="10dp"
+                    android:textColorLink="@color/color_tertiary"
+                    android:ems="10"
+                    android:layout_weight="9"
+                    android:hint="Email" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/icon_suggestion"
+                    android:layout_margin="10dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/icon_suggestion"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/suggestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:textColorHighlight="@color/color_tertiary"
+                    android:textColorLink="@color/color_tertiary"
+                    android:textColor="@color/color_tertiary"
+                    android:gravity="top|left"
+                    android:textColorHint="@color/color_tertiary"
+                    android:layout_weight="9"
+                    android:minLines="10"
+                    android:hint="Suggestion" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/send_suggestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="Send Suggestion"
+                android:textColor="@color/color_secondary"
+                android:background="@color/color_tertiary"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -109,4 +109,16 @@
         android:layout_toLeftOf="@+id/email_text"
         android:layout_toStartOf="@+id/email_text" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Have A Suggestion ?"
+        android:textStyle="italic"
+        android:clickable="true"
+        android:id="@+id/suggestion_about"
+        android:layout_below="@+id/icon_facebook"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"/>
+
 </RelativeLayout>

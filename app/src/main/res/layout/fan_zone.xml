@@ -9,7 +9,8 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:weightSum="9">
+        android:weightSum="8"
+        android:background="@color/color_complementary_3">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,7 +22,7 @@
                 android:id="@+id/fan_zone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ABOUT"
+                android:text="FAN ZONE"
                 android:layout_marginTop="10dp"
                 android:textSize="16dp"
                 android:textColor="@color/color_secondary"
@@ -36,13 +37,14 @@
             android:layout_marginRight="7dp"
             android:layout_marginBottom="5dp"
             android:layout_height="0dp"
-            android:layout_weight="8">
+            android:layout_weight="8"
+            android:background="@color/color_complementary_3">
 
             <TableLayout
                 android:id="@+id/fan_zone_table"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:shrinkColumns="2">
+                android:shrinkColumns="0">
 
             </TableLayout>
 
@@ -51,13 +53,15 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="50dp"
+            android:weightSum="1"
+            android:background="@color/color_white">
 
             <EditText
                 android:textSize="16dp"
                 android:id="@+id/message_box"
-                android:layout_width="277dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="40dp"
                 android:focusable="false"
                 android:layout_marginTop="5dp"
@@ -71,7 +75,8 @@
                 android:id="@+id/send_chat_button"
                 android:background="@drawable/send_chat_button"
                 android:layout_width="30dp"
-                android:layout_gravity="end|right"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="30dp" />
 
         </LinearLayout>

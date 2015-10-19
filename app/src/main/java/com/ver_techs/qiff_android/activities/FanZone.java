@@ -75,12 +75,12 @@ public class FanZone extends Activity {
         Button send_chat_button = (Button) findViewById(R.id.send_chat_button);
         send_chat_button.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    //send chat with existing User Name
-                    sendChatToParse();
-                }
-            }
+                                                @Override
+                                                public void onClick(View v) {
+                                                    //send chat with existing User Name
+                                                    sendChatToParse();
+                                                }
+                                            }
 
         );
 
@@ -107,23 +107,23 @@ public class FanZone extends Activity {
                         }
 
                         message = message_editText.getText().toString(); //get message from text box
-                        ChatItem chatItem = new ChatItem(userName, message); //create a new chatitem
 
-                        //Log.i("***username***", chatItem.getUserName());
+                        if(!message.equals("")) {
+                            ChatItem chatItem = new ChatItem(userName, message); //create a new chatitem
 
-                        // Save the data to Parse whenever internet is available
-                        chatItem.saveInBackground(new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    updateFanZoneWithParseChats(); //if save was successful, update the fan zone chats to reflect new chat
-                                } else {
+                            // Save the data to Parse whenever internet is available
+                            chatItem.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (e == null) {
+                                        updateFanZoneWithParseChats(); //if save was successful, update the fan zone chats to reflect new chat
+                                    } else {
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                        message_editText.setText(""); //clear the message box
-
+                            message_editText.setText(""); //clear the message box
+                        }
                     }
                 });
 
@@ -135,7 +135,7 @@ public class FanZone extends Activity {
     }
 
     protected void updateFanZoneWithParseChats(){
-        // Polulating Fan zone with chat messages from Parse
+        // Populating Fan zone with chat messages from Parse
 
         final TableLayout tl = (TableLayout) findViewById(R.id.fan_zone_table);
 
@@ -156,31 +156,39 @@ public class FanZone extends Activity {
                     // Access the array of results here
                     for (int i = chatItemList.size() - 1; i >= 0; i--) {
 
-                        TableRow tr_1 = new TableRow(FanZone.this);
-                        tr_1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        LayoutInflater inflater = (LayoutInflater) (FanZone.this).getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        View tr_view = inflater.inflate(R.layout.layout_chat_row, null);;
 
-                        TextView fan_name = new TextView(FanZone.this);
+                        TableRow tr_1 = new TableRow(FanZone.this);
+
+                        TableLayout.LayoutParams tableRowParams = new TableLayout.LayoutParams
+                                (TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
+
+                        int leftMargin = 20;
+                        int topMargin = 20;
+                        int rightMargin=20;
+                        int bottomMargin=20;
+
+                        tableRowParams.setMargins(leftMargin, topMargin, rightMargin, bottomMargin);
+
+                        tr_1.setLayoutParams(tableRowParams);
+
+                        TextView fan_name = (TextView) tr_view.findViewById(R.id.userNameRow);
                         fan_name.setText(chatItemList.get(i).getUserName());
                         fan_name.setTextSize(16);
                         fan_name.setTypeface(custom_font, Typeface.BOLD);
                         fan_name.setTextColor(getResources().getColor(R.color.color_black));
-                        tr_1.addView(fan_name);// add the column to the table row here
 
-                        TextView colon = new TextView(FanZone.this);
-                        colon.setText(" :   ");
-                        colon.setTextSize(16);
-                        colon.setTypeface(custom_font);
-                        colon.setTextColor(getResources().getColor(R.color.color_secondary));
-                        tr_1.addView(colon);// add the column to the table row here
-
-                        TextView message = new TextView(FanZone.this);
+                        TextView message = (TextView) tr_view.findViewById(R.id.messageRow);
                         message.setText(chatItemList.get(i).getChatMessage());
                         message.setTextSize(16);
-                        message.setTypeface(custom_font);
-                        message.setTextColor(getResources().getColor(R.color.color_secondary));
-                        tr_1.addView(message);// add the column to the table row here
+                        message.setTypeface(custom_font, Typeface.BOLD);
+                        message.setTextColor(getResources().getColor(R.color.color_black));
 
-                        tl.addView(tr_1, new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        tr_1.addView(tr_view);
+                        tr_1.setBackgroundResource(R.drawable.rectangle_rounded_corner_chat_bubble);
+
+                        tl.addView(tr_1, tableRowParams);
 
                     }
 

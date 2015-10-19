@@ -19,6 +19,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -26,13 +29,15 @@ import com.parse.SaveCallback;
 import com.ver_techs.qiff_android.R;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class FanZone extends Activity {
 
-    SharedPreferences sharedPreferences;
-    EditText userName_editText, message_editText;
-    String userName, message;
+    EditText message_editText;
+    String userName = "nothing", message;
     Boolean touchedOnce = false; //boolean to determine if chatbox is being focused on for first time or not
     Typeface custom_font;
 
@@ -53,24 +58,13 @@ public class FanZone extends Activity {
 
         //Code to check if user has focused on message edittext, if so, if there is no username yet, get from user
 
-        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-
         message_editText = (EditText) findViewById(R.id.message_box);
 
         message_editText.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (touchedOnce == false) { //if message box is being focused first time, get username by showinputdialog()
-                    if (sharedPreferences.getString("UserName", "null").equals("null")) {
-                        //Get desired User Name from user
-                        showInputDialog();
-                    }
-                    touchedOnce = true; //and set boolean to true
-                } else { //else enable focus on message box and allow for viewing keypad and sending text
-                    view.setFocusable(true);
-                    view.setFocusableInTouchMode(true);
-                }
-
+                // enable focus on message box and allow for viewing keypad and sending text
+                view.setFocusable(true);
+                view.setFocusableInTouchMode(true);
                 return false;
             }
         });
@@ -93,63 +87,49 @@ public class FanZone extends Activity {
 
     }
 
+    protected void sendChatToParse(){
 
-    protected void showInputDialog() {
+        /* make the facebook API call to get fb username */
+        GraphRequest request = GraphRequest.newMeRequest(
+                AccessToken.getCurrentAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject object,
+                            GraphResponse response) {
+                        // When fields have been recieved
 
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View promptView = layoutInflater.inflate(R.layout.username_alert_dialog, null); //inflate dialog for username input
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setView(promptView);
+                        try {
+                            userName = object.getString("first_name");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-        userName_editText = (EditText) promptView.findViewById(R.id.userName);
+                        message = message_editText.getText().toString(); //get message from text box
+                        ChatItem chatItem = new ChatItem(userName, message); //create a new chatitem
 
-        alertDialogBuilder
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                })
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                        //Log.i("***username***", chatItem.getUserName());
 
-                        userName = userName_editText.getText().toString();
-                        if (userName.length() > 7) //if username is longer than seven characters, take only the first 7 characters
-                            userName = userName.substring(0, 6);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("UserName", userName);
-                        editor.commit();
-                        dialog.cancel(); //cancel dialog after clicking OK
+                        // Save the data to Parse whenever internet is available
+                        chatItem.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    updateFanZoneWithParseChats(); //if save was successful, update the fan zone chats to reflect new chat
+                                } else {
+                                }
+                            }
+                        });
+
+                        message_editText.setText(""); //clear the message box
+
                     }
                 });
 
-        // create an alert dialog
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
-
-    }
-
-    protected void sendChatToParse(){
-
-        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        userName = sharedPreferences.getString("UserName", "null"); //get username
-        message = message_editText.getText().toString(); //get message from text box
-        ChatItem chatItem = new ChatItem(userName, message); //create a new chatitem
-
-        //Log.i("***username***", chatItem.getUserName());
-        //Log.i("***message***", chatItem.getChatMessage());
-
-        // Save the data to Parse whenever internet is available
-        chatItem.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    updateFanZoneWithParseChats(); //if save was successful, update the fan zone chats to reflect new chat
-                } else {
-                }
-            }
-        });
-
-        message_editText.setText(""); //clear the message box
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "first_name");
+        request.setParameters(parameters);
+        request.executeAsync();
 
     }
 

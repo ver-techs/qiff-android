@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -72,10 +73,10 @@ public class FanZone extends Activity {
         //Chat send button code - to get username first time, save as sharedpref, use it subsequently, and send chat messages
 
         Button send_chat_button = (Button) findViewById(R.id.send_chat_button);
-        send_chat_button.setOnClickListener(new View.OnClickListener(){
+        send_chat_button.setOnClickListener(new View.OnClickListener() {
 
                 @Override
-                public void onClick (View v){
+                public void onClick(View v) {
                     //send chat with existing User Name
                     sendChatToParse();
                 }
@@ -145,7 +146,7 @@ public class FanZone extends Activity {
         // Define the class we would like to query
         ParseQuery<ChatItem> query = ParseQuery.getQuery(ChatItem.class);
         // Execute the find asynchronously
-        query.addAscendingOrder("createdAt"); //order query results
+        query.addDescendingOrder("createdAt"); //order query results
         query.findInBackground(new FindCallback<ChatItem>() {
 
             public void done(List<ChatItem> chatItemList, ParseException e) {
@@ -182,6 +183,14 @@ public class FanZone extends Activity {
                         tl.addView(tr_1, new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
                     }
+
+                    final ScrollView fan_scroll = (ScrollView) findViewById(R.id.fan_zone_scroll);
+                    fan_scroll.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            fan_scroll.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
 
                 } else {
                     Log.d("item", "Error: " + e.getMessage());

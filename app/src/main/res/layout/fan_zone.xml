@@ -1,87 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fanzone_card"
-        android:layout_marginRight="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginBottom="3dp"
+    <LinearLayout
+        android:id="@+id/relative_layout_fan_zone"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_weight="3"
-        card_view:cardElevation="5sp"
-        card_view:cardBackgroundColor="@color/color_white">
+        android:orientation="vertical"
+        android:weightSum="9">
 
         <RelativeLayout
-            android:id="@+id/relative_layout_fan_zone"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@color/color_primary" >
 
             <TextView
                 android:id="@+id/fan_zone"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="FAN ZONE"
-                android:textSize="18dp"
-                android:textColor="@color/color_primary"
-                android:gravity="center"
-                android:layout_marginLeft="7dp"
-                android:layout_column="0"
-                android:layout_marginTop="10dp">
-            </TextView>
-
-            <ScrollView
-                android:id="@+id/childScroll2"
-                android:layout_width="match_parent"
-                android:layout_below="@id/fan_zone"
-                android:layout_marginLeft="7dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginBottom="5dp"
-                android:layout_height="100dp">
-
-                <TableLayout
-                    android:id="@+id/fan_zone_table"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:shrinkColumns="2">
-
-                </TableLayout>
-
-            </ScrollView>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/childScroll2">
-
-                <EditText
-                    android:textSize="16dp"
-                    android:id="@+id/message_box"
-                    android:layout_width="277dp"
-                    android:layout_height="40dp"
-                    android:focusable="false"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:hint="Enter a fan message !"
-                    android:textCursorDrawable="@null"
-                    android:textColor="@color/color_primary"/>
-
-                <Button
-                    android:id="@+id/send_chat_button"
-                    android:background="@drawable/send_chat_button"
-                    android:layout_width="30dp"
-                    android:layout_gravity="end|right"
-                    android:layout_height="30dp" />
-
-            </LinearLayout>
+                android:text="ABOUT"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+                android:textColor="@color/color_secondary"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+        <ScrollView
+            android:id="@+id/fan_zone_scroll"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="5dp"
+            android:layout_height="0dp"
+            android:layout_weight="8">
+
+            <TableLayout
+                android:id="@+id/fan_zone_table"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:shrinkColumns="2">
+
+            </TableLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:textSize="16dp"
+                android:id="@+id/message_box"
+                android:layout_width="277dp"
+                android:layout_height="40dp"
+                android:focusable="false"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="Enter a fan message !"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/color_primary"/>
+
+            <Button
+                android:id="@+id/send_chat_button"
+                android:background="@drawable/send_chat_button"
+                android:layout_width="30dp"
+                android:layout_gravity="end|right"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

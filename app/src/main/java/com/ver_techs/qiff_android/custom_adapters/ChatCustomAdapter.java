@@ -1,6 +1,7 @@
 package com.ver_techs.qiff_android.custom_adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,18 +46,27 @@ public class ChatCustomAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+
         ChatItemLocal chatMessageObj = getItem(position);
         View row = convertView;
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (chatMessageObj.getOrientation().equals("right")) {
             row = inflater.inflate(R.layout.layout_chat_row_right, parent, false);
         }else{
             row = inflater.inflate(R.layout.layout_chat_row_left, parent, false);
         }
-        chatText = (TextView) row.findViewById(R.id.msgr);
-        chatText.setText(chatMessageObj.getChatMessage());
+
+        Typeface custom_font = Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_path));
+
         nameText = (TextView) row.findViewById(R.id.name);
         nameText.setText(chatMessageObj.getUserName());
+        nameText.setTypeface(custom_font);
+
+        chatText = (TextView) row.findViewById(R.id.msgr);
+        chatText.setText(chatMessageObj.getChatMessage());
+        chatText.setTypeface(custom_font);
+
         return row;
     }
 }

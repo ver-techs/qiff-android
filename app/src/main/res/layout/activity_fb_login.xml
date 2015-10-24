@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_complementary_6">
 
     <com.facebook.login.widget.LoginButton
-        android:layout_marginTop="150dp"
         android:id="@+id/login_button"
+        android:layout_width="40dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        facebook:com_facebook_login_text=""
+        facebook:com_facebook_logout_text=""
+        />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginTop="20dp"
+        android:text="Login to Fan Zone with Facebook"
+        android:layout_centerVertical="true"
+        android:textColor="@color/color_white"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_button"/>
 
-</LinearLayout>
+</RelativeLayout>

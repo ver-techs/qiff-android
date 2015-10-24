@@ -34,6 +34,8 @@ public class FacebookLoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_fb_login);
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setBackgroundResource(R.drawable.icon_facebook_reverse);
+        loginButton.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
 
         callbackManager = CallbackManager.Factory.create(); //create facebook callbackmanager
 

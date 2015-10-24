@@ -23,7 +23,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="5dp"
-        android:textColor="@color/color_tertiary" />
+        android:textColor="@color/color_primary" />
 
     <TextView
         android:id="@+id/msgr"

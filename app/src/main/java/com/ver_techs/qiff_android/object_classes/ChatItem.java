@@ -3,6 +3,10 @@ package com.ver_techs.qiff_android.object_classes;
 import com.parse.ParseObject;
 import com.parse.ParseClassName;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @ParseClassName("ChatItem")
 
 // Class for holding a chat item in parse
@@ -19,7 +23,7 @@ public class ChatItem extends ParseObject{
     }
 
     public void setUserName(String username){
-        put("userName",username);
+        put("userName", username);
     }
 
     public void setChatMessage(String chatmessage){

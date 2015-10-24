@@ -3,16 +3,17 @@ package com.ver_techs.qiff_android.object_classes;
 //Class to store local fixture items
 public class ChatItemLocal{
 
-    String userName, chatMessage, orientation;
+    String userName, chatMessage, chatTime, orientation;
 
     //default constructor
     public ChatItemLocal(){
     }
 
-    public ChatItemLocal(String username, String chatmessage, String orientation) {
+    public ChatItemLocal(String username, String chatmessage, String chatTime, String orientation) {
         super();
         setUserName(username);
         setChatMessage(chatmessage);
+        setChatTime(chatTime);
         setOrientation(orientation);
     }
 
@@ -22,6 +23,10 @@ public class ChatItemLocal{
 
     public void setChatMessage(String chatmessage){
         chatMessage = chatmessage;
+    }
+
+    public void setChatTime(String chatTime) {
+        this.chatTime = chatTime;
     }
 
     public void setOrientation(String orientation){
@@ -34,6 +39,10 @@ public class ChatItemLocal{
 
     public String getChatMessage() {
         return chatMessage;
+    }
+
+    public String getChatTime() {
+        return chatTime;
     }
 
     public String getOrientation(){

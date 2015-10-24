@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ChatCustomAdapter extends BaseAdapter {
 
-    private TextView nameText, chatText;
+    private TextView nameText, chatText, chatTime;
     ArrayList<ChatItemLocal> chatItemArrayList; //Local variable list that stores all fixture items
     private Context context;
 
@@ -66,6 +66,10 @@ public class ChatCustomAdapter extends BaseAdapter {
         chatText = (TextView) row.findViewById(R.id.msgr);
         chatText.setText(chatMessageObj.getChatMessage());
         chatText.setTypeface(custom_font);
+
+        chatTime = (TextView) row.findViewById(R.id.chatTime);
+        chatTime.setText(chatMessageObj.getChatTime());
+        chatTime.setTypeface(custom_font);
 
         return row;
     }

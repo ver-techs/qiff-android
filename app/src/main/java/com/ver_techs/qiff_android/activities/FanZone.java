@@ -34,7 +34,9 @@ import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 //Activity class to display fan chats and allow user to send fan chats
@@ -150,7 +152,7 @@ public class FanZone extends Activity {
         // Define the class we would like to query
         ParseQuery<ChatItem> query = ParseQuery.getQuery(ChatItem.class);
         // Execute the find asynchronously
-        query.addDescendingOrder("createdAt"); //order query results
+        query.addAscendingOrder("createdAt"); //order query results
         query.findInBackground(new FindCallback<ChatItem>() {
 
             public void done(List<ChatItem> chatItemList, ParseException e) {
@@ -158,14 +160,18 @@ public class FanZone extends Activity {
                 if (e == null) {
 
                     // Access the array of results here
-                    for (int i = chatItemList.size() - 1; i >= 0; i--) {
+                    for (int i = 0; i < chatItemList.size(); i++) {
+
+                        Date date = chatItemList.get(i).getCreatedAt();
+                        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd MMM ");
+                        String time = formatter.format(date);
 
                         if((i % 2) == 0) { //alternate chats are shown on left and right side of the screen
-                            ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(i).getUserName(), chatItemList.get(i).getChatMessage(), "right");
+                            ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(i).getUserName(), chatItemList.get(i).getChatMessage(), time, "right");
                             chatItemArrayList.add(chatItemLocal);
                         }
                         else{
-                            ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(i).getUserName(), chatItemList.get(i).getChatMessage(), "left");
+                            ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(i).getUserName(), chatItemList.get(i).getChatMessage(), time, "left");
                             chatItemArrayList.add(chatItemLocal);
                         }
                     }

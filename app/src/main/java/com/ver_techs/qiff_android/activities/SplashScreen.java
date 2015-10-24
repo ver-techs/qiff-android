@@ -63,27 +63,12 @@ public class SplashScreen extends Activity {
 
             @Override
             public void run() {
-//                if(isLoggedIn()) {
-                    // Executed once the timer is over, start main activity
-                    Intent i = new Intent(SplashScreen.this, MainActivity.class);
-                    startActivity(i);
-//                }
-//                else
-//                {
-//                    // Executed once the timer is over, start fb login activity
-//                    Intent i = new Intent(SplashScreen.this, FacebookLoginActivity.class);
-//                    startActivity(i);
-//                }
-                // Close this activity
-                finish();
+            // Executed once the timer is over, start main activity
+            Intent i = new Intent(SplashScreen.this, MainActivity.class);
+            startActivity(i);
+            finish();
             }
         }, SPLASH_TIME_OUT);
-    }
-
-    //function to check if facebook is logged in
-    public boolean isLoggedIn() {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        return accessToken != null;
     }
 
     //function to animate splash view as fade in

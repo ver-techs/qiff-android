@@ -41,8 +41,10 @@ import com.ver_techs.qiff_android.R;
 import com.ver_techs.qiff_android.object_classes.LiveCommentaryItem;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import android.os.Handler;
 
 // Fragment that inflates the home screen
 public class HomeFragment extends Fragment{
@@ -72,6 +74,7 @@ public class HomeFragment extends Fragment{
 
         custom_font = Typeface.createFromAsset(getActivity().getAssets(), getString(R.string.font_path));
 
+        aboutText.setTypeface(custom_font);
         name_team1.setTypeface(custom_font);
         name_team2.setTypeface(custom_font);
         score_team1.setTypeface(custom_font);
@@ -79,7 +82,6 @@ public class HomeFragment extends Fragment{
         time.setTypeface(custom_font);
         score_team2.setTypeface(custom_font);
         live_commentary.setTypeface(custom_font);
-
 
         //ensuring parent and child scrolls views work fine on touch
 
@@ -149,21 +151,31 @@ public class HomeFragment extends Fragment{
                             name_team1.setText(liveMatchItem.getString("teamName1"));  //set team names
                             name_team2.setText(liveMatchItem.getString("teamName2"));
 
+                            final String liveMatchItem_MatchCompleted = liveMatchItem.getString("matchCompleted");
+                            final String liveMatchItem_DateTime = liveMatchItem.getString("dateTime");
+
                             if(checkIfMatchDateIsToday(liveMatchItem.getString("dateTime"))){ //check if match is scheduled for today
                                 //change home fragment header according to if match is today or not
                                 aboutText.setText("TODAY'S MATCH");
 
-                                if(liveMatchItem.getString("matchCompleted").contains("Start"))  //control logic for dateTime field to account for various fixture scenarios
-                                    time.setText(elapsedMinutes(liveMatchItem.getString("matchCompleted").replace("Start", ""))); //remove substring start
-                                else if (liveMatchItem.getString("matchCompleted").contains("Second"))
-                                    time.setText(elapsedMinutes(liveMatchItem.getString("matchCompleted").replace("Second", ""))+ " (2)"); //remove subtsring second
-                                else{
-                                    int check = matchStartsIn60Minutes(liveMatchItem.getString("dateTime")); //check if match starts in 60 minutes
-                                    if(check != -1)  //if yes, print countdown
-                                        time.setText("Counting down " + String.valueOf(check) + "\" !");
-                                    else //if not, say it is an upcoming match
-                                        time.setText("Upcoming Match !");
-                                }
+                                final Handler handler =new Handler();
+                                final Runnable r = new Runnable() {
+                                    public void run() {
+                                        handler.postDelayed(this, 60000);
+                                        if(liveMatchItem_MatchCompleted.contains("Start"))  //control logic for dateTime field to account for various fixture scenarios
+                                            time.setText(elapsedMinutes(liveMatchItem_MatchCompleted.replace("Start", ""))); //remove substring start
+                                        else if (liveMatchItem_MatchCompleted.contains("Second"))
+                                            time.setText(elapsedMinutes(liveMatchItem_MatchCompleted.replace("Second", ""))+ " (2) "); //remove subtsring second
+                                        else{
+                                            int check = matchStartsIn60Minutes(liveMatchItem_DateTime); //check if match starts in 60 minutes
+                                            if(check != -1)  //if yes, print countdown
+                                                time.setText("Counting down " + String.valueOf(check) + "\" !");
+                                            else //if not, say it is an upcoming match
+                                                time.setText("Upcoming Match !");
+                                        }
+                                    }
+                                };
+                                handler.postDelayed(r, 0000);
                             }
                             else {
                                 aboutText.setText("LAST MATCH");

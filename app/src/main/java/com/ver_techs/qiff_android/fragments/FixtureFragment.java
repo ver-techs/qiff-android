@@ -2,6 +2,7 @@ package com.ver_techs.qiff_android.fragments;
 
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -177,8 +178,17 @@ public class FixtureFragment extends Fragment {
                             nDialog.cancel(); //cancel the dialog once load has completed
 
                             if(upcomingSelected) { //set the appropriate adapter to the list based on dropdown selection
-                                upcomingFixtureCustomAdapter = new UpcomingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
-                                fixtureList.setAdapter(upcomingFixtureCustomAdapter); //set the adapter to the listview
+
+                                final Handler handler =new Handler();
+                                final Runnable r = new Runnable() {
+                                    public void run() {
+                                        handler.postDelayed(this, 60000);
+
+                                        upcomingFixtureCustomAdapter = new UpcomingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view
+                                        fixtureList.setAdapter(upcomingFixtureCustomAdapter); //set the adapter to the listview
+                                    }
+                                };
+                                handler.postDelayed(r, 0000);
                             }
                             else {
                                 forgoingFixtureListAdapter = new ForgoingFixtureCustomAdapter(getActivity(), fixtureItemArrayList); //get a new istance of adapter for fixture view

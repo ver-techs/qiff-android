@@ -124,11 +124,6 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
             time = (TextView) view.findViewById(R.id.time);
 
             if(checkIfMatchDateIsToday(fixtureItemLocal.getTimeDate())){ //check if match is scheduled for today
-
-                final Handler handler =new Handler();
-                final Runnable r = new Runnable() {
-                    public void run() {
-                        handler.postDelayed(this, 60000);
                 if(fixtureItemLocal.getMatchStatus().contains("Start"))  //control logic for dateTime field to account for various fixture scenarios
                     time.setText(elapsedMinutes(fixtureItemLocal.getMatchStatus().replace("Start", ""))); //remove substring start
                 else if (fixtureItemLocal.getMatchStatus().contains("Second"))
@@ -140,9 +135,6 @@ public class UpcomingFixtureCustomAdapter extends BaseAdapter {
                     else //if not, say it is an upcoming match
                         time.setText("Upcoming Match !");
                 }
-                    }
-                };
-                handler.postDelayed(r, 0000);
             }
             else
                 time.setText(fixtureItemLocal.getTimeDate().substring(6,14));

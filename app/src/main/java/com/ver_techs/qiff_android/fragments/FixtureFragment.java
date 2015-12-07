@@ -1,6 +1,7 @@
 package com.ver_techs.qiff_android.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -17,11 +18,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.parse.ConfigCallback;
 import com.parse.FindCallback;
 import com.parse.ParseConfig;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.ver_techs.qiff_android.activities.FacebookLoginActivity;
 import com.ver_techs.qiff_android.custom_adapters.ForgoingFixtureCustomAdapter;
 import com.ver_techs.qiff_android.custom_adapters.UpcomingFixtureCustomAdapter;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
@@ -46,6 +49,7 @@ public class FixtureFragment extends Fragment {
     boolean isSeparator = false; //to check if current item should create a separator or not
     String dateTime;
     boolean upcomingSelected;
+    FloatingActionButton floatingActionButton;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -59,6 +63,16 @@ public class FixtureFragment extends Fragment {
 
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setEnabled(false); //disable the swipe refresh
+
+        floatingActionButton = (FloatingActionButton) v.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
+                startActivity(i);
+            }
+        });
 
         //set font to header in the fragment
         TextView match_schedule_text = (TextView) v.findViewById(R.id.match_schedule_text);

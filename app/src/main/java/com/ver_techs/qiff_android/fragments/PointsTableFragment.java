@@ -1,6 +1,7 @@
 package com.ver_techs.qiff_android.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,9 +15,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.ver_techs.qiff_android.activities.FacebookLoginActivity;
 import com.ver_techs.qiff_android.object_classes.PointsTableItem;
 import com.ver_techs.qiff_android.object_classes.PointsTableItemLocal;
 import com.ver_techs.qiff_android.R;
@@ -32,6 +35,7 @@ public class PointsTableFragment extends Fragment{
     private ProgressDialog nDialog;
     View v;
     int allFourQueriesDone=0; //variable to check if all 4 queries have been executed and done
+    FloatingActionButton floatingActionButton;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -45,6 +49,16 @@ public class PointsTableFragment extends Fragment{
         nDialog.setIndeterminate(false);
         nDialog.setCancelable(false);
         nDialog.show();
+
+        floatingActionButton = (FloatingActionButton) v.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
+                startActivity(i);
+            }
+        });
 
         final TextView name_group_1 = (TextView) v.findViewById(R.id.name_group1);
         final TextView name_group_2 = (TextView) v.findViewById(R.id.name_group2);

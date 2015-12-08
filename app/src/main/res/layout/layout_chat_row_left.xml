@@ -4,7 +4,7 @@
     android:background="@color/color_complementary_3"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -13,10 +13,17 @@
         android:layout_marginLeft="10dp"
         android:background="@drawable/rectangle_rounded_corner_chat_bubble">
 
+        <ImageView
+            android:id="@+id/profilepic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/kmcc_kkd"/>
+
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/profilepic"
             android:layout_gravity="left"
             android:layout_marginBottom="3dp"
             android:layout_marginRight="10dp"
@@ -29,6 +36,7 @@
             android:id="@+id/msgr"
             android:layout_below="@id/name"
             android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/profilepic"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginRight="10dp"
@@ -42,6 +50,7 @@
             android:layout_below="@id/msgr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/profilepic"
             android:layout_gravity="left"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="10dp"
@@ -51,6 +60,6 @@
             android:textSize="8dp"
             android:textColor="@color/color_complementary_1" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

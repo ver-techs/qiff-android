@@ -3,6 +3,8 @@ package com.ver_techs.qiff_android.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -34,6 +37,7 @@ import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -116,6 +120,24 @@ public class FanZone extends Activity {
                             e.printStackTrace();
                         }
 
+                        try {
+                            if (object.has("picture")) {
+                                String profilePicUrl = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                                URL url=null;
+                                try {
+                                    url = new URL(profilePicUrl);
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                                Bitmap profilePic = getFacebookProfilePicture(url);
+                                ImageView pic = (ImageView) findViewById(R.id.profilepic);
+                                pic.setImageBitmap(profilePic);
+                            }
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         message = message_editText.getText().toString(); //get message from text box
 
                         if(!message.equals("")) {
@@ -138,7 +160,7 @@ public class FanZone extends Activity {
                 });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "first_name"); //fields to fetch during facebook api request
+        parameters.putString("fields", "first_name,picture"); //fields to fetch during facebook api request
         request.setParameters(parameters);
         request.executeAsync(); //execute api call
 
@@ -166,11 +188,10 @@ public class FanZone extends Activity {
                         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd MMM ");
                         String time = formatter.format(date);
 
-                        if((i % 2) == 0) { //alternate chats are shown on left and right side of the screen
+                        if ((i % 2) == 0) { //alternate chats are shown on left and right side of the screen
                             ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(i).getUserName(), chatItemList.get(i).getChatMessage(), time, "right");
                             chatItemArrayList.add(chatItemLocal);
-                        }
-                        else{
+                        } else {
                             ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(i).getUserName(), chatItemList.get(i).getChatMessage(), time, "left");
                             chatItemArrayList.add(chatItemLocal);
                         }
@@ -184,6 +205,17 @@ public class FanZone extends Activity {
                 }
             }
         });
+    }
+
+    public static Bitmap getFacebookProfilePicture(URL url){
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+            return bitmap;
     }
 
     @Override

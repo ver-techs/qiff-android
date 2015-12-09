@@ -23,8 +23,10 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.ver_techs.qiff_android.R;
@@ -37,6 +39,7 @@ import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -114,6 +117,7 @@ public class FanZone extends Activity {
                             GraphResponse response) {
                         // When fields have been recieved
 
+                        ParseFile file = null;
                         try {
                             userName = object.getString("first_name"); //get first name from the json object
                         } catch (JSONException e) {
@@ -122,26 +126,38 @@ public class FanZone extends Activity {
 
                         try {
                             if (object.has("picture")) {
-                                String profilePicUrl = object.getJSONObject("picture").getJSONObject("data").getString("url");
-                                URL url=null;
+
+                                Bitmap profilePic = null;
+                                Profile profile = Profile.getCurrentProfile();
+                                URL img_value = null;
                                 try {
-                                    url = new URL(profilePicUrl);
+                                    img_value = new URL("http://graph.facebook.com/" + profile.getId() + "/picture?type=small");
                                 }
                                 catch (Exception e){
                                     e.printStackTrace();
                                 }
-                                Bitmap profilePic = getFacebookProfilePicture(url);
-                                ImageView pic = (ImageView) findViewById(R.id.profilepic);
-                                pic.setImageBitmap(profilePic);
+                                try {
+                                    profilePic = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                                // Convert it to byte
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                byte[] image = stream.toByteArray();
+
+                                // Create the ParseFile
+                                file = new ParseFile("androidbegin.png", image);
                             }
-                        }catch (JSONException e) {
+                        }catch (Exception e) {
                             e.printStackTrace();
                         }
 
                         message = message_editText.getText().toString(); //get message from text box
 
                         if(!message.equals("")) {
-                            ChatItem chatItem = new ChatItem(userName, message); //create a new chatitem with username and message
+                            ChatItem chatItem = new ChatItem(userName, message, file); //create a new chatitem with username and message
 
                             // Save the data to Parse whenever internet is available
                             chatItem.saveInBackground(new SaveCallback() {

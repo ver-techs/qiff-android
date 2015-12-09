@@ -1,5 +1,6 @@
 package com.ver_techs.qiff_android.object_classes;
 
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseClassName;
 
@@ -16,10 +17,11 @@ public class ChatItem extends ParseObject{
     public  ChatItem(){
     }
 
-    public ChatItem(String username, String chatmessage) {
+    public ChatItem(String username, String chatmessage, ParseFile profilePicture) {
         super();
         setUserName(username);
         setChatMessage(chatmessage);
+        setProfilePicture(profilePicture);
     }
 
     public void setUserName(String username){
@@ -28,6 +30,10 @@ public class ChatItem extends ParseObject{
 
     public void setChatMessage(String chatmessage){
         put("chatMessage",chatmessage);
+    }
+
+    public void setProfilePicture(ParseFile profilePicture){
+        put("profilePic", profilePicture);
     }
 
     public String getUserName() {

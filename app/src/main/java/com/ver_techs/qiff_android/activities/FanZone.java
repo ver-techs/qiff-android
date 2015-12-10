@@ -1,8 +1,6 @@
 package com.ver_techs.qiff_android.activities;
 
 import android.app.Activity;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,16 +8,11 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -34,10 +27,8 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.ver_techs.qiff_android.R;
 import com.ver_techs.qiff_android.custom_adapters.ChatCustomAdapter;
-import com.ver_techs.qiff_android.custom_adapters.UpcomingFixtureCustomAdapter;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
 import com.ver_techs.qiff_android.object_classes.ChatItemLocal;
-import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +39,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -120,13 +110,10 @@ public class FanZone extends Activity {
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
-                    public void onCompleted(
-                            JSONObject object,
-                            GraphResponse response) {
+                    public void onCompleted(JSONObject object, GraphResponse response) {
                         // When fields have been recieved
 
-                        ParseFile file = null;
-                        final Profile profile = Profile.getCurrentProfile();
+                        final Profile profile = Profile.getCurrentProfile(); //get current user profile details
 
                         try {
                             userName = object.getString("first_name"); //get first name from the json object
@@ -134,41 +121,34 @@ public class FanZone extends Activity {
                             e.printStackTrace();
                         }
 
+                        //AsyncTask to send chat to parse
                         AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
                             protected Bitmap doInBackground(Void... p) {
-                                Bitmap bm = null;
+                                Bitmap bm = null; //initialize a bitmap
                                 try {
-                                    URL url = new URL("http://graph.facebook.com/" + profile.getId() + "/picture?type=small");
+                                    URL url = new URL("http://graph.facebook.com/" + profile.getId() + "/picture?type=small"); //the url of profile picture
                                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                                    Log.i("aaki1", Integer.toString(connection.getResponseCode()));
 
-                                    boolean redirect = false;
+                                    boolean redirect = false; //boolean variable to check if there is a need to direct from url or not
 
-                                    // normally, 3xx is redirect
                                     int status = connection.getResponseCode();
-                                    if (status != HttpURLConnection.HTTP_OK) {
-                                        if (status == HttpURLConnection.HTTP_MOVED_TEMP
-                                                || status == HttpURLConnection.HTTP_MOVED_PERM
-                                                || status == HttpURLConnection.HTTP_SEE_OTHER)
+                                    if (status != HttpURLConnection.HTTP_OK) { //examine the response code of the http connection
+                                        if (status == HttpURLConnection.HTTP_MOVED_TEMP || status == HttpURLConnection.HTTP_MOVED_PERM || status == HttpURLConnection.HTTP_SEE_OTHER)
                                             redirect = true;
                                     }
 
-                                    if (redirect) {
-
+                                    if (redirect) { //if there is a need to redirect
                                         // get redirect url from "location" header field
                                         String newUrl = connection.getHeaderField("Location");
-
                                         // open the new connnection again
                                         connection = (HttpURLConnection) new URL(newUrl).openConnection();
-
-                                        Log.i("aaki2", Integer.toString(connection.getResponseCode()));
                                     }
 
-                                    InputStream is = connection.getInputStream();
+                                    InputStream is = connection.getInputStream(); //get data from the connection
                                     BufferedInputStream bis = new BufferedInputStream(is);
-                                    bm = BitmapFactory.decodeStream(bis);
-                                    bis.close();
-                                    is.close();
+                                    bm = BitmapFactory.decodeStream(bis); //decode it intoa bitmap
+                                    bis.close(); //close the stream
+                                    is.close(); //close the stream
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -177,13 +157,10 @@ public class FanZone extends Activity {
 
                             protected void onPostExecute(Bitmap bm) {
 
-                                if(bm == null)
-                                    Log.i("aaki", "no bitmap");
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                                // get byte array here
-                                byte[] bytearray= stream.toByteArray();
-                                ParseFile file = new ParseFile("dp.jpg",bytearray);
+                                bm.compress(Bitmap.CompressFormat.JPEG, 100, stream); //compress the bitmap
+                                byte[] bytearray= stream.toByteArray(); //convert the bitmap into a byte array for storing in parse
+                                ParseFile file = new ParseFile("dp.jpg",bytearray); //convert the byte array to a parsefile
 
                                 message = message_editText.getText().toString(); //get message from text box
 
@@ -206,12 +183,12 @@ public class FanZone extends Activity {
 
                             }
                         };
-                        t.execute();
+                        t.execute(); //execute the async task
                     }
                 });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "first_name,picture"); //fields to fetch during facebook api request
+        parameters.putString("fields", "first_name"); //fields to fetch during facebook api request
         request.setParameters(parameters);
         request.executeAsync(); //execute api call
 
@@ -222,12 +199,11 @@ public class FanZone extends Activity {
 
         // Parse query to get all chats from server
 
-
         // Define the class we would like to query
         ParseQuery<ChatItem> query = ParseQuery.getQuery(ChatItem.class);
         // Execute the find asynchronously
         query.addAscendingOrder("createdAt"); //order query results
-        query.setLimit(20);
+        query.setLimit(20); //set an upper limit to number of chat item results to be returned
         query.findInBackground(new FindCallback<ChatItem>() {
 
             public void done(final List<ChatItem> chatItemList, ParseException e) {
@@ -241,17 +217,16 @@ public class FanZone extends Activity {
                         Date date = chatItemList.get(i).getCreatedAt();
                         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd MMM ");
                         final String time = formatter.format(date);
-
+                        ParseFile fileObject = chatItemList.get(i).getProfilePicture();
                         final int j = i;
+
                         if ((i % 2) == 0) { //alternate chats are shown on left and right side of the screen
 
-                            ParseFile fileObject = chatItemList.get(i).getProfilePicture();
-                            fileObject.getDataInBackground(new GetDataCallback() {
+                            fileObject.getDataInBackground(new GetDataCallback() { //fetch the profile picture in the background
 
                                 public void done(byte[] data, ParseException e) {
                                     if (e == null) {
-                                        Log.d("test", "We've got data in pic.");
-                                        // Decode the Byte[] into Bitmap
+                                        // Decode the Byte array into Bitmap
                                         Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
 
                                         ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(j).getUserName(), chatItemList.get(j).getChatMessage(), time, "right", bmp);
@@ -265,13 +240,12 @@ public class FanZone extends Activity {
                             });
                         } else {
 
-                            ParseFile fileObject = chatItemList.get(i).getProfilePicture();
                             fileObject.getDataInBackground(new GetDataCallback() {
 
                                 public void done(byte[] data, ParseException e) {
                                     if (e == null) {
                                         Log.d("test", "We've got data in pic.");
-                                        // Decode the Byte[] into Bitmap
+                                        // Decode the Byte array into Bitmap
                                         Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
 
                                         ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(j).getUserName(), chatItemList.get(j).getChatMessage(), time, "left", bmp);
@@ -290,13 +264,13 @@ public class FanZone extends Activity {
                         @Override
                         public void run() {
                             try {
-                                Thread.sleep(noOfChats*300);
+                                Thread.sleep(noOfChats*300); //wait to download the image files and convert into bitmap and save
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                             runOnUiThread(new Runnable() {
                                 @Override
-                                public void run() {
+                                public void run() { //after the downloads waiting period is over, call the adapter and set it
                                     chatCustomAdapter = new ChatCustomAdapter(FanZone.this, chatItemArrayList); //get a new istance of adapter for fixture view
                                     listView.setAdapter(chatCustomAdapter);
                                 }

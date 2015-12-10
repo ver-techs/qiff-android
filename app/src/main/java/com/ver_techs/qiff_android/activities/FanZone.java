@@ -41,6 +41,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -215,8 +217,11 @@ public class FanZone extends Activity {
                     // Access the array of results here
                     for (i = 0; i < chatItemList.size(); i++) {
                         Date date = chatItemList.get(i).getCreatedAt();
-                        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd MMM ");
-                        final String time = formatter.format(date);
+                        SimpleDateFormat formatter1 = new SimpleDateFormat("HH:mm dd MMM "); //time format for display with chat message
+                        final String time1 = formatter1.format(date);
+                        SimpleDateFormat formatter2 = new SimpleDateFormat("MM dd HH:mm "); //time format to help sort chat items accordingly to chronological order
+                        final String time2 = formatter2.format(date);
+
                         ParseFile fileObject = chatItemList.get(i).getProfilePicture();
                         final int j = i;
 
@@ -229,12 +234,11 @@ public class FanZone extends Activity {
                                         // Decode the Byte array into Bitmap
                                         Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-                                        ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(j).getUserName(), chatItemList.get(j).getChatMessage(), time, "right", bmp);
+                                        ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(j).getUserName(), chatItemList.get(j).getChatMessage(), time1, "right", bmp, time2);
                                         chatItemArrayList.add(chatItemLocal);
 
                                     } else {
-                                        Log.d("test",
-                                                "There was a problem downloading the data.");
+                                        Log.d("aaki", "There was a problem downloading the data.");
                                     }
                                 }
                             });
@@ -244,16 +248,14 @@ public class FanZone extends Activity {
 
                                 public void done(byte[] data, ParseException e) {
                                     if (e == null) {
-                                        Log.d("test", "We've got data in pic.");
                                         // Decode the Byte array into Bitmap
                                         Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-                                        ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(j).getUserName(), chatItemList.get(j).getChatMessage(), time, "left", bmp);
+                                        ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(j).getUserName(), chatItemList.get(j).getChatMessage(), time1, "left", bmp, time2);
                                         chatItemArrayList.add(chatItemLocal);
 
                                     } else {
-                                        Log.d("test",
-                                                "There was a problem downloading the data.");
+                                        Log.d("aaki", "There was a problem downloading the data.");
                                     }
                                 }
                             });
@@ -264,13 +266,21 @@ public class FanZone extends Activity {
                         @Override
                         public void run() {
                             try {
-                                Thread.sleep(noOfChats*300); //wait to download the image files and convert into bitmap and save
+                                Thread.sleep(noOfChats*50); //wait to download the image files and convert into bitmap and save
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() { //after the downloads waiting period is over, call the adapter and set it
+
+                                    Comparator<ChatItemLocal> myComparator = new Comparator<ChatItemLocal>() {
+                                        public int compare(ChatItemLocal obj1, ChatItemLocal obj2) {
+                                            return obj1.getFullTime().compareTo(obj2.getFullTime());
+                                        }
+                                    };
+                                    Collections.sort(chatItemArrayList, myComparator);
+
                                     chatCustomAdapter = new ChatCustomAdapter(FanZone.this, chatItemArrayList); //get a new istance of adapter for fixture view
                                     listView.setAdapter(chatCustomAdapter);
                                 }

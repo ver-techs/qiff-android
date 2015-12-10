@@ -47,6 +47,8 @@ public class ChatCustomAdapter extends BaseAdapter {
         return i; // index number
     }
 
+
+
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ChatItemLocal chatMessageObj = getItem(position);

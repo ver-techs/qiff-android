@@ -5,20 +5,21 @@ import android.graphics.Bitmap;
 //Class to store local fixture items
 public class ChatItemLocal{
 
-    String userName, chatMessage, chatTime, orientation;
+    String userName, chatMessage, chatTime, orientation, fullTime;
     Bitmap profilePicture;
 
     //default constructor
     public ChatItemLocal(){
     }
 
-    public ChatItemLocal(String username, String chatmessage, String chatTime, String orientation, Bitmap profilePicture) {
+    public ChatItemLocal(String username, String chatmessage, String chatTime, String orientation, Bitmap profilePicture, String fullTime) {
         super();
         setUserName(username);
         setChatMessage(chatmessage);
         setChatTime(chatTime);
         setOrientation(orientation);
         setProfilePicture(profilePicture);
+        setFullTime(fullTime);
     }
 
     public void setUserName(String username){
@@ -41,6 +42,10 @@ public class ChatItemLocal{
         this.profilePicture = profilePicture;
     }
 
+    public void setFullTime(String fullTime){
+        this.fullTime = fullTime;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -60,6 +65,10 @@ public class ChatItemLocal{
     public Bitmap getProfilePicture(){
         return
                 profilePicture;
+    }
+
+    public String getFullTime(){
+        return fullTime;
     }
 
 }

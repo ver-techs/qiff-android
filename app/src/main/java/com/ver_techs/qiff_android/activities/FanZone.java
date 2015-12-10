@@ -27,6 +27,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
@@ -221,34 +222,87 @@ public class FanZone extends Activity {
 
         // Parse query to get all chats from server
 
+
         // Define the class we would like to query
         ParseQuery<ChatItem> query = ParseQuery.getQuery(ChatItem.class);
         // Execute the find asynchronously
         query.addAscendingOrder("createdAt"); //order query results
+        query.setLimit(20);
         query.findInBackground(new FindCallback<ChatItem>() {
 
-            public void done(List<ChatItem> chatItemList, ParseException e) {
+            public void done(final List<ChatItem> chatItemList, ParseException e) {
 
                 if (e == null) {
 
+                    int i;
+                    final int noOfChats = chatItemList.size();
                     // Access the array of results here
-                    for (int i = 0; i < chatItemList.size(); i++) {
-
+                    for (i = 0; i < chatItemList.size(); i++) {
                         Date date = chatItemList.get(i).getCreatedAt();
                         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd MMM ");
-                        String time = formatter.format(date);
+                        final String time = formatter.format(date);
 
+                        final int j = i;
                         if ((i % 2) == 0) { //alternate chats are shown on left and right side of the screen
-                            ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(i).getUserName(), chatItemList.get(i).getChatMessage(), time, "right");
-                            chatItemArrayList.add(chatItemLocal);
+
+                            ParseFile fileObject = chatItemList.get(i).getProfilePicture();
+                            fileObject.getDataInBackground(new GetDataCallback() {
+
+                                public void done(byte[] data, ParseException e) {
+                                    if (e == null) {
+                                        Log.d("test", "We've got data in pic.");
+                                        // Decode the Byte[] into Bitmap
+                                        Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+
+                                        ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(j).getUserName(), chatItemList.get(j).getChatMessage(), time, "right", bmp);
+                                        chatItemArrayList.add(chatItemLocal);
+
+                                    } else {
+                                        Log.d("test",
+                                                "There was a problem downloading the data.");
+                                    }
+                                }
+                            });
                         } else {
-                            ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(i).getUserName(), chatItemList.get(i).getChatMessage(), time, "left");
-                            chatItemArrayList.add(chatItemLocal);
+
+                            ParseFile fileObject = chatItemList.get(i).getProfilePicture();
+                            fileObject.getDataInBackground(new GetDataCallback() {
+
+                                public void done(byte[] data, ParseException e) {
+                                    if (e == null) {
+                                        Log.d("test", "We've got data in pic.");
+                                        // Decode the Byte[] into Bitmap
+                                        Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+
+                                        ChatItemLocal chatItemLocal = new ChatItemLocal(chatItemList.get(j).getUserName(), chatItemList.get(j).getChatMessage(), time, "left", bmp);
+                                        chatItemArrayList.add(chatItemLocal);
+
+                                    } else {
+                                        Log.d("test",
+                                                "There was a problem downloading the data.");
+                                    }
+                                }
+                            });
                         }
                     }
 
-                    chatCustomAdapter = new ChatCustomAdapter(FanZone.this, chatItemArrayList); //get a new istance of adapter for fixture view
-                    listView.setAdapter(chatCustomAdapter);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(noOfChats*300);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    chatCustomAdapter = new ChatCustomAdapter(FanZone.this, chatItemArrayList); //get a new istance of adapter for fixture view
+                                    listView.setAdapter(chatCustomAdapter);
+                                }
+                            });
+                        }
+                    }).start();
 
                 } else {
                     Log.d("item", "Error: " + e.getMessage());

@@ -44,4 +44,7 @@ public class ChatItem extends ParseObject{
         return getString("chatMessage");
     }
 
+    public ParseFile getProfilePicture() {
+        return getParseFile("profilePic");
+    }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import java.util.List;
 public class ChatCustomAdapter extends BaseAdapter {
 
     private TextView nameText, chatText, chatTime;
+    private ImageView profilePicture;
     ArrayList<ChatItemLocal> chatItemArrayList; //Local variable list that stores all fixture items
     private Context context;
 
@@ -70,6 +72,9 @@ public class ChatCustomAdapter extends BaseAdapter {
         chatTime = (TextView) row.findViewById(R.id.chatTime);
         chatTime.setText(chatMessageObj.getChatTime());
         chatTime.setTypeface(custom_font);
+
+        profilePicture = (ImageView) row.findViewById(R.id.profilepic);
+        profilePicture.setImageBitmap(chatMessageObj.getProfilePicture());
 
         return row;
     }

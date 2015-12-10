@@ -1,11 +1,13 @@
 package com.ver_techs.qiff_android.activities;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,8 +41,13 @@ import com.ver_techs.qiff_android.object_classes.FixtureItemLocal;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -118,60 +125,87 @@ public class FanZone extends Activity {
                         // When fields have been recieved
 
                         ParseFile file = null;
+                        final Profile profile = Profile.getCurrentProfile();
+
                         try {
                             userName = object.getString("first_name"); //get first name from the json object
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        try {
-                            if (object.has("picture")) {
-
-                                Bitmap profilePic = null;
-                                Profile profile = Profile.getCurrentProfile();
-                                URL img_value = null;
+                        AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
+                            protected Bitmap doInBackground(Void... p) {
+                                Bitmap bm = null;
                                 try {
-                                    img_value = new URL("http://graph.facebook.com/" + profile.getId() + "/picture?type=small");
-                                }
-                                catch (Exception e){
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    profilePic = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
-                                }
-                                catch (Exception e){
-                                    e.printStackTrace();
-                                }
+                                    URL url = new URL("http://graph.facebook.com/" + profile.getId() + "/picture?type=small");
+                                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                                    Log.i("aaki1", Integer.toString(connection.getResponseCode()));
 
-                                // Convert it to byte
-                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                byte[] image = stream.toByteArray();
+                                    boolean redirect = false;
 
-                                // Create the ParseFile
-                                file = new ParseFile("androidbegin.png", image);
-                            }
-                        }catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        message = message_editText.getText().toString(); //get message from text box
-
-                        if(!message.equals("")) {
-                            ChatItem chatItem = new ChatItem(userName, message, file); //create a new chatitem with username and message
-
-                            // Save the data to Parse whenever internet is available
-                            chatItem.saveInBackground(new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    if (e == null) {
-                                        updateFanZoneWithParseChats(); //if save was successful, update the fan zone chats to reflect new chat
-                                    } else {
+                                    // normally, 3xx is redirect
+                                    int status = connection.getResponseCode();
+                                    if (status != HttpURLConnection.HTTP_OK) {
+                                        if (status == HttpURLConnection.HTTP_MOVED_TEMP
+                                                || status == HttpURLConnection.HTTP_MOVED_PERM
+                                                || status == HttpURLConnection.HTTP_SEE_OTHER)
+                                            redirect = true;
                                     }
-                                }
-                            });
 
-                            message_editText.setText(""); //clear the message box
-                        }
+                                    if (redirect) {
+
+                                        // get redirect url from "location" header field
+                                        String newUrl = connection.getHeaderField("Location");
+
+                                        // open the new connnection again
+                                        connection = (HttpURLConnection) new URL(newUrl).openConnection();
+
+                                        Log.i("aaki2", Integer.toString(connection.getResponseCode()));
+                                    }
+
+                                    InputStream is = connection.getInputStream();
+                                    BufferedInputStream bis = new BufferedInputStream(is);
+                                    bm = BitmapFactory.decodeStream(bis);
+                                    bis.close();
+                                    is.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                return bm;
+                            }
+
+                            protected void onPostExecute(Bitmap bm) {
+
+                                if(bm == null)
+                                    Log.i("aaki", "no bitmap");
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                                // get byte array here
+                                byte[] bytearray= stream.toByteArray();
+                                ParseFile file = new ParseFile("dp.jpg",bytearray);
+
+                                message = message_editText.getText().toString(); //get message from text box
+
+                                if(!message.equals("")) {
+                                    ChatItem chatItem = new ChatItem(userName, message, file); //create a new chatitem with username and message
+
+                                    // Save the data to Parse whenever internet is available
+                                    chatItem.saveInBackground(new SaveCallback() {
+                                        @Override
+                                        public void done(ParseException e) {
+                                            if (e == null) {
+                                                updateFanZoneWithParseChats(); //if save was successful, update the fan zone chats to reflect new chat
+                                            } else {
+                                            }
+                                        }
+                                    });
+
+                                    message_editText.setText(""); //clear the message box
+                                }
+
+                            }
+                        };
+                        t.execute();
                     }
                 });
 
@@ -223,9 +257,11 @@ public class FanZone extends Activity {
         });
     }
 
-    public static Bitmap getFacebookProfilePicture(URL url){
+    public static Bitmap getFacebookProfilePicture(String urlString){
         Bitmap bitmap = null;
+        URL url;
         try {
+            url = new URL(urlString);
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         }
         catch (Exception e){
@@ -233,6 +269,7 @@ public class FanZone extends Activity {
         }
             return bitmap;
     }
+
 
     @Override
     public void onBackPressed(){ //on back button being pressed, move to main activity

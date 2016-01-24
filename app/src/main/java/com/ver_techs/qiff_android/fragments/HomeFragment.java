@@ -179,6 +179,11 @@ public class HomeFragment extends Fragment{
                                 };
                                 handler.postDelayed(r, 0000);
                             }
+                            else
+                            if(checkIfMatchDateIsTomorrow(liveMatchItem.getString("dateTime"))) { //check if match is scheduled for tomorrow
+                                aboutText.setText("TOMORROW'S MATCH"); //if so set header to tomorrow's match
+                                time.setText("Upcoming Match !"); //set time to upcoming match
+                            }
                             else {
                                 aboutText.setText("LAST MATCH");
                                 time.setText(liveMatchItem.getString("dateTime"));
@@ -304,7 +309,7 @@ public class HomeFragment extends Fragment{
                     simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getDate(); //parse the current date, get date
             monthDifference = simpleDateFormat.parse(matchDate).getMonth() - //parse the matchDate, get month
                     simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getMonth(); //parse the current date, get month
-            if(dateDifference == 0 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
+            if(dateDifference == 1 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
                 result=true;
             else
                 result=false;

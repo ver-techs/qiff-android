@@ -166,6 +166,8 @@ public class HomeFragment extends Fragment{
                                             time.setText(elapsedMinutes(liveMatchItem_MatchCompleted.replace("Start", ""))); //remove substring start
                                         else if (liveMatchItem_MatchCompleted.contains("Second"))
                                             time.setText(elapsedMinutes(liveMatchItem_MatchCompleted.replace("Second", ""))+ " (2) "); //remove subtsring second
+                                        else if(liveMatchItem_MatchCompleted.contains("HT"))
+                                            time.setText("HT");
                                         else{
                                             int check = matchStartsIn60Minutes(liveMatchItem_DateTime); //check if match starts in 60 minutes
                                             if(check != -1)  //if yes, print countdown
@@ -273,6 +275,26 @@ public class HomeFragment extends Fragment{
     }
 
     public boolean checkIfMatchDateIsToday(String matchDate){ //function to check if a match is scheduled for today
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
+        Boolean result = false;
+        Date timeNow = new Date(); //get current date
+        int dateDifference, monthDifference;
+        try { //get difference between match date and current date
+            dateDifference = simpleDateFormat.parse(matchDate).getDate() - //parse the matchDate, get date
+                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getDate(); //parse the current date, get date
+            monthDifference = simpleDateFormat.parse(matchDate).getMonth() - //parse the matchDate, get month
+                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getMonth(); //parse the current date, get month
+            if(dateDifference == 0 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
+                result=true;
+            else
+                result=false;
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean checkIfMatchDateIsTomorrow(String matchDate){ //function to check if a match is scheduled for today
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
         Boolean result = false;
         Date timeNow = new Date(); //get current date

@@ -214,156 +214,197 @@ public class HomeFragment extends Fragment{
         tl.removeAllViews(); //refresh the fan zone, remove all existing rows from existing tablelayout
 
         // Parse query to get all live commentary from server
+        ParseConfig.getInBackground(new ConfigCallback() { //call a background function to get parse config value for current or last match id
 
-        // Define the class we would like to query
-        ParseQuery<LiveCommentaryItem> query = ParseQuery.getQuery(LiveCommentaryItem.class);
-        // Execute the find asynchronously
-            query.addAscendingOrder("createdAt"); //order query results
-        query.findInBackground(new FindCallback<LiveCommentaryItem>() {
+            @Override
+            public void done(ParseConfig config, ParseException e) { //parse query successful
+                String currentOrLastMatchId = config.getString("CurrentOrLastMatchId");
 
-            public void done(List<LiveCommentaryItem> liveCommentaryItemList, ParseException e) {
+                // Define the class we would like to query
+                ParseQuery<LiveCommentaryItem> query = ParseQuery.getQuery(LiveCommentaryItem.class);
+                // Execute the find asynchronously
+                query.addAscendingOrder("createdAt"); //order query results
+                query.whereEqualTo("matchId", currentOrLastMatchId);
 
-                if (e == null) {
+                query.findInBackground(new FindCallback<LiveCommentaryItem>() {
 
-                    // Access the array of results here
-                    for (int i = liveCommentaryItemList.size() - 1; i >= 0; i--) {
+                    public void done(List<LiveCommentaryItem> liveCommentaryItemList, ParseException e) {
 
-                        TableRow tr_1 = new TableRow(getActivity());
-                        tr_1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        if (e == null) {
 
-                        TextView minute = new TextView(getActivity());
-                        minute.setText(liveCommentaryItemList.get(i).getMinute());
-                        minute.setTextSize(16);
-                        minute.setTypeface(custom_font, Typeface.BOLD);
-                        minute.setTextColor(getResources().getColor(R.color.color_complementary_1));
-                        tr_1.addView(minute);// add the column to the table row here
+                            // Access the array of results here
+                            for (int i = liveCommentaryItemList.size() - 1; i >= 0; i--) {
 
-                        TextView colon = new TextView(getActivity());
-                        colon.setText(" :   ");
-                        colon.setTextSize(16);
-                        colon.setTypeface(custom_font);
-                        colon.setTextColor(getResources().getColor(R.color.color_secondary));
-                        tr_1.addView(colon);// add the column to the table row here
+                                TableRow tr_1 = new TableRow(getActivity());
+                                tr_1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                        TextView commentary = new TextView(getActivity());
-                        commentary.setText(liveCommentaryItemList.get(i).getCommentary());
-                        commentary.setTextSize(16);
-                        commentary.setTypeface(custom_font);
-                        commentary.setTextColor(getResources().getColor(R.color.color_secondary));
-                        tr_1.addView(commentary);// add the column to the table row here
+                                TextView minute = new TextView(getActivity());
+                                minute.setText(liveCommentaryItemList.get(i).getMinute());
+                                minute.setTextSize(16);
+                                minute.setTypeface(custom_font, Typeface.BOLD);
+                                minute.setTextColor(getResources().getColor(R.color.color_complementary_1));
+                                tr_1.addView(minute);// add the column to the table row here
 
-                        tl.addView(tr_1, new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                                TextView colon = new TextView(getActivity());
+                                colon.setText(" :   ");
+                                colon.setTextSize(16);
+                                colon.setTypeface(custom_font);
+                                colon.setTextColor(getResources().getColor(R.color.color_secondary));
+                                tr_1.addView(colon);// add the column to the table row here
 
+                                TextView commentary = new TextView(getActivity());
+                                commentary.setText(liveCommentaryItemList.get(i).getCommentary());
+                                commentary.setTextSize(16);
+                                commentary.setTypeface(custom_font);
+                                commentary.setTextColor(getResources().getColor(R.color.color_secondary));
+                                tr_1.addView(commentary);// add the column to the table row here
+
+                                tl.addView(tr_1, new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+                            }
+
+                        } else {
+                            Log.d("item", "Error: " + e.getMessage());
+                        }
                     }
-
-                } else {
-                    Log.d("item", "Error: " + e.getMessage());
-                }
+                });
             }
-        });
-    }
+            });
+            }
 
-    public String elapsedMinutes(String matchStartTime){ //function to calcultae minutes elapsed since game start for ongoing games
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm"); //using time format hh:mm
-        Date timeNow = new Date(); //get current time
-        int minutes=0; //no of minutes between current time and matchStartTime
-        try {
-            minutes = (int)
-                    ((simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getTime() -                //parse and get current time
-                            simpleDateFormat.parse(matchStartTime.replace("Start", "")).getTime()         //parse and get matchStartTime
-                    )*0.00001667);                                                                        //find the difference between the two in milliseconds, convert to minutes
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
+            public String elapsedMinutes(String matchStartTime) { //function to calcultae minutes elapsed since game start for ongoing games
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm"); //using time format hh:mm
+                Date timeNow = new Date(); //get current time
+                int minutes = 0; //no of minutes between current time and matchStartTime
+                try {
+                    minutes = (int)
+                            ((simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getTime() -                //parse and get current time
+                                    simpleDateFormat.parse(matchStartTime.replace("Start", "")).getTime()         //parse and get matchStartTime
+                            ) * 0.00001667);                                                                        //find the difference between the two in milliseconds, convert to minutes
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+
+                return String.valueOf(minutes) + "\"";  //return the elapsed minutes wid double qoute at the end
+            }
+
+            public boolean checkIfMatchDateIsToday(String matchDate) { //function to check if a match is scheduled for today
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
+                Boolean result = false;
+                Date timeNow = new Date(); //get current date
+                int dateDifference, monthDifference;
+                try { //get difference between match date and current date
+                    dateDifference = simpleDateFormat.parse(matchDate).getDate() - //parse the matchDate, get date
+                            simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getDate(); //parse the current date, get date
+                    monthDifference = simpleDateFormat.parse(matchDate).getMonth() - //parse the matchDate, get month
+                            simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getMonth(); //parse the current date, get month
+                    if (dateDifference == 0 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
+                        result = true;
+                    else
+                        result = false;
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+                return result;
+            }
+
+            public boolean checkIfMatchDateIsTomorrow(String matchDate) { //function to check if a match is scheduled for today
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
+                Boolean result = false;
+                Date timeNow = new Date(); //get current date
+                int dateDifference, monthDifference;
+                try { //get difference between match date and current date
+                    dateDifference = simpleDateFormat.parse(matchDate).getDate() - //parse the matchDate, get date
+                            simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getDate(); //parse the current date, get date
+                    monthDifference = simpleDateFormat.parse(matchDate).getMonth() - //parse the matchDate, get month
+                            simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getMonth(); //parse the current date, get month
+                    if (dateDifference == 1 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
+                        result = true;
+                    else
+                        result = false;
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+                return result;
+            }
+
+            public int matchStartsIn60Minutes(String matchDate) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
+                int result = -1;
+                Date timeNow = new Date(); //get current date
+                int minuteDifference = -1;
+                try { //get difference between match date and current date
+                    minuteDifference = (int) ((simpleDateFormat.parse(matchDate).getTime() - //parse the matchDate, get time in milliseconds
+                            simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getTime()) * 0.00001667); //parse the current date, get time in milliseconds
+                    if (minuteDifference <= 60) //after converting to minutes, check if minute difference is less than 60
+                        result = minuteDifference; //if so return the countdown
+                    else
+                        result = -1; //if not, return false
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+                if (result > 0)
+                    return result;
+
+                return -1;
+            }
+
+
+            public int findTeamLogo(String teamName) {
+                // code to find corresponding image of respective teams
+
+                int resource_id = 0;
+                switch (teamName) {
+                    case "NADHAM TCR":
+                        resource_id = R.drawable.kmcc_wnd;
+                        break;
+                    case "KMCC MLP":
+                        resource_id = R.drawable.kmcc_mlp;
+                        break;
+                    case "KMCC KKD":
+                        resource_id = R.drawable.kmcc_kkd;
+                        break;
+                    case "KMCC PKD":
+                        resource_id = R.drawable.kmcc_pkd;
+                        break;
+                    case "SKIA TVM":
+                        resource_id = R.drawable.skia_tvm;
+                        break;
+                    case "KMCC WND":
+                        resource_id = R.drawable.kmcc_wnd;
+                        break;
+                    case "CFQ PTNMTA":
+                        resource_id = R.drawable.cfq_ptnmta;
+                        break;
+                    case "MAK KKD":
+                        resource_id = R.drawable.mak_kkd;
+                        break;
+                    case "EDSO EKM":
+                        resource_id = R.drawable.edso_ekm;
+                        break;
+                    case "MAMWAQ MLP":
+                        resource_id = R.drawable.mamwaq_mlp;
+                        break;
+                    case "KMCC KNR":
+                        resource_id = R.drawable.kmcc_knr;
+                        break;
+                    case "CFQ KKD":
+                        resource_id = R.drawable.cfq_kkd;
+                        break;
+                    case "TYC TCR":
+                        resource_id = R.drawable.tyc_tcr;
+                        break;
+                    case "KMCC TCR":
+                        resource_id = R.drawable.kmcc_tcr;
+                        break;
+                    case "KMCC KSGD":
+                        resource_id = R.drawable.kmcc_ksgd;
+                        break;
+                    case "KPAQ KKD":
+                        resource_id = R.drawable.kpaq_kkd;
+                        break;
+                }
+                return resource_id;
+            }
+
         }
-
-        return String.valueOf(minutes) + "\"";  //return the elapsed minutes wid double qoute at the end
-    }
-
-    public boolean checkIfMatchDateIsToday(String matchDate){ //function to check if a match is scheduled for today
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
-        Boolean result = false;
-        Date timeNow = new Date(); //get current date
-        int dateDifference, monthDifference;
-        try { //get difference between match date and current date
-            dateDifference = simpleDateFormat.parse(matchDate).getDate() - //parse the matchDate, get date
-                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getDate(); //parse the current date, get date
-            monthDifference = simpleDateFormat.parse(matchDate).getMonth() - //parse the matchDate, get month
-                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getMonth(); //parse the current date, get month
-            if(dateDifference == 0 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
-                result=true;
-            else
-                result=false;
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public boolean checkIfMatchDateIsTomorrow(String matchDate){ //function to check if a match is scheduled for today
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
-        Boolean result = false;
-        Date timeNow = new Date(); //get current date
-        int dateDifference, monthDifference;
-        try { //get difference between match date and current date
-            dateDifference = simpleDateFormat.parse(matchDate).getDate() - //parse the matchDate, get date
-                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getDate(); //parse the current date, get date
-            monthDifference = simpleDateFormat.parse(matchDate).getMonth() - //parse the matchDate, get month
-                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getMonth(); //parse the current date, get month
-            if(dateDifference == 1 && monthDifference == 0) //if the difference between days is zero, the match is scheduled for today
-                result=true;
-            else
-                result=false;
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public int matchStartsIn60Minutes(String matchDate){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM hh:mm"); //using time format hh:mm
-        int result = -1;
-        Date timeNow = new Date(); //get current date
-        int minuteDifference = -1;
-        try { //get difference between match date and current date
-            minuteDifference =(int) ((simpleDateFormat.parse(matchDate).getTime() - //parse the matchDate, get time in milliseconds
-                    simpleDateFormat.parse(simpleDateFormat.format(timeNow)).getTime())*0.00001667); //parse the current date, get time in milliseconds
-            if(minuteDifference <= 60) //after converting to minutes, check if minute difference is less than 60
-                result = minuteDifference; //if so return the countdown
-            else
-                result = -1; //if not, return false
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        if(result > 0)
-            return result;
-
-        return -1;
-    }
-
-
-    public int findTeamLogo(String teamName){
-        // code to find corresponding image of respective teams
-
-        int resource_id = 0;
-        switch (teamName){
-            case "NADHAM TCR" : resource_id = R.drawable.kmcc_wnd; break;
-            case "KMCC MLP" : resource_id = R.drawable.kmcc_mlp; break;
-            case "KMCC KKD" : resource_id = R.drawable.kmcc_kkd; break;
-            case "KMCC PKD" : resource_id = R.drawable.kmcc_pkd; break;
-            case "SKIA TVM" : resource_id = R.drawable.skia_tvm; break;
-            case "KMCC WND" : resource_id = R.drawable.kmcc_wnd; break;
-            case "CFQ PTNMTA" : resource_id = R.drawable.cfq_ptnmta; break;
-            case "MAK KKD" : resource_id = R.drawable.mak_kkd; break;
-            case "EDSO EKM" : resource_id = R.drawable.edso_ekm; break;
-            case "MAMWAQ MLP" : resource_id = R.drawable.mamwaq_mlp; break;
-            case "KMCC KNR" : resource_id = R.drawable.kmcc_knr; break;
-            case "CFQ KKD" : resource_id =  R.drawable.cfq_kkd; break;
-            case "TYC TCR" : resource_id = R.drawable.tyc_tcr; break;
-            case "KMCC TCR" : resource_id = R.drawable.kmcc_tcr; break;
-            case "KMCC KSGD" : resource_id = R.drawable.kmcc_ksgd; break;
-            case "KPAQ KKD" : resource_id = R.drawable.kpaq_kkd; break;
-        }
-        return resource_id;
-    }
-
-}

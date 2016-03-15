@@ -65,7 +65,7 @@
             </ListView>
 
             <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/fab"
+                android:id="@+id/fabPrediction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
@@ -76,7 +76,7 @@
                 fab:fab_colorPressed="@color/color_primary" />
 
             <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/fab2"
+                android:id="@+id/fabChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"

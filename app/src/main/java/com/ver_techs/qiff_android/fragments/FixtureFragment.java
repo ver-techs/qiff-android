@@ -25,6 +25,7 @@ import com.parse.ParseConfig;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.ver_techs.qiff_android.activities.FacebookLoginActivity;
+import com.ver_techs.qiff_android.activities.Prediction;
 import com.ver_techs.qiff_android.custom_adapters.ForgoingFixtureCustomAdapter;
 import com.ver_techs.qiff_android.custom_adapters.UpcomingFixtureCustomAdapter;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
@@ -49,7 +50,7 @@ public class FixtureFragment extends Fragment {
     boolean isSeparator = false; //to check if current item should create a separator or not
     String dateTime;
     boolean upcomingSelected;
-    FloatingActionButton floatingActionButton;
+    FloatingActionButton floatingActionButtonChat, floatingActionButtonPrediction;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -64,12 +65,22 @@ public class FixtureFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setEnabled(false); //disable the swipe refresh
 
-        floatingActionButton = (FloatingActionButton) v.findViewById(R.id.fab);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        floatingActionButtonChat = (FloatingActionButton) v.findViewById(R.id.fabChat);
+        floatingActionButtonChat.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
+                startActivity(i);
+            }
+        });
+
+        floatingActionButtonPrediction = (FloatingActionButton) v.findViewById(R.id.fabPrediction);
+        floatingActionButtonPrediction.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), Prediction.class);
                 startActivity(i);
             }
         });

@@ -42,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
         ParseObject.registerSubclass(PointsTableItem.class);
         ParseObject.registerSubclass(LiveCommentaryItem.class);
         ParseObject.registerSubclass(SuggestionItem.class);
+        ParseObject.registerSubclass(PredictionQuestions.class);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) { //check if mainactivity is being created normally or from broadcast reciever

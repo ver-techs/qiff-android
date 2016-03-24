@@ -16,6 +16,7 @@ import com.ver_techs.qiff_android.custom_views.SlidingTabLayout;
 import com.ver_techs.qiff_android.custom_adapters.ViewPagerAdapter;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
+import com.ver_techs.qiff_android.object_classes.PredictionQuestions;
 import com.ver_techs.qiff_android.object_classes.SuggestionItem;
 
 // Main Activity class

@@ -21,6 +21,14 @@ public class PredictionQuestionsLocal {
         return matchId;
     }
 
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setMatchId(String matchId) {
+        this.matchId = matchId;
+    }
+
 }
 
 

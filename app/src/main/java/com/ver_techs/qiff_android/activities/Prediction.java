@@ -27,6 +27,7 @@ import com.ver_techs.qiff_android.fragments.PredictionFragment;
 import com.ver_techs.qiff_android.object_classes.PredictionQuestions;
 import com.ver_techs.qiff_android.object_classes.PredictionQuestionsLocal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,14 +79,15 @@ public class Prediction extends AppCompatActivity {
 //                        Log.i("aaki", String.valueOf(i));
 //                        final PredictionQuestionsLocal predictionQuestionsLocal = new PredictionQuestionsLocal(
 //                                predictionQuestionsList.get(i).getString("question"), predictionQuestionsList.get(i).getString("matchId"));
-                        //final PredictionQuestionsLocal predictionQuestionsLocal = new PredictionQuestionsLocal(
-//                                "question", "matchId");
+                        final PredictionQuestionsLocal predictionQuestionsLocal = new PredictionQuestionsLocal(
+                                "question", "matchId");
 //                          final Handler handler =new Handler();
 //                        final Runnable r = new Runnable() {
 //                            public void run() {
 //                                handler.postDelayed(this, 60000);
                                 Bundle args = new Bundle();
-                                args.putString("question", "question");
+                                args.putString("question", predictionQuestionsLocal.getQuestion());
+                                args.putString("matchId", predictionQuestionsLocal.getMatchId());
                                 PredictionFragment pf = new PredictionFragment();
                                 pf.setArguments(args);
                                 adapter.addFrag(pf, "ONE"); //set team names

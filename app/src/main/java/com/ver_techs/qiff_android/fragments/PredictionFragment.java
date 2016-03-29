@@ -3,6 +3,7 @@ package com.ver_techs.qiff_android.fragments;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import com.ver_techs.qiff_android.object_classes.PredictionQuestionsLocal;
 public class PredictionFragment extends Fragment{
 
     View v;
-    //private PredictionQuestionsLocal predictionQuestionsLocal;
+    private PredictionQuestionsLocal predictionQuestionsLocal;
     String s;
     private ProgressDialog nDialog; //progress dialog to show while parse query is running in background
 
@@ -39,10 +40,10 @@ public class PredictionFragment extends Fragment{
         v = inflater.inflate(R.layout.fragment_prediction, container, false);
 
         Bundle b = getArguments();
+        predictionQuestionsLocal = new PredictionQuestionsLocal(b.getString("question"),b.getString("matchId"));
 
-        final TextView question = (TextView) getActivity().findViewById(R.id.question);
-        question.setText(b.getString("question"));
-
+        TextView question = (TextView) v.findViewById(R.id.question);
+        question.setText(predictionQuestionsLocal.getQuestion());
         return v;
     }
 

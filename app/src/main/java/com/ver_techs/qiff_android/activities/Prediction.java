@@ -55,7 +55,15 @@ public class Prediction extends AppCompatActivity {
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                tabLayout.setupWithViewPager(viewPager);
+            }
+        }, 1000);
+
 
         //set font to header in the fragment
         TextView prediction_text = (TextView) findViewById(R.id.prediction_text);
@@ -68,37 +76,37 @@ public class Prediction extends AppCompatActivity {
 
         final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-//        ParseQuery query = ParseQuery.getQuery("PredictionQuestions");
-//        query.findInBackground(new FindCallback<PredictionQuestions>() {
-//
-//            public void done(List<PredictionQuestions> predictionQuestionsList, ParseException e) {
-//
-//                if (e == null) {
-//                    // Access the array of results here
-//                    for (int i = 0; i < predictionQuestionsList.size(); i++) {
-//                        Log.i("aaki", String.valueOf(i));
-//                        final PredictionQuestionsLocal predictionQuestionsLocal = new PredictionQuestionsLocal(
-//                                predictionQuestionsList.get(i).getString("question"), predictionQuestionsList.get(i).getString("matchId"));
+        ParseQuery query = ParseQuery.getQuery("PredictionQuestions");
+        query.findInBackground(new FindCallback<PredictionQuestions>() {
+
+            public void done(List<PredictionQuestions> predictionQuestionsList, ParseException e) {
+
+                if (e == null) {
+
+                    // Access the array of results here
+                    for (int i = 0; i < predictionQuestionsList.size(); i++) {
+
                         final PredictionQuestionsLocal predictionQuestionsLocal = new PredictionQuestionsLocal(
-                                "question", "matchId");
-//                          final Handler handler =new Handler();
-//                        final Runnable r = new Runnable() {
-//                            public void run() {
-//                                handler.postDelayed(this, 60000);
+                                predictionQuestionsList.get(i).getString("question"), predictionQuestionsList.get(i).getString("matchId"));
+                        //final Handler handler =new Handler();
+                        //final Runnable r = new Runnable() {
+                            //public void run() {
+                                //handler.postDelayed(this, 60000);
                                 Bundle args = new Bundle();
                                 args.putString("question", predictionQuestionsLocal.getQuestion());
                                 args.putString("matchId", predictionQuestionsLocal.getMatchId());
                                 PredictionFragment pf = new PredictionFragment();
                                 pf.setArguments(args);
-                                adapter.addFrag(pf, "ONE"); //set team names
-//                            }
-//                        };
-//                        handler.postDelayed(r, 0000);
-//                    }
+                                adapter.addFrag(pf, "ONE"); //set question titles
+                                adapter.notifyDataSetChanged();
+                            //}
+                        //};
+                        //handler.postDelayed(r, 60000);
+                    }
                     nDialog.cancel(); //cancel the dialog once load has completed
-  //              }
-//            }
-//        });
+                }
+            }
+        });
 
         viewPager.setAdapter(adapter);
     }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -71,20 +72,17 @@ public class PredictionFragment extends Fragment{
         name_team1 = (TextView) v.findViewById(R.id.name_team1);
         name_team2 = (TextView) v.findViewById(R.id.name_team2);
 
+        NumberPicker numberPicker1 = (NumberPicker) v.findViewById(R.id.score_team1_predicted);
+        numberPicker1.setMaxValue(10);
+        numberPicker1.setMinValue(0);
+        numberPicker1.setWrapSelectorWheel(true);
+
+        NumberPicker numberPicker2 = (NumberPicker) v.findViewById(R.id.score_team2_predicted);
+        numberPicker2.setMaxValue(10);
+        numberPicker2.setMinValue(0);
+        numberPicker2.setWrapSelectorWheel(true);
+
         new GetTeamNames(this).execute();
-//        ParseQuery<FixtureItem> query = ParseQuery.getQuery("FixtureItem");
-//        query.whereEqualTo("objectId", predictionQuestionsLocal.getMatchId());
-//        query.getFirstInBackground(new GetCallback<FixtureItem>() {
-//            public void done(FixtureItem object, ParseException e) {
-//                if (object == null) {
-//                    Log.d("aaki", "The getFirst request failed.");
-//                } else {
-//                    Log.d("aaki", "Retrieved the object.");
-//                    Log.i("aaki", object.getTeamName1());
-//                    Log.i("aaki", object.getTeamName2());
-//                }
-//            }
-//        });
 
         return v;
     }

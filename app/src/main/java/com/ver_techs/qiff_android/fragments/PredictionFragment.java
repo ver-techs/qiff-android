@@ -1,28 +1,30 @@
 package com.ver_techs.qiff_android.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 import com.ver_techs.qiff_android.R;
+import com.ver_techs.qiff_android.activities.MainActivity;
 import com.ver_techs.qiff_android.custom_views.CustomProgressDialog;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
-import com.ver_techs.qiff_android.object_classes.PointsTableItem;
+import com.ver_techs.qiff_android.object_classes.PredictionAnswer;
 import com.ver_techs.qiff_android.object_classes.PredictionQuestionsLocal;
+import com.ver_techs.qiff_android.object_classes.SuggestionItem;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -39,6 +41,7 @@ public class PredictionFragment extends Fragment{
     private ProgressDialog nDialog; //progress dialog to show while parse query is running in background
     ImageView team1_logo, team2_logo;
     TextView name_team1, name_team2;
+    Button send;
 
     public PredictionFragment() {
         // Required empty public constructor
@@ -72,17 +75,49 @@ public class PredictionFragment extends Fragment{
         name_team1 = (TextView) v.findViewById(R.id.name_team1);
         name_team2 = (TextView) v.findViewById(R.id.name_team2);
 
-        NumberPicker numberPicker1 = (NumberPicker) v.findViewById(R.id.score_team1_predicted);
+        final NumberPicker numberPicker1 = (NumberPicker) v.findViewById(R.id.score_team1_predicted);
         numberPicker1.setMaxValue(10);
         numberPicker1.setMinValue(0);
         numberPicker1.setWrapSelectorWheel(true);
 
-        NumberPicker numberPicker2 = (NumberPicker) v.findViewById(R.id.score_team2_predicted);
+        final NumberPicker numberPicker2 = (NumberPicker) v.findViewById(R.id.score_team2_predicted);
         numberPicker2.setMaxValue(10);
         numberPicker2.setMinValue(0);
         numberPicker2.setWrapSelectorWheel(true);
 
+        send = (Button) v.findViewById(R.id.send_prediction);
+
         new GetTeamNames(this).execute();
+
+        send.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                    try{
+
+                        String scoreTeam1 = String.valueOf(numberPicker1.getValue());
+                        String scoreTeam2 = String.valueOf(numberPicker2.getValue());
+
+                        PredictionAnswer predictionAnswer = new PredictionAnswer(predictionQuestionsLocal.getMatchId(), scoreTeam1, scoreTeam2); //create a new chatitem
+
+                        // Save the data to Parse whenever internet is available
+                        predictionAnswer.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(com.parse.ParseException e) {
+
+                                if (e == null) {
+                                } else {
+                                }
+                            }
+                        });
+
+                    }
+                    catch(Exception ex){
+                        ex.printStackTrace();
+                    }
+
+            }
+        });
 
         return v;
     }
@@ -121,7 +156,7 @@ public class PredictionFragment extends Fragment{
             if (frag != null){
                 if(findFriends != null) {
                     Log.i("aaki", String.valueOf(findFriends.size()));
-                    nDialog.cancel(); //cancel the dialog once load has completed
+
                     try {
                         fixtureItem = findFriends.get(0);
                     }
@@ -132,6 +167,7 @@ public class PredictionFragment extends Fragment{
                     name_team2.setText(fixtureItem.getTeamName2());
                     team1_logo.setImageResource(findTeamLogo(fixtureItem.getTeamName1()));
                     team2_logo.setImageResource(findTeamLogo(fixtureItem.getTeamName2()));
+                    nDialog.cancel(); //cancel the dialog once load has completed
                 }
             }
         }

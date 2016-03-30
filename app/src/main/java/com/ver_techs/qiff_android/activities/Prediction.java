@@ -5,16 +5,12 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.facebook.AccessToken;
 import com.facebook.appevents.AppEventsLogger;
@@ -27,7 +23,6 @@ import com.ver_techs.qiff_android.fragments.PredictionFragment;
 import com.ver_techs.qiff_android.object_classes.PredictionQuestions;
 import com.ver_techs.qiff_android.object_classes.PredictionQuestionsLocal;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +31,7 @@ public class Prediction extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ProgressDialog nDialog; //progress dialog to show while parse query is running in background
+    private String[] titles = new String[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +60,11 @@ public class Prediction extends AppCompatActivity {
             }
         }, 2000);
 
+        titles[0] = "ONE";
+        titles[1] = "TWO";
+        titles[2] = "THREE";
+        titles[3] = "FOUR";
+        titles[4] = "FIVE";
 
         //set font to header in the fragment
         TextView prediction_text = (TextView) findViewById(R.id.prediction_text);
@@ -97,7 +98,7 @@ public class Prediction extends AppCompatActivity {
                                 args.putString("matchId", predictionQuestionsLocal.getMatchId());
                                 PredictionFragment pf = new PredictionFragment();
                                 pf.setArguments(args);
-                                adapter.addFrag(pf, "ONE"); //set question titles
+                                adapter.addFrag(pf, titles[i]); //set question titles
                                 adapter.notifyDataSetChanged();
                             //}
                         //};

@@ -16,6 +16,7 @@ import com.ver_techs.qiff_android.custom_views.SlidingTabLayout;
 import com.ver_techs.qiff_android.custom_adapters.ViewPagerAdapter;
 import com.ver_techs.qiff_android.object_classes.ChatItem;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
+import com.ver_techs.qiff_android.object_classes.PredictionAnswer;
 import com.ver_techs.qiff_android.object_classes.PredictionQuestions;
 import com.ver_techs.qiff_android.object_classes.SuggestionItem;
 
@@ -44,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
         ParseObject.registerSubclass(LiveCommentaryItem.class);
         ParseObject.registerSubclass(SuggestionItem.class);
         ParseObject.registerSubclass(PredictionQuestions.class);
+        ParseObject.registerSubclass(PredictionAnswer.class);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) { //check if mainactivity is being created normally or from broadcast reciever

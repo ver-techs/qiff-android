@@ -62,7 +62,7 @@ public class Prediction extends AppCompatActivity {
                 // Do something after 5s = 5000ms
                 tabLayout.setupWithViewPager(viewPager);
             }
-        }, 1000);
+        }, 2000);
 
 
         //set font to header in the fragment

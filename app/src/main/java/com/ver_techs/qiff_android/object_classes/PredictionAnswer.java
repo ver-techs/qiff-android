@@ -16,11 +16,12 @@ public class PredictionAnswer extends ParseObject {
     public PredictionAnswer(){
     }
 
-    public PredictionAnswer(String matchId, String scoreTeam1, String scoreTeam2) {
+    public PredictionAnswer(String matchId, String scoreTeam1, String scoreTeam2, String userFbId) {
         super();
         setMatchId(matchId);
         setScoreTeam1(scoreTeam1);
         setScoreTeam2(scoreTeam2);
+        setUserFbId(userFbId);
     }
 
     public void setMatchId(String matchId){
@@ -35,6 +36,10 @@ public class PredictionAnswer extends ParseObject {
         put("scoreTeam2", scoreTeam2);
     }
 
+    public void setUserFbId(String userFbId) {
+        put("userFacebookId", userFbId);
+    }
+
     public String getMatchId() {
         return getString("matchId");
     }
@@ -47,4 +52,7 @@ public class PredictionAnswer extends ParseObject {
         return getString("scoreTeam2");
     }
 
+    public String getUserFbId() {
+        return getString("userFacebookId");
+    }
 }

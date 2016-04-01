@@ -1,7 +1,6 @@
 package com.ver_techs.qiff_android.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,18 +12,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.ver_techs.qiff_android.R;
-import com.ver_techs.qiff_android.activities.MainActivity;
 import com.ver_techs.qiff_android.custom_views.CustomProgressDialog;
 import com.ver_techs.qiff_android.object_classes.FixtureItem;
 import com.ver_techs.qiff_android.object_classes.PredictionAnswer;
 import com.ver_techs.qiff_android.object_classes.PredictionQuestionsLocal;
-import com.ver_techs.qiff_android.object_classes.SuggestionItem;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -42,6 +45,7 @@ public class PredictionFragment extends Fragment{
     ImageView team1_logo, team2_logo;
     TextView name_team1, name_team2;
     Button send;
+    String user_id;
 
     public PredictionFragment() {
         // Required empty public constructor
@@ -92,30 +96,54 @@ public class PredictionFragment extends Fragment{
         send.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                    try{
-
-                        String scoreTeam1 = String.valueOf(numberPicker1.getValue());
-                        String scoreTeam2 = String.valueOf(numberPicker2.getValue());
-
-                        PredictionAnswer predictionAnswer = new PredictionAnswer(predictionQuestionsLocal.getMatchId(), scoreTeam1, scoreTeam2); //create a new chatitem
-
-                        // Save the data to Parse whenever internet is available
-                        predictionAnswer.saveInBackground(new SaveCallback() {
+                Log.i("aaki", "rechd 1");
+                /* make the facebook API call to get fb username */
+                GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
                             @Override
-                            public void done(com.parse.ParseException e) {
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                // When fields have been recieved
+                                Log.i("aaki", "rechd 2");
+                                final Profile profile = Profile.getCurrentProfile(); //get current user profile details
 
-                                if (e == null) {
-                                } else {
+                                try {
+                                    user_id = object.getString("id"); //get id number from the json object
+                                    Log.i("aaki", user_id);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
+
+                                try{
+
+                                    String scoreTeam1 = String.valueOf(numberPicker1.getValue());
+                                    String scoreTeam2 = String.valueOf(numberPicker2.getValue());
+
+                                    PredictionAnswer predictionAnswer = new PredictionAnswer(predictionQuestionsLocal.getMatchId(), scoreTeam1, scoreTeam2, user_id); //create a new chatitem
+
+                                    // Save the data to Parse whenever internet is available
+                                    predictionAnswer.saveInBackground(new SaveCallback() {
+                                        @Override
+                                        public void done(com.parse.ParseException e) {
+
+                                            if (e == null) {
+                                                Log.i("aaki", "prediction answer sent to parse successfully");
+                                            } else {
+                                                Log.i("aaki", "prediction answer sending unsuccessful");
+                                            }
+                                        }
+                                    });
+
+                                }
+                                catch(Exception ex){
+                                    ex.printStackTrace();
+                                }
+
                             }
                         });
-
-                    }
-                    catch(Exception ex){
-                        ex.printStackTrace();
-                    }
-
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id"); //fields to fetch during facebook api request
+                request.setParameters(parameters);
+                request.executeAsync(); //execute api call
             }
         });
 
@@ -125,7 +153,7 @@ public class PredictionFragment extends Fragment{
     private class GetTeamNames extends AsyncTask<Void,Void,Void>
     {
         private WeakReference<Fragment> weakRef;
-        List<FixtureItem> findFriends = null;
+        List<FixtureItem> question = null;
 
         public GetTeamNames(Fragment frag){
             weakRef = new WeakReference< Fragment >(frag);
@@ -141,7 +169,7 @@ public class PredictionFragment extends Fragment{
             // Execute the find asynchronously
 
             try {
-                findFriends = query3.find();
+                question = query3.find();
             } catch (ParseException e) {
                 e.printStackTrace();
                 Log.d("aaki", "The getFirst request failed.");
@@ -154,11 +182,10 @@ public class PredictionFragment extends Fragment{
             Fragment frag = weakRef.get();
             FixtureItem fixtureItem = null;
             if (frag != null){
-                if(findFriends != null) {
-                    Log.i("aaki", String.valueOf(findFriends.size()));
+                if(question != null) {
 
                     try {
-                        fixtureItem = findFriends.get(0);
+                        fixtureItem = question.get(0);
                     }
                     catch (NullPointerException e){
                         e.printStackTrace();

@@ -90,10 +90,6 @@ public class Prediction extends AppCompatActivity {
 
                         final PredictionQuestionsLocal predictionQuestionsLocal = new PredictionQuestionsLocal(
                                 predictionQuestionsList.get(i).getString("question"), predictionQuestionsList.get(i).getString("matchId"));
-                        //final Handler handler =new Handler();
-                        //final Runnable r = new Runnable() {
-                            //public void run() {
-                                //handler.postDelayed(this, 60000);
                                 Bundle args = new Bundle();
                                 args.putString("question", predictionQuestionsLocal.getQuestion());
                                 args.putString("matchId", predictionQuestionsLocal.getMatchId());
@@ -101,9 +97,6 @@ public class Prediction extends AppCompatActivity {
                                 pf.setArguments(args);
                                 adapter.addFrag(pf, titles[i]); //set question titles
                                 adapter.notifyDataSetChanged();
-                            //}
-                        //};
-                        //handler.postDelayed(r, 60000);
                     }
                     nDialog.cancel(); //cancel the dialog once load has completed
                 }

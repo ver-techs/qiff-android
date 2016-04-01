@@ -71,6 +71,7 @@ public class FixtureFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
+                i.putExtra("next_activity", "chat");
                 startActivity(i);
             }
         });
@@ -80,7 +81,8 @@ public class FixtureFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), Prediction.class);
+                Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
+                i.putExtra("next_activity","prediction");
                 startActivity(i);
             }
         });

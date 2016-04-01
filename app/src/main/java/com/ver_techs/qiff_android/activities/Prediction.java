@@ -1,6 +1,7 @@
 package com.ver_techs.qiff_android.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -163,7 +164,9 @@ public class Prediction extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-
+    public void onBackPressed(){ //on back button being pressed, move to main activity
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

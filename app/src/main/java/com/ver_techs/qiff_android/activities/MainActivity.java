@@ -1,8 +1,13 @@
 package com.ver_techs.qiff_android.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.support.v4.view.ViewPager;
 
@@ -19,6 +24,9 @@ import com.ver_techs.qiff_android.object_classes.FixtureItem;
 import com.ver_techs.qiff_android.object_classes.PredictionAnswer;
 import com.ver_techs.qiff_android.object_classes.PredictionQuestions;
 import com.ver_techs.qiff_android.object_classes.SuggestionItem;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 // Main Activity class
 public class MainActivity extends ActionBarActivity {
@@ -56,6 +64,10 @@ public class MainActivity extends ActionBarActivity {
             Log.i("aaki", "got title - " + title + " and message " + message);
 
         }
+
+        // Function to generate facebook key hash - to be added whenever code is run on a new system
+        printHashKey(this);
+
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles for the Tabs and Number Of Tabs
         adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), titles, numbOfTabs);
 
@@ -111,6 +123,22 @@ public class MainActivity extends ActionBarActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         //}
+    }
+
+    public static void printHashKey(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo("com.ver_techs.qiff_android", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String hashKey = new String(Base64.encode(md.digest(), 0));
+                Log.i("aaki", "printHashKey() Hash Key: " + hashKey);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("aaki", "printHashKey()", e);
+        } catch (Exception e) {
+            Log.e("aaki", "printHashKey()", e);
+        }
     }
 
 }

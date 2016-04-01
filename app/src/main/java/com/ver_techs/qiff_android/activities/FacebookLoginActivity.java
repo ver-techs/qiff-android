@@ -21,11 +21,26 @@ public class FacebookLoginActivity extends FragmentActivity {
 
     private LoginButton loginButton;
     CallbackManager callbackManager;
+    String intent_message="null";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            intent_message = extras.getString("next_activity");
+            if(isLoggedIn() && intent_message.equalsIgnoreCase("chat")){
+                Intent i = new Intent(FacebookLoginActivity.this, FanZone.class);
+                startActivity(i);
+            }
+            else
+            if(isLoggedIn() && intent_message.equalsIgnoreCase("prediction")){
+                Intent i = new Intent(FacebookLoginActivity.this, Prediction.class);
+                startActivity(i);
+            }
+        }
+        else
         if(isLoggedIn()){
             Intent i = new Intent(FacebookLoginActivity.this, FanZone.class);
             startActivity(i);
@@ -45,8 +60,14 @@ public class FacebookLoginActivity extends FragmentActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Log.i("aaki", "fb login success");
-                Intent i = new Intent(FacebookLoginActivity.this, FanZone.class);
-                startActivity(i);
+                if(intent_message.equalsIgnoreCase("chat")) {
+                    Intent i = new Intent(FacebookLoginActivity.this, FanZone.class);
+                    startActivity(i);
+                }
+                else{
+                    Intent i = new Intent(FacebookLoginActivity.this, Prediction.class);
+                    startActivity(i);
+                }
             }
 
             @Override

@@ -58,18 +58,20 @@
                     android:textSize="25dp"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/color_white"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    android:text="Loading time.."/>
 
 
                 <Button
+                    android:id="@+id/shareFbStatus"
                     android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_toRightOf="@id/time"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/icon_mic" />
+                    android:background="@drawable/icon_facebook_reverse" />
 
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"

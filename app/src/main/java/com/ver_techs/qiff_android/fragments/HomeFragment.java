@@ -121,6 +121,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
+                i.putExtra("next_activity","chat");
                 startActivity(i);
             }
         });
@@ -131,18 +132,9 @@ public class HomeFragment extends Fragment{
         shareFbStatus.setVisibility(View.VISIBLE);
         shareFbStatus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                // Open fb dialog for sharing status on facebook
-                ShareDialog shareDialog;
-                shareDialog = new ShareDialog(getActivity());
-                if (ShareDialog.canShow(ShareLinkContent.class)) {
-                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                            .setContentTitle("QIFF '16")
-                            .setContentDescription(
-                                    "The QIFF 2016 Android Application showcases Live scores, prediction games, fan chats and much more !")
-                            .setContentUrl(Uri.parse("https://www.facebook.com/QatarIndianFootballForum"))
-                            .build();
-                    shareDialog.show(linkContent);
-                }
+                Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
+                i.putExtra("next_activity","status_update");
+                startActivity(i);
             }
         });
 

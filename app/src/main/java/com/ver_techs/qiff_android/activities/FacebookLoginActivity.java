@@ -3,6 +3,7 @@ package com.ver_techs.qiff_android.activities;
 import java.util.Arrays;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -15,6 +16,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.ver_techs.qiff_android.R;
 
 public class FacebookLoginActivity extends FragmentActivity {
@@ -39,10 +42,25 @@ public class FacebookLoginActivity extends FragmentActivity {
                 Intent i = new Intent(FacebookLoginActivity.this, Prediction.class);
                 startActivity(i);
             }
+            else
+            if(isLoggedIn() && intent_message.equalsIgnoreCase("status_update")){
+                // Open fb dialog for sharing status on facebook
+                ShareDialog shareDialog;
+                shareDialog = new ShareDialog(this);
+                if (ShareDialog.canShow(ShareLinkContent.class)) {
+                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                            .setContentTitle("QIFF '16")
+                            .setContentDescription(
+                                    "The QIFF 2016 Android Application showcases Live scores, prediction games, fan chats and much more !")
+                            .setContentUrl(Uri.parse("https://www.facebook.com/QatarIndianFootballForum"))
+                            .build();
+                    shareDialog.show(linkContent);
+                }
+            }
         }
         else
         if(isLoggedIn()){
-            Intent i = new Intent(FacebookLoginActivity.this, FanZone.class);
+            Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
             startActivity(i);
         }
 
@@ -95,6 +113,8 @@ public class FacebookLoginActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+        Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
+        startActivity(i);
     }
 
 }

@@ -56,6 +56,7 @@ public class PointsTableFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), FacebookLoginActivity.class);
+                i.putExtra("next_activity","chat");
                 startActivity(i);
             }
         });

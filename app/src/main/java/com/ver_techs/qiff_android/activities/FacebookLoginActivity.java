@@ -113,8 +113,16 @@ public class FacebookLoginActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-        Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
-        startActivity(i);
+        if(isLoggedIn()) {
+            Log.i("aaki", "fb login success");
+            Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
+            startActivity(i);
+        }
+        else {
+            Log.i("aaki", "fb login error");
+            Intent i = new Intent(FacebookLoginActivity.this, MainActivity.class);
+            startActivity(i);
+        }
     }
 
 }
